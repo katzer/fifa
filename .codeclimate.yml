@@ -1,0 +1,25 @@
+engines:
+  rubocop:
+    enabled: true
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - TODO
+      - FIXME
+      - BUG
+      - HACK
+  duplication:
+    enabled: false
+    config:
+      languages:
+      - ruby
+ratings:
+  paths:
+  - lib/**
+  - bintest/**
+  - "**.rb"
+  - "**.go"
+exclude_paths:
+- spec/**/*
+- test/**/*

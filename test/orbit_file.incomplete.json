@@ -1,0 +1,14 @@
+[
+    {
+        "id": "app-package",
+        "type": "server"
+    },
+    {
+        "id": "db-package",
+        "type": "db"
+    },
+    {
+        "id": "web-package",
+        "type": "web"
+    }
+]

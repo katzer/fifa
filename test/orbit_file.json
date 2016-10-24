@@ -1,0 +1,23 @@
+[
+    {
+        "id": "app-package",
+        "type": "server",
+        "user": "user1",
+        "url": "url1.de"
+    },
+    {
+        "id": "db-package",
+        "type": "db",
+        "user": "user1",
+        "url": "url_url1.bla.blergh.de",
+        "host": "host1.bla",
+        "port": 666,
+        "sid": "horst1"
+    },
+    {
+        "id": "web-package",
+        "type": "web",
+        "user": "user1",
+        "url": "https://url.1.net"
+    }
+]
