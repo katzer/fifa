@@ -1,6 +1,6 @@
 # ff [![Build Status](https://travis-ci.org/appPlant/ff.svg?branch=master)](https://travis-ci.org/appPlant/ff) [![Code Climate](https://codeclimate.com/github/appPlant/ff/badges/gpa.svg)](https://codeclimate.com/github/appPlant/ff)
 
-Cross-platform CLI tool to get informations about planets.
+Cross-platform CLI tool to find out the way to any "planet".
 
     $ ff -h
     usage: ff [options...] <planet>
