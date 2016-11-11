@@ -38,7 +38,7 @@ You'll be able to find the binaries in the following directories:
 
 Get the connection by type:
 
-    $ export IPS_ORBIT_FILE=/path/to/orbit.json
+    $ export ORBIT_FILE=/path/to/orbit.json
 
     $ ff app-package
     $ user@hostname.de

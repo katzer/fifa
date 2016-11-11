@@ -21,7 +21,7 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 module FF
-  # Provides access to the content of the IPS_ORBIT_FILE.
+  # Provides access to the content of the ORBIT_FILE.
   class Planet
     # Find planet by ID. Raises an error if no planet could be found.
     #
@@ -36,22 +36,22 @@ module FF
     #
     # @return [ Array<Hash> ]
     def self.planets
-      JSON.parse(IO.read(ips_orbit_file_path))
+      JSON.parse(IO.read(orbit_file_path))
     rescue RuntimeError
-      raise "cannot read from #{ips_orbit_file_path}"
+      raise "cannot read from #{orbit_file_path}"
     end
 
-    # The file path where to find the IPS_ORBIT_FILE.
+    # The file path where to find the ORBIT_FILE.
     # Raises an error if the env variable is not set.
     #
     # @return [ String ]
-    def self.ips_orbit_file_path
-      ENV.fetch('IPS_ORBIT_FILE')
+    def self.orbit_file_path
+      ENV.fetch('ORBIT_FILE')
     rescue KeyError
-      raise 'env IPS_ORBIT_FILE not set'
+      raise 'env ORBIT_FILE not set'
     end
 
-    # A planet is a single entry found in the IPS_ORBIT_FILE.
+    # A planet is a single entry found in the ORBIT_FILE.
     #
     # @param [ Hash ] attributes Extracted attributes from the file.
     #

@@ -24,7 +24,7 @@ require 'open3'
 require_relative '../mrblib/ff/version'
 
 def orbit_env_get(file)
-  { 'IPS_ORBIT_FILE' => File.expand_path("../test/#{file}.json", __dir__) }
+  { 'ORBIT_FILE' => File.expand_path("fixtures/#{file}.json", __dir__) }
 end
 
 BINARY    = File.expand_path('../mruby/bin/ff', __dir__)
@@ -159,14 +159,14 @@ assert('incomplete web') do
   assert_include output, 'unknown'
 end
 
-assert('IPS_ORBIT_FILE: not set') do
+assert('ORBIT_FILE: not set') do
   _, output, status = Open3.capture3(BINARY, 'planet')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'not set'
 end
 
-assert('IPS_ORBIT_FILE: wrong path') do
+assert('ORBIT_FILE: wrong path') do
   _, output, status = Open3.capture3(WRONG_ENV, BINARY, 'planet')
 
   assert_false status.success?, 'Process did exit cleanly'
