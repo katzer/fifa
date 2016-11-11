@@ -5,11 +5,12 @@ Cross-platform CLI tool to find out the way to any "planet".
     $ ff -h
     usage: ff [options...] <planet>
     Options:
+    -a=ATTRIBUTE     Show value of attribute
     -e=TYPE          Expected type of planet to validate against
-    -h, --help       This help text
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url or tns
     -t, --type       Show type of planet
+    -h, --help       This help text
     -v, --version    Show version number
 
 ## Installation
@@ -33,20 +34,31 @@ You'll be able to find the binaries in the following directories:
 - Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/ff`
 - Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/ff`
 
-## Usage
+## Basic Usage
 
-From terminal execute:
+Get the connection by type:
 
     $ export IPS_ORBIT_FILE=/path/to/orbit.json
-
-    $ ff -t db-package
-    $ db
 
     $ ff app-package
     $ user@hostname.de
 
     $ ff -f=tns db-package
     $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
+
+## Advanced features
+
+Get the type:
+
+    $ ff -t db-package
+    $ db
+
+Get a specific attribute:
+
+    $ ff -a=port db-package
+    $ 1234
+
+Ensure the right type:
 
     $ ff -e=web db-package
     $ type missmatch: expected web but got db
@@ -58,10 +70,6 @@ From terminal execute:
 Affer this command finishes, you'll see the /releases for each target in the releases directory.
 
 ## Tests
-
-To run all unit tests:
-
-    $ docker-compose run mtest
 
 To run all integration tests:
 

@@ -64,6 +64,7 @@ module FF
     attr_reader :attributes
 
     # The type of the planet.
+    # Raises an error if the type is not set.
     #
     # @return [ String ]
     def type

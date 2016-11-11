@@ -118,6 +118,13 @@ assert('sqlplus format with password') do
   assert_include output, 'user1/uwish@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
+assert('attribute match') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-a=port', 'db-package')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, '666'
+end
+
 assert('type match') do
   _, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'db-package')
 

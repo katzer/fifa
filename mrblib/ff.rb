@@ -27,8 +27,8 @@ def __main__(argv)
     print_usage
   elsif parser.print_version?
     print_version
-  elsif parser.print_type?
-    print_type(parser.planet, parser)
+  elsif parser.print_attribute?
+    print_attribute(parser.planet, parser)
   else
     print_connection(parser.planet, parser)
   end
@@ -41,20 +41,23 @@ end
 def print_usage
   puts 'usage: ff [options...] <planet>'
   puts 'Options:'
+  puts '-a=ATTRIBUTE    Show value of attribute'
   puts '-e=TYPE         Expected type of planet to validate against'
-  puts '-h, --help      This help text'
   puts '-f=FORMAT       Show formatted connection string'
   puts '                Possible formats are jdbc, sqlplus, url or tns'
   puts '-t, --type      Show type of planet'
+  puts '-h, --help      This help text'
   puts '-v, --version   Show version number'
 end
 
-def print_type(planet_id, parser)
-  type = FF::Planet.find(planet_id).type
+def print_attribute(planet_id, parser)
+  planet   = FF::Planet.find(planet_id)
+  attr_key = parser.attribute
+  attr_val = planet.attributes[attr_key]
 
-  validate_type(type, parser)
+  validate_type(planet.type, parser)
 
-  puts type
+  puts attr_val
 end
 
 def print_connection(planet_id, parser)

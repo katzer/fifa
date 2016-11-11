@@ -21,6 +21,7 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 module FF
+  # Class for command-line option analysis.
   class OptParser
     def initialize(args = ARGV)
       @args = args || []
@@ -34,30 +35,37 @@ module FF
       @args.include?('-h') || @args.include?('--help') || @args.size < 2
     end
 
-    def print_type?
-      @args.include?('-t') || @args.include?('--type')
+    def print_attribute?
+      @args.any? { |opt| opt == '-t' || opt == '--type' || opt[0..2] == '-a=' }
     end
 
     def validate?
       @args.any? { |opt| opt[0..2] == '-e=' }
     end
 
+    def attribute
+      param_value('-a', 'type')
+    end
+
     def expected_type
-      @args.find { |opt| opt[0..2] == '-e=' }
-           .sub('-e=', '')
-    rescue NoMethodError
-      nil
+      param_value('-e')
     end
 
     def format
-      @args.find { |opt| opt[0..2] == '-f=' }
-           .sub('-f=', '')
-    rescue NoMethodError
-      'default'
+      param_value('-f', 'default')
     end
 
     def planet
       @args.last if @args.size > 1
+    end
+
+    private
+
+    def param_value(attr, default_value = nil)
+      @args.find { |opt| opt[0..2] == "#{attr}=" }
+           .sub("#{attr}=", '')
+    rescue NoMethodError
+      default_value
     end
   end
 end
