@@ -88,7 +88,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/apppla
 
 ## License
 
-The gem is available as open source under the terms of the [Apache 2.0 License][license].
+The code is available as open source under the terms of the [Apache 2.0 License][license].
 
 Made with :yum: from Leipzig
 
