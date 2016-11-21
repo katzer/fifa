@@ -25,6 +25,7 @@ require_relative 'mrblib/ff/version'
 gem = MRuby::Gem::Specification.new('ff') do |spec|
   spec.bins = ['ff']
 
+  spec.add_dependency 'mruby-sprintf', core: 'mruby-sprintf'
   spec.add_dependency 'mruby-print', core: 'mruby-print'
   spec.add_dependency 'mruby-env', mgem: 'mruby-env'
   spec.add_dependency 'mruby-io', mgem: 'mruby-io'

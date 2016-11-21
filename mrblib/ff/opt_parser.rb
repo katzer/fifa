@@ -39,6 +39,10 @@ module FF
       @args.any? { |opt| opt == '-t' || opt == '--type' || opt[0..2] == '-a=' }
     end
 
+    def print_pretty?
+      @args.include?('-p') || @args.include?('--pretty')
+    end
+
     def validate?
       @args.any? { |opt| opt[0..2] == '-e=' }
     end
