@@ -20,17 +20,17 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
-def __main__(argv)
-  parser = FF::OptParser.new(argv)
+def __main__(_)
+  parser = FF::OptParser.new
 
   if parser.print_usage?
     print_usage
   elsif parser.print_version?
     print_version
   elsif parser.print_attribute?
-    print_attribute(parser.planet, parser)
+    print_attribute(parser.planets, parser)
   else
-    print_connection(parser.planet, parser)
+    print_connection(parser.planets, parser)
   end
 end
 
@@ -45,7 +45,7 @@ end
 #
 # @return [ Void ]
 def print_usage
-  puts 'usage: ff [options...] <planet>'
+  puts 'usage: ff [options...] <planet>...'
   puts 'Options:'
   puts '-a=ATTRIBUTE    Show value of attribute'
   puts '-e=TYPE         Expected type of planet to validate against'
@@ -63,17 +63,17 @@ end
 # @param [ OptParser] parser
 #
 # @return [ Void ]
-def print_attribute(planet_id, parser)
-  planet   = FF::Planet.find(planet_id)
-  attr_key = parser.attribute
-  attr_val = planet.attributes[attr_key]
+def print_attribute(planet_ids, parser)
+  planets   = FF::Planet.find_all(planet_ids)
+  attribute = parser.attribute
+  values    = planets.map { |planet| planet.attributes[attribute] }
 
-  validate_type(planet.type, parser)
+  planets.each { |planet| validate_type(planet.type, parser) }
 
   if parser.print_pretty?
-    print_as_table attr_key, [planet_id], [attr_val]
+    print_as_table attribute, planet_ids, values
   else
-    puts attr_val
+    values.each { |value| puts value }
   end
 end
 
@@ -83,16 +83,16 @@ end
 # @param [ OptParser] parser
 #
 # @return [ Void ]
-def print_connection(planet_id, parser)
-  planet     = FF::Planet.find(planet_id)
-  connection = planet.connection(parser.format)
+def print_connection(planet_ids, parser)
+  planets     = FF::Planet.find_all(planet_ids)
+  connections = planets.map { |planet| planet.connection(parser.format) }
 
-  validate_type(planet.type, parser)
+  planets.each { |planet| validate_type(planet.type, parser) }
 
   if parser.print_pretty?
-    print_as_table 'CONNECTION', [planet_id], [connection]
+    print_as_table 'CONNECTION', planet_ids, connections
   else
-    puts connection
+    connections.each { |connection| puts connection }
   end
 end
 
@@ -110,15 +110,17 @@ end
 #
 # @return [ Void ]
 def print_as_table(column, planets, values)
-  planet_length = planets.max { |i| i.to_s.length }.length
-  value_length  = values.max { |i| i.to_s.length }.length
-  row_format    = " %2s   %-#{planet_length}s   %#{value_length}s"
+  planet_length = planets.map { |i| i.to_s.length }.max
+  value_length  = values.map { |i| i.to_s.length }.max
+  row_format    = " %2s   %-#{planet_length}s   %-#{value_length}s"
   header        = format(row_format, 'NR', 'PLANET', column.upcase)
 
   puts header
   puts '=' * header.length
-  values.each_with_index { |val, i| printf row_format, i, planets[i], val }
-  puts ''
+
+  values.each_with_index do |val, i|
+    printf "#{row_format}\n", i, planets[i], val
+  end
 end
 
 # Raises an error if the type does not match the expected type.

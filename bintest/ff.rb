@@ -63,63 +63,79 @@ assert('unknown planet') do
 end
 
 assert('server') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'app-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-app')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1@url1.de'
 end
 
 assert('web') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'web-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-web')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'https://url.1.net'
 end
 
 assert('db') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'db-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'url_url1.bla.blergh.de'
 end
 
+assert('multi connections') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-db', 'my-web')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, 'url_url1.bla.blergh.de'
+  assert_include output, 'https://url.1.net'
+end
+
+assert('multi types') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-t', 'my-db', 'my-web')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, 'db'
+  assert_include output, 'web'
+end
+
 assert('jdbc format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=jdbc', 'db-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=jdbc', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'host1.bla:666:horst1'
 end
 
 assert('jdbc format with password') do
-  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=jdbc', 'db-package')
+  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=jdbc', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1/uwish@host1.bla:666:horst1'
 end
 
 assert('tns format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=tns', 'db-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=tns', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))' # rubocop:disable LineLength
 end
 
 assert('sqlplus format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=plus', 'db-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=plus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
 assert('sqlplus format with password') do
-  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=plus', 'db-package')
+  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=plus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1/uwish@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
 assert('pretty type') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-t', '-p', 'app-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-t', '-p', 'my-app')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'TYPE'
@@ -127,7 +143,7 @@ assert('pretty type') do
 end
 
 assert('pretty connection') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-p', 'app-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-p', 'my-app')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'CONNECTION'
@@ -135,41 +151,41 @@ assert('pretty connection') do
 end
 
 assert('attribute match') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-a=port', 'db-package')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-a=port', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '666'
 end
 
 assert('type match') do
-  _, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'db-package')
+  _, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
 end
 
 assert('type missmatch') do
-  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '-e=db', 'app-package')
+  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '-e=db', 'my-app')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'type missmatch'
 end
 
 assert('incomplete server') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'app-package')
+  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-app')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'unknown'
 end
 
 assert('incomplete db') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'db-package')
+  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-db')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'unknown'
 end
 
 assert('incomplete web') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'web-package')
+  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-web')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'unknown'

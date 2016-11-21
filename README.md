@@ -3,12 +3,13 @@
 Cross-platform CLI tool to find out the way to any "planet".
 
     $ ff -h
-    usage: ff [options...] <planet>
+    usage: ff [options...] <planet>...
     Options:
     -a=ATTRIBUTE     Show value of attribute
     -e=TYPE          Expected type of planet to validate against
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url or tns
+    -p, --pretty     Pretty print output as a table
     -t, --type       Show type of planet
     -h, --help       This help text
     -v, --version    Show version number
@@ -40,8 +41,9 @@ Get the connection by type:
 
     $ export ORBIT_FILE=/path/to/orbit.json
 
-    $ ff app-package
-    $ user@hostname.de
+    $ ff app-package-1 app-package-2
+    $ user@hostname-1.de
+    $ user@hostname-2.de
 
     $ ff -f=tns db-package
     $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
@@ -62,6 +64,16 @@ Ensure the right type:
 
     $ ff -e=web db-package
     $ type missmatch: expected web but got db
+
+Pretty print output:
+
+    $ ff -p app-package db-package web-package
+    
+      NR   PLANET        CONNECTION            
+      =========================================
+       0   app-package   user1@url1.de         
+       1   db-package    url_url1.bla.blergh.de
+       2   web-package   https://url.1.net
 
 ## Releases
 

@@ -1,12 +1,12 @@
 [
     {
-        "id": "app-package",
+        "id": "my-app",
         "type": "server",
         "user": "user1",
         "url": "url1.de"
     },
     {
-        "id": "db-package",
+        "id": "my-db",
         "type": "db",
         "user": "user1",
         "url": "url_url1.bla.blergh.de",
@@ -15,7 +15,7 @@
         "sid": "horst1"
     },
     {
-        "id": "web-package",
+        "id": "my-web",
         "type": "web",
         "user": "user1",
         "url": "https://url.1.net"

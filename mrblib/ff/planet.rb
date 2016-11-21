@@ -25,11 +25,22 @@ module FF
   class Planet
     # Find planet by ID. Raises an error if no planet could be found.
     #
+    # @param [ String ] planet_id The Id of the planet.
+    #
     # @return [ Planet ]
     def self.find(planet_id)
       planet = planets.find { |i| i['id'] == planet_id }
       raise 'unknown planet' unless planet
       Planet.new(planet)
+    end
+
+    # Find planets by ID. Raises an error if a planet could not be found.
+    #
+    # @param [ Array<String> ] planet_ids An array of planet ids.
+    #
+    # @return [ Array<Planet> ]
+    def self.find_all(planet_ids)
+      planet_ids.map { |id| find(id) }
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.

@@ -1,14 +1,14 @@
 [
     {
-        "id": "app-package",
+        "id": "my-app",
         "type": "server"
     },
     {
-        "id": "db-package",
+        "id": "my-db",
         "type": "db"
     },
     {
-        "id": "web-package",
+        "id": "my-web",
         "type": "web"
     }
 ]

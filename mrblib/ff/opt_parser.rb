@@ -23,7 +23,7 @@
 module FF
   # Class for command-line option analysis.
   class OptParser
-    def initialize(args = ARGV)
+    def initialize(args = ARGV[1..-1])
       @args = args || []
     end
 
@@ -32,7 +32,7 @@ module FF
     end
 
     def print_usage?
-      @args.include?('-h') || @args.include?('--help') || @args.size < 2
+      @args.include?('-h') || @args.include?('--help') || @args.empty?
     end
 
     def print_attribute?
@@ -59,8 +59,8 @@ module FF
       param_value('-f', 'default')
     end
 
-    def planet
-      @args.last if @args.size > 1
+    def planets
+      @args.select { |opt| opt[0] != '-' }
     end
 
     private
