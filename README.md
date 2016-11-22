@@ -14,7 +14,16 @@ Cross-platform CLI tool to find out the way to any "planet".
     -h, --help       This help text
     -v, --version    Show version number
 
+## Prerequisites
+You'll need to add your `ORBIT_FILE` first to your profile:
+
+    $ export ORBIT_FILE=/path/to/orbit.json
+
 ## Installation
+
+Download the latest version from the [release page][releases] and add the executable to your `PATH`.
+
+## Development
 
 Clone the repo:
     
@@ -106,6 +115,7 @@ Made with :yum: from Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
+[releases]: https://github.com/appPlant/ff/releases
 [docker]: https://docs.docker.com/engine/installation
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de
