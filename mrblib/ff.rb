@@ -110,8 +110,8 @@ end
 #
 # @return [ Void ]
 def print_as_table(column, planets, values)
-  planet_length = planets.map { |i| i.to_s.length }.max
-  value_length  = values.map { |i| i.to_s.length }.max
+  planet_length = (planets.map { |i| i.to_s.length } << 6).max
+  value_length  = (values.map  { |i| i.to_s.length } << column.size).max
   row_format    = " %2s   %-#{planet_length}s   %-#{value_length}s"
   header        = format(row_format, 'NR', 'PLANET', column.upcase)
 
