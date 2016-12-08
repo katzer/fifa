@@ -21,16 +21,16 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 def __main__(_)
-  parser = FF::OptParser.new
+  @parser = FF::OptParser.new
 
-  if parser.print_usage?
+  if @parser.print_usage?
     print_usage
-  elsif parser.print_version?
+  elsif @parser.print_version?
     print_version
-  elsif parser.print_attribute?
-    print_attribute(parser.planets, parser)
+  elsif @parser.print_attribute?
+    print_attribute(@parser.planets)
   else
-    print_connection(parser.planets, parser)
+    print_connection(@parser.planets)
   end
 end
 
@@ -41,7 +41,7 @@ def print_version
   puts "v#{FF::VERSION}"
 end
 
-# How to use these tool.
+# Print out how to use these tool.
 #
 # @return [ Void ]
 def print_usage
@@ -59,40 +59,43 @@ end
 
 # Print the attribute value of the specified planet.
 #
-# @param [ String ] planet_id The id of the planet.
-# @param [ OptParser] parser
+# @param [ String ] planet_ids The ids of the planets.
 #
 # @return [ Void ]
-def print_attribute(planet_ids, parser)
+def print_attribute(planet_ids)
   planets   = FF::Planet.find_all(planet_ids)
-  attribute = parser.attribute
+  attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
 
-  planets.each { |planet| validate_type(planet.type, parser) }
-
-  if parser.print_pretty?
-    print_as_table attribute, planet_ids, values
-  else
-    values.each { |value| puts value }
-  end
+  planets.each { |planet| validate_type(planet.type) }
+  print_values(attribute, planet_ids, values)
 end
 
 # Print the connection string of the specified planet.
 #
-# @param [ String ] planet_id The id of the planet.
-# @param [ OptParser] parser
+# @param [ String ] planet_ids The ids of the planets.
 #
 # @return [ Void ]
-def print_connection(planet_ids, parser)
+def print_connection(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
-  connections = planets.map { |planet| planet.connection(parser.format) }
+  connections = planets.map { |planet| planet.connection(@parser.format) }
 
-  planets.each { |planet| validate_type(planet.type, parser) }
+  planets.each { |planet| validate_type(planet.type) }
+  print_values('CONNECTION', planet_ids, connections)
+end
 
-  if parser.print_pretty?
-    print_as_table 'CONNECTION', planet_ids, connections
+# Print values to stdout.
+#
+# @param [ String ] column See `print_as_table`.
+# @param [ Array<String> ] planets See `print_as_table`.
+# @param [ Array<values> ] values See `print_as_table`.
+#
+# @return [ Void ]
+def print_values(column, planets, values)
+  if @parser.print_pretty?
+    print_as_table column, planets, values
   else
-    connections.each { |connection| puts connection }
+    values.each { |val| puts val }
   end
 end
 
@@ -126,10 +129,9 @@ end
 # Raises an error if the type does not match the expected type.
 #
 # @param [ String ] type The type to check.
-# @param [ OptParser ] parser Contains the expected type.
 #
 # @return [ Void ]
-def validate_type(type, parser)
-  return if !parser.validate? || type == parser.expected_type
-  raise "type missmatch: expected #{parser.expected_type} but got #{type}"
+def validate_type(type)
+  return if !@parser.validate? || type == @parser.expected_type
+  raise "type missmatch: expected #{@parser.expected_type} but got #{type}"
 end
