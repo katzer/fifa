@@ -50,7 +50,7 @@ def print_usage
   puts '-a=ATTRIBUTE    Show value of attribute'
   puts '-e=TYPE         Expected type of planet to validate against'
   puts '-f=FORMAT       Show formatted connection string'
-  puts '                Possible formats are jdbc, sqlplus, url or tns'
+  puts '                Possible formats are jdbc, sqlplus, url, tns or pqdb'
   puts '-p, --pretty    Pretty print output as a table'
   puts '-t, --type      Show type of planet'
   puts '-h, --help      This help text'

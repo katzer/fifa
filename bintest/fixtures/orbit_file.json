@@ -7,6 +7,8 @@
     },
     {
         "id": "my-db",
+        "server": "my-app",
+        "db": "OP_DB",
         "type": "db",
         "user": "user1",
         "url": "url_url1.bla.blergh.de",

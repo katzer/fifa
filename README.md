@@ -8,7 +8,7 @@ Cross-platform CLI tool to find out the way to any "planet".
     -a=ATTRIBUTE     Show value of attribute
     -e=TYPE          Expected type of planet to validate against
     -f=FORMAT        Show formatted connection string
-                     Possible formats are jdbc, sqlplus, url or tns
+                     Possible formats are jdbc, sqlplus, url, tns or pqdb
     -p, --pretty     Pretty print output as a table
     -t, --type       Show type of planet
     -h, --help       This help text

@@ -141,6 +141,8 @@ module FF
         tns_connection
       when 'plus', 'sqlplus'
         sqlplus_connection
+      when 'pqdb'
+        pqdb_connection
       else
         raise "invalid format: #{format}"
       end
@@ -184,6 +186,18 @@ module FF
     def tns_connection
       raise_if_missing('host', 'port', 'sid')
       "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{attributes['host']})(PORT=#{attributes['port']})))(CONNECT_DATA=(SID=#{attributes['sid']})))" # rubocop:disable LineLength
+    end
+
+    # Connection formatted to use for qpdb.
+    # Raises an error if a required attribute is missing!
+    #
+    # @return [ String ]
+    def pqdb_connection
+      raise_if_missing('server', 'db')
+
+      planet = self.class.find(attributes['server'])
+
+      "#{attributes['db']}:#{planet.server_connection}"
     end
 
     # Raises an error if a provided attribute is missing.
