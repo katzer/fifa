@@ -47,7 +47,7 @@ module FF
     #
     # @return [ Array<Hash> ]
     def self.planets
-      JSON.parse(IO.read(orbit_file_path))
+      @planets ||= JSON.parse(IO.read(orbit_file_path))
     rescue RuntimeError
       raise "cannot read from #{orbit_file_path}"
     end
