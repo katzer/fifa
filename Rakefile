@@ -22,12 +22,15 @@
 
 require 'fileutils'
 
-MRUBY_VERSION="1.2.0"
+mruby_version = ENV.fetch('MRUBY_VERSION', '1.2.0')
 
 file :mruby do
-  #sh "git clone --depth=1 https://github.com/mruby/mruby"
-  sh "curl -L --fail --retry 3 --retry-delay 1 https://github.com/mruby/mruby/archive/1.2.0.tar.gz -s -o - | tar zxf -"
-  FileUtils.mv("mruby-1.2.0", "mruby")
+  if mruby_version == 'head'
+    sh "git clone --depth=1 https://github.com/mruby/mruby"
+  else
+    sh "curl -L --fail --retry 3 --retry-delay 1 https://github.com/mruby/mruby/archive/#{mruby_version}.tar.gz -s -o - | tar zxf -"
+    FileUtils.mv("mruby-#{mruby_version}", "mruby")
+  end
 end
 
 APP_NAME=ENV["APP_NAME"] || "ff"
