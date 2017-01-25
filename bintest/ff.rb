@@ -23,13 +23,17 @@
 require 'open3'
 require_relative '../mrblib/ff/version'
 
-def orbit_env_get(file)
-  { 'ORBIT_FILE' => File.expand_path("fixtures/#{file}.json", __dir__) }
+def orbit_env_get(file = nil)
+  if file
+    { 'ORBIT_FILE' => File.expand_path("config/#{file}.json", __dir__) }
+  else
+    { 'ORBIT_HOME' => __dir__ }
+  end
 end
 
 BINARY    = File.expand_path('../mruby/bin/ff', __dir__)
 
-ORBIT_ENV = orbit_env_get('orbit_file').freeze
+ORBIT_ENV = orbit_env_get.freeze
 PASWD_ENV = orbit_env_get('orbit_file.password').freeze
 INCMP_ENV = orbit_env_get('orbit_file.incomplete').freeze
 WRONG_ENV = orbit_env_get('wrong').freeze

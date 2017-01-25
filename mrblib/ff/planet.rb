@@ -57,9 +57,13 @@ module FF
     #
     # @return [ String ]
     def self.orbit_file_path
-      ENV.fetch('ORBIT_FILE')
+      if ENV.include? 'ORBIT_FILE'
+        ENV['ORBIT_FILE']
+      else
+        File.join(ENV.fetch('ORBIT_HOME'), 'config/orbit_file.json')
+      end
     rescue KeyError
-      raise 'env ORBIT_FILE not set'
+      raise 'env ORBIT_HOME not set'
     end
 
     # A planet is a single entry found in the ORBIT_FILE.
