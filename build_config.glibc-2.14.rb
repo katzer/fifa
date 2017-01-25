@@ -37,13 +37,13 @@ MRuby::Build.new do |conf|
   gem_config(conf)
 end
 
-MRuby::Build.new('x86_64-pc-linux-gnu') do |conf|
+MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.14') do |conf|
   toolchain :gcc
 
   gem_config(conf)
 end
 
-MRuby::CrossBuild.new('i686-pc-linux-gnu') do |conf|
+MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.14') do |conf|
   toolchain :gcc
 
   [conf.cc, conf.cxx, conf.linker].each do |cc|

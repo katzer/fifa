@@ -29,16 +29,22 @@ Clone the repo:
     
     $ git clone https://github.com/appPlant/ff.git && cd ff/
 
+Make the scripts executable
+
+    $ chmod u+x scripts/*
+
 And then execute:
 
 ```bash
-$ docker-compose run compile # https://docs.docker.com/engine/installation
+$ scripts/compile # https://docs.docker.com/engine/installation
 ```
 
 You'll be able to find the binaries in the following directories:
 
-- Linux (64-bit): `mruby/build/x86_64-pc-linux-gnu/bin/ff`
-- Linux (32-bit): `mruby/build/i686-pc-linux-gnu/bin/ff`
+- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/ff`
+- Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/ff`
+- Linux (64-bit): `mruby/build/x86_64-pc-linux-gnu-glibc-2.14/bin/ff`
+- Linux (32-bit): `mruby/build/i686-pc-linux-gnu-glibc-2.14/bin/ff`
 - OS X (64-bit): `mruby/build/x86_64-apple-darwin14/bin/ff`
 - OS X (32-bit): `mruby/build/i386-apple-darwin14/bin/ff`
 - Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/ff`
@@ -86,15 +92,15 @@ Pretty print output:
 
 ## Releases
 
-    $ docker-compose run release
+    $ scripts/release
 
 Affer this command finishes, you'll see the /releases for each target in the releases directory.
 
 ## Tests
 
-To run all integration tests:
+To run all tests:
 
-    $ docker-compose run bintest
+    $ scripts/bintest
 
 ## Contributing
 

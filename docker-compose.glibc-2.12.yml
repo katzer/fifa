@@ -19,7 +19,15 @@
 # limitations under the License.
 #
 # @APPPLANT_LICENSE_HEADER_END@
-
-module FF
-  VERSION = '1.2.0-dev'.freeze
-end
+compile: &defaults
+  dockerfile: Dockerfile.glibc-2.12
+  environment:
+    MRUBY_CONFIG: build_config.glibc-2.12.rb
+bintest:
+  <<: *defaults
+clean:
+  <<: *defaults
+shell:
+  <<: *defaults
+release:
+  <<: *defaults

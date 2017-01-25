@@ -20,6 +20,20 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
-module FF
-  VERSION = '1.2.0-dev'.freeze
-end
+compile: &defaults
+  build: .
+  volumes:
+    - .:/home/mruby/code:rw
+  command: rake compile
+bintest:
+  <<: *defaults
+  command: rake test:bintest
+clean:
+  <<: *defaults
+  command: rake clean
+shell:
+  <<: *defaults
+  command: bash
+release:
+  <<: *defaults
+  command: rake release
