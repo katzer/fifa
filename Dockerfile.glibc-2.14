@@ -1,1 +1,2 @@
-FROM hone/mruby-cli
+FROM appplant/mruby-cli:glibc-2.14
+MAINTAINER Sebastian Katzer "katzer@appplant.de"
