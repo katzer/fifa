@@ -34,7 +34,7 @@ APP_NAME=ENV["APP_NAME"] || "ff"
 APP_ROOT=ENV["APP_ROOT"] || Dir.pwd
 # avoid redefining constants in mruby Rakefile
 mruby_root=File.expand_path(ENV["MRUBY_ROOT"] || "#{APP_ROOT}/mruby")
-mruby_config=File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.rb")
+mruby_config=File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.glibc-2.14.rb")
 ENV['MRUBY_ROOT'] = mruby_root
 ENV['MRUBY_CONFIG'] = mruby_config
 Rake::Task[:mruby].invoke unless Dir.exist?(mruby_root)
