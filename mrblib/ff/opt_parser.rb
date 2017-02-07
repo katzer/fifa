@@ -20,6 +20,8 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
+# rubocop:disable MutableConstant
+
 module FF
   # Class for command-line option analysis.
   class OptParser
@@ -49,7 +51,7 @@ module FF
     def unknown_opts
       @args.select { |opt| opt[0] == '-' }
            .map { |opt| opt.include?('=') ? opt[0..2] : opt }
-           .select { |opt| !OPTIONS.include? opt }
+           .reject { |opt| OPTIONS.include? opt }
     end
 
     # If the parser contains unknown options.

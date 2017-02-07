@@ -20,6 +20,8 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
+# rubocop:disable SymbolProc
+
 def __main__(_)
   @parser = FF::OptParser.new
 
