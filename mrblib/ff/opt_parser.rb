@@ -32,7 +32,7 @@ module FF
     end
 
     def print_usage?
-      @args.include?('-h') || @args.include?('--help') || @args.empty?
+      @args.include?('-h') || @args.include?('--help')
     end
 
     def print_attribute?

@@ -66,9 +66,10 @@ def print_attributes(planet_ids)
   planets   = FF::Planet.find_all(planet_ids)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
+  ids       = planets.map { |p| p.id }
 
   planets.each { |planet| validate_type(planet.type) }
-  print_values(attribute, planet_ids, values)
+  print_values(attribute, ids, values)
 end
 
 # Print the connection string of the specified planets.
@@ -79,9 +80,10 @@ end
 def print_connections(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
   connections = planets.map { |planet| planet.connection(@parser.format) }
+  ids         = planets.map { |p| p.id }
 
   planets.each { |planet| validate_type(planet.type) }
-  print_values('CONNECTION', planet_ids, connections)
+  print_values('CONNECTION', ids, connections)
 end
 
 # Print values to stdout.

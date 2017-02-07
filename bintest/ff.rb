@@ -38,29 +38,36 @@ PASWD_ENV = orbit_env_get('orbit_file.password').freeze
 INCMP_ENV = orbit_env_get('orbit_file.incomplete').freeze
 WRONG_ENV = orbit_env_get('wrong').freeze
 
-assert('version') do
+assert('version [-v]') do
   output, status = Open3.capture2(BINARY, '-v')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, FF::VERSION
 end
 
-assert('help') do
+assert('version [--version]') do
+  output, status = Open3.capture2(BINARY, '--version')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, FF::VERSION
+end
+
+assert('usage [-h]') do
   output, status = Open3.capture2(BINARY, '-h')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'usage'
 end
 
-assert('missing planet') do
-  output, status = Open3.capture2(BINARY)
+assert('usage [--help]') do
+  output, status = Open3.capture2(BINARY, '--help')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'usage'
 end
 
 assert('unknown planet') do
-  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, 'planet')
+  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '<unknown>')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'unknown planet'
@@ -87,12 +94,30 @@ assert('db') do
   assert_include output, 'url_url1.bla.blergh.de'
 end
 
+assert('all connections') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY)
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, 'user1@url1.de'
+  assert_include output, 'url_url1.bla.blergh.de'
+  assert_include output, 'https://url.1.net'
+end
+
 assert('multi connections') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-db', 'my-web')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'url_url1.bla.blergh.de'
   assert_include output, 'https://url.1.net'
+end
+
+assert('all types') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-t')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_include output, 'server'
+  assert_include output, 'db'
+  assert_include output, 'web'
 end
 
 assert('multi types') do

@@ -21,11 +21,5 @@
         "type": "web",
         "user": "user1",
         "url": "https://url.1.net"
-    },
-    {
-        "id": "mcv-test",
-        "type": "server",
-        "user": "taipsti50",
-        "url": "taipsti50.w7"
     }
 ]

@@ -39,8 +39,22 @@ module FF
     # @param [ Array<String> ] planet_ids An array of planet ids.
     #
     # @return [ Array<Planet> ]
-    def self.find_all(planet_ids)
+    def self.find_with_ids(planet_ids)
       planet_ids.map { |id| find(id) }
+    end
+
+    # Find planets by ID. Returns all planets if no ids are specified.
+    # Raises an error if a planet could not be found.
+    #
+    # @param [ Array<String> ] planet_ids Optional array of planet ids.
+    #
+    # @return [ Array<Planet> ]
+    def self.find_all(planet_ids = nil)
+      if planets.nil? || planet_ids.empty?
+        planets.map { |planet| Planet.new(planet) }
+      else
+        find_with_ids(planet_ids)
+      end
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.
@@ -72,11 +86,12 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
+      @id         = attributes['id'].freeze
       @attributes = attributes
     end
 
     # Property reader for the attributes.
-    attr_reader :attributes
+    attr_reader :attributes, :id
 
     # The type of the planet.
     # Raises an error if the type is not set.
@@ -90,10 +105,9 @@ module FF
     # Raises an error if the specified type is unknown.
     #
     # @param [ String ] format Possible values are url, tns or jdbc
-    #                          Defaults to: default
     #
     # @return [ String ]
-    def connection(format = nil)
+    def connection(format)
       case type
       when 'web'
         web_connection
@@ -132,10 +146,9 @@ module FF
     # Raises an error if the specified format is unknown.
     #
     # @param [ String ] format Possible values are url, tns or jdbc
-    #                          Defaults to: default
     #
     # @return [ String ]
-    def db_connection(format = 'default')
+    def db_connection(format)
       case format
       when 'default', 'url'
         url_connection
