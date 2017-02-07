@@ -66,6 +66,13 @@ assert('usage [--help]') do
   assert_include output, 'usage'
 end
 
+assert('unknown flag') do
+  _, output, status = Open3.capture3(BINARY, '-unknown')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'unknown option'
+end
+
 assert('unknown planet') do
   _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '<unknown>')
 

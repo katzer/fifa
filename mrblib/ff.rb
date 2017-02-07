@@ -23,6 +23,22 @@
 def __main__(_)
   @parser = FF::OptParser.new
 
+  validate_options
+  execute_request
+end
+
+# Raise an error if the tool was invoked with unknown options.
+#
+# @return [ Void ]
+def validate_options
+  return unless @parser.unknown_opts?
+  raise "unknown option: #{@parser.unknown_opts.join ', '}"
+end
+
+# Execute the request.
+#
+# @return [ Void ]
+def execute_request
   if @parser.print_usage?
     print_usage
   elsif @parser.print_version?

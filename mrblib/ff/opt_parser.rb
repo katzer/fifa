@@ -23,53 +23,120 @@
 module FF
   # Class for command-line option analysis.
   class OptParser
+    # List of all supported options
+    OPTIONS = [
+      '-v', '--version',
+      '-h', '--help',
+      '-t', '--type',
+      '-p', '--pretty',
+      '-e=',
+      '-a=',
+      '-f='
+    ]
+
+    # Initialize the parser and check for unknown options
+    #
+    # @param [ Array<String> ] args List of command-line arguments.
+    #
+    # @return [ FF::OptParser ]
     def initialize(args = ARGV[1..-1])
       @args = args || []
     end
 
+    # List all unknown options.
+    #
+    # @return [ Array<String> ]
+    def unknown_opts
+      @args.select { |opt| opt[0] == '-' }
+           .map { |opt| opt.include?('=') ? opt[0..2] : opt }
+           .select { |opt| !OPTIONS.include? opt }
+    end
+
+    # If the parser contains unknown options.
+    #
+    # @return [ Boolean ]
+    def unknown_opts?
+      unknown_opts.any?
+    end
+
+    # If the tool should print out the version number.
+    #
+    # @return [ Boolean ] Yes if the options include -v or --version.
     def print_version?
       @args.include?('-v') || @args.include?('--version')
     end
 
+    # If the tool should print out the usage.
+    #
+    # @return [ Boolean ] Yes if the options include -h or --help.
     def print_usage?
       @args.include?('-h') || @args.include?('--help')
     end
 
+    # If the tool should print out attributes other then the connection.
+    #
+    # @return [ Boolean ] Yes if the options include -t, --type or -a.
     def print_attribute?
       @args.any? { |opt| opt == '-t' || opt == '--type' || opt[0..2] == '-a=' }
     end
 
+    # If the tool should print out everything in a formatted table.
+    #
+    # @return [ Boolean ] Yes if the options include -p, --pretty.
     def print_pretty?
       @args.include?('-p') || @args.include?('--pretty')
     end
 
+    # If the tool should validate the type.
+    #
+    # @return [ Boolean ] Yes if the options include -e.
     def validate?
       @args.any? { |opt| opt[0..2] == '-e=' }
     end
 
+    # The attribute to find for.
+    #
+    # @return [ String ] Ddefaults to: type.
     def attribute
       param_value('-a', 'type')
     end
 
+    # The expected type to validate against.
+    #
+    # @return [ String ] Ddefaults to: nil.
     def expected_type
       param_value('-e')
     end
 
+    # The format of the connection string.
+    #
+    # @return [ String ] Ddefaults to: default.
     def format
       param_value('-f', 'default')
     end
 
+    # The passed planet ids.
+    #
+    # @return [ Array<String> ]
     def planets
       @args.select { |opt| opt[0] != '-' }
     end
 
     private
 
+    # Extract the value of the specified options.
+    # Raises an error if the option has been specified but without an value.
+    #
+    # @param [ String ] attr The options to look for.
+    # @param [ Object ] default_value The default value to use for
+    #                                 if the options has not been specified.
+    #
+    # @return [ Object ]
     def param_value(attr, default_value = nil)
-      @args.find { |opt| opt[0..2] == "#{attr}=" }
-           .sub("#{attr}=", '')
+      arg = @args.find { |opt| opt[0..2] == "#{attr}=" }
+      arg ? arg.sub("#{attr}=", '') : default_value
     rescue NoMethodError
-      default_value
+      raise "Missing value for flag #{attr}"
     end
   end
 end
