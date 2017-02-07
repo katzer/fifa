@@ -50,6 +50,16 @@ module FF
 
       alias default url
 
+      # Connection formatted to use for internals.
+      # Raises an error if a required attribute is missing!
+      #
+      # @param [ Array<String> ] params List of attributes where to look for.
+      #
+      # @return [ String ]
+      def sni(params)
+        "#{params['type']}|#{params['id']}|#{params['name']}|#{default(params)}"
+      end
+
       private
 
       # Raises an error if a provided attribute is missing.

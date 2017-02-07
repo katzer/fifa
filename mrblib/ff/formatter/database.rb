@@ -82,6 +82,16 @@ module FF
         raise_if_missing(params, 'server', 'db')
         "#{params['db']}:#{FF::Planet.find(params['server']).connection(:ssh)}"
       end
+
+      # Connection formatted to use for internals.
+      # Raises an error if a required attribute is missing!
+      #
+      # @param [ Array<String> ] params List of attributes where to look for.
+      #
+      # @return [ String ]
+      def sni(params)
+        "db|#{params['id']}|#{params['name']}|#{pqdb(params)}"
+      end
     end
   end
 end

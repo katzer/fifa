@@ -63,6 +63,8 @@ Get the connection by type:
     $ ff -f=tns db-package
     $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 
+Passing ids is optional. If no ids are specified, then _ff_ executes the request for all found planets.
+
 ## Advanced features
 
 Get the type:
@@ -89,6 +91,17 @@ Pretty print output:
        0   app-package   user1@url1.de         
        1   db-package    url_url1.bla.blergh.de
        2   web-package   https://url.1.net
+
+## Internal features
+
+Format used by the _sni_ tool:
+
+    $ ff -f=sni app-package db-package web-package
+    $ server|app-package|My App-Package|user1@url1.de
+    $ db|db-package|My DB-Package|OP-DB:user1@url1.de
+    $ web|web-package|My Web-Package|https://url.1.net
+
+The general format is `type|id|name|type specific connection`.
 
 ## Releases
 
