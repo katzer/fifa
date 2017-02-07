@@ -28,9 +28,9 @@ def __main__(_)
   elsif @parser.print_version?
     print_version
   elsif @parser.print_attribute?
-    print_attribute(@parser.planets)
+    print_attributes(@parser.planets)
   else
-    print_connection(@parser.planets)
+    print_connections(@parser.planets)
   end
 end
 
@@ -57,12 +57,12 @@ def print_usage
   puts '-v, --version   Show version number'
 end
 
-# Print the attribute value of the specified planet.
+# Print the attribute value of the specified planets.
 #
 # @param [ String ] planet_ids The ids of the planets.
 #
 # @return [ Void ]
-def print_attribute(planet_ids)
+def print_attributes(planet_ids)
   planets   = FF::Planet.find_all(planet_ids)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
@@ -71,12 +71,12 @@ def print_attribute(planet_ids)
   print_values(attribute, planet_ids, values)
 end
 
-# Print the connection string of the specified planet.
+# Print the connection string of the specified planets.
 #
 # @param [ String ] planet_ids The ids of the planets.
 #
 # @return [ Void ]
-def print_connection(planet_ids)
+def print_connections(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
   connections = planets.map { |planet| planet.connection(@parser.format) }
 
