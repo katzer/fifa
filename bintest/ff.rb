@@ -157,14 +157,14 @@ assert('tns format') do
 end
 
 assert('sqlplus format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=plus', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=sqlplus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
 assert('sqlplus format with password') do
-  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=plus', 'my-db')
+  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=sqlplus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1/uwish@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength

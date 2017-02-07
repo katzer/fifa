@@ -91,7 +91,7 @@ module FF
     end
 
     # Property reader for the attributes.
-    attr_reader :attributes, :id
+    attr_reader :id, :attributes
 
     # The type of the planet.
     # Raises an error if the type is not set.
@@ -102,128 +102,12 @@ module FF
     end
 
     # Formatted connection depend on the type (db, web or server).
-    # Raises an error if the specified type is unknown.
     #
-    # @param [ String ] format Possible values are url, tns or jdbc
+    # @param [ String ] format Possible values are url, tns, jdbc, ...
     #
     # @return [ String ]
     def connection(format)
-      case type
-      when 'web'
-        web_connection
-      when 'server'
-        server_connection
-      when 'db'
-        db_connection(format)
-      else
-        raise "invalid type: #{type}"
-      end
-    end
-
-    private
-
-    # Connection formatted to use for CURL.
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def web_connection
-      raise_if_missing('url')
-      attributes['url']
-    end
-
-    alias url_connection web_connection
-
-    # Connection formatted to use for SSH.
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def server_connection
-      raise_if_missing('user', 'url')
-      "#{attributes['user']}@#{attributes['url']}"
-    end
-
-    # Formatted connection for databases.
-    # Raises an error if the specified format is unknown.
-    #
-    # @param [ String ] format Possible values are url, tns or jdbc
-    #
-    # @return [ String ]
-    def db_connection(format)
-      case format
-      when 'default', 'url'
-        url_connection
-      when 'jdbc'
-        jdbc_connection
-      when 'tns'
-        tns_connection
-      when 'plus', 'sqlplus'
-        sqlplus_connection
-      when 'pqdb'
-        pqdb_connection
-      else
-        raise "invalid format: #{format}"
-      end
-    end
-
-    # Connection formatted to use for JDBC driver.
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def jdbc_connection
-      raise_if_missing('host', 'port', 'sid')
-
-      pre = 'jdbc:oracle:thin'
-      suf = "#{attributes['host']}:#{attributes['port']}:#{attributes['sid']}"
-
-      if attributes['password']
-        "#{pre}:#{attributes['user']}/#{attributes['password']}@#{suf}"
-      else
-        "#{pre}:@#{suf}"
-      end
-    end
-
-    # Connection formatted to use with SqlPlus
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def sqlplus_connection
-      raise_if_missing('user')
-
-      if attributes['password']
-        "#{attributes['user']}/#{attributes['password']}@\"@#{tns_connection}\""
-      else
-        "#{attributes['user']}@\"@#{tns_connection}\""
-      end
-    end
-
-    # Connection formatted to use for TNS listener.
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def tns_connection
-      raise_if_missing('host', 'port', 'sid')
-      "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{attributes['host']})(PORT=#{attributes['port']})))(CONNECT_DATA=(SID=#{attributes['sid']})))" # rubocop:disable LineLength
-    end
-
-    # Connection formatted to use for qpdb.
-    # Raises an error if a required attribute is missing!
-    #
-    # @return [ String ]
-    def pqdb_connection
-      raise_if_missing('server', 'db')
-
-      planet = self.class.find(attributes['server'])
-
-      "#{attributes['db']}:#{planet.server_connection}"
-    end
-
-    # Raises an error if a provided attribute is missing.
-    #
-    # @param [ Array<String> ] keys The names of the attributes to check for.
-    #
-    # @return [ Void ]
-    def raise_if_missing(*keys)
-      keys.each { |attr| raise "unknown #{attr}" unless attributes[attr] }
+      Formatter.for_type(type).format(format, attributes)
     end
   end
 end
