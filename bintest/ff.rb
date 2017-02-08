@@ -34,8 +34,8 @@ end
 BINARY    = File.expand_path('../mruby/bin/ff', __dir__)
 
 ORBIT_ENV = orbit_env_get.freeze
-PASWD_ENV = orbit_env_get('orbit_file.password').freeze
-INCMP_ENV = orbit_env_get('orbit_file.incomplete').freeze
+PASWD_ENV = orbit_env_get('orbit.password').freeze
+INCMP_ENV = orbit_env_get('orbit.incomplete').freeze
 WRONG_ENV = orbit_env_get('wrong').freeze
 
 assert('version [-v]') do

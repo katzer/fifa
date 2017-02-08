@@ -74,7 +74,7 @@ module FF
       if ENV.include? 'ORBIT_FILE'
         ENV['ORBIT_FILE']
       else
-        File.join(ENV.fetch('ORBIT_HOME'), 'config/orbit_file.json')
+        File.join(ENV.fetch('ORBIT_HOME'), 'config/orbit.json')
       end
     rescue KeyError
       raise 'env ORBIT_HOME not set'
