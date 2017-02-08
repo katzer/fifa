@@ -177,8 +177,8 @@ assert('pqdb format') do
   assert_include output, 'OP_DB:user1@url1.de'
 end
 
-assert('sni format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=sni')
+assert('ski format') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=ski')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'server|my-app|Server|user1@url1.de'

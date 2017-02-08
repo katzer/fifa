@@ -56,7 +56,7 @@ module FF
       # @param [ Array<String> ] params List of attributes where to look for.
       #
       # @return [ String ]
-      def sni(params)
+      def ski(params)
         "#{params['type']}|#{params['id']}|#{params['name']}|#{default(params)}"
       end
 

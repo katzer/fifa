@@ -89,7 +89,7 @@ module FF
       # @param [ Array<String> ] params List of attributes where to look for.
       #
       # @return [ String ]
-      def sni(params)
+      def ski(params)
         "db|#{params['id']}|#{params['name']}|#{pqdb(params)}"
       end
     end
