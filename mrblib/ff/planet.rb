@@ -86,19 +86,34 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
-      @id         = attributes['id'].freeze
       @attributes = attributes
     end
 
     # Property reader for the attributes.
-    attr_reader :id, :attributes
+    attr_reader :attributes
+
+    # The id of the planet.
+    # Raises an error if not set.
+    #
+    # @return [ String ]
+    def id
+      attributes['id'] || raise('unknown id')
+    end
 
     # The type of the planet.
-    # Raises an error if the type is not set.
+    # Raises an error if not set.
     #
     # @return [ String ]
     def type
       attributes['type'] || raise('unknown type')
+    end
+
+    # The name of the planet.
+    # Raises an error if not set.
+    #
+    # @return [ String ]
+    def name
+      attributes['name'] || raise('unknown name')
     end
 
     # Formatted connection depend on the type (db, web or server).

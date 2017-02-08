@@ -20,8 +20,6 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
-# rubocop:disable SymbolProc
-
 def __main__(_)
   @parser = FF::OptParser.new
 
@@ -84,10 +82,9 @@ def print_attributes(planet_ids)
   planets   = FF::Planet.find_all(planet_ids)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
-  ids       = planets.map { |p| p.id }
 
   planets.each { |planet| validate_type(planet.type) }
-  print_values(attribute, ids, values)
+  print_values(attribute, planets, values)
 end
 
 # Print the connection string of the specified planets.
@@ -98,17 +95,16 @@ end
 def print_connections(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
   connections = planets.map { |planet| planet.connection(@parser.format) }
-  ids         = planets.map { |p| p.id }
 
   planets.each { |planet| validate_type(planet.type) }
-  print_values('CONNECTION', ids, connections)
+  print_values('CONNECTION', planets, connections)
 end
 
 # Print values to stdout.
 #
 # @param [ String ] column See `print_as_table`.
-# @param [ Array<String> ] planets See `print_as_table`.
-# @param [ Array<values> ] values See `print_as_table`.
+# @param [ Array<Planet> ] planets See `print_as_table`.
+# @param [ Array ] values See `print_as_table`.
 #
 # @return [ Void ]
 def print_values(column, planets, values)
@@ -123,27 +119,25 @@ end
 #
 # print_as_table type, [app-package], [server]
 #
-#  NR  PLANET         TYPE
-# ========================
-#   0  app-package  server
-#
-# @param [ String ] column The name of the 3rd column.
-# @param [ Array<String> ] planets The values for the 2nd column.
-# @param [ Array<values> ] values The values for the 3rd column.
+# @param [ String ] column The name of the value column.
+# @param [ Array<Planet> ] planets Ordered list of requested planets.
+# @param [ Array ] values The entries for the value column.
 #
 # @return [ Void ]
 def print_as_table(column, planets, values)
-  planet_length = (planets.map { |i| i.to_s.length } << 6).max
-  value_length  = (values.map  { |i| i.to_s.length } << column.size).max
-  row_format    = " %2s   %-#{planet_length}s   %-#{value_length}s"
-  header        = format(row_format, 'NR', 'PLANET', column.upcase)
+  table = Terminal::Table.new do |t|
+    t.title    = ARGV.join ' '
+    t.headings = ['NR.', 'TYPE', 'ID', 'NAME', column.upcase]
+    t.style    = { all_separators: true }
 
-  puts header
-  puts '=' * header.length
+    planets.each_with_index do |p, i|
+      t << ["#{i}.", p.type, p.id, p.name, values[i]]
+    end
 
-  values.each_with_index do |val, i|
-    printf "#{row_format}\n", i, planets[i], val
+    t.align_column 0, :right
   end
+
+  puts table.to_s
 end
 
 # Raises an error if the type does not match the expected type.

@@ -25,15 +25,12 @@ require_relative 'mrblib/ff/version'
 gem = MRuby::Gem::Specification.new('ff') do |spec|
   spec.bins = ['ff']
 
-  spec.add_dependency 'mruby-sprintf', core: 'mruby-sprintf'
-  spec.add_dependency 'mruby-print', core: 'mruby-print'
-  spec.add_dependency 'mruby-env', mgem: 'mruby-env'
-  spec.add_dependency 'mruby-io', mgem: 'mruby-io'
-  spec.add_dependency 'mruby-json', mgem: 'mruby-json'
+  spec.add_dependency 'mruby-terminal-table', github: 'appplant/mruby-terminal-table'
 
-  if ARGV.include? 'test:mtest'
-    spec.add_dependency 'mruby-mtest', mgem: 'mruby-mtest'
-  end
+  spec.add_dependency 'mruby-print'
+  spec.add_dependency 'mruby-env'
+  spec.add_dependency 'mruby-io'
+  spec.add_dependency 'mruby-json'
 end
 
 gem.license = 'Apache 2.0'
