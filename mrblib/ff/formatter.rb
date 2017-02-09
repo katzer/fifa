@@ -37,7 +37,7 @@ module FF
       when 'db', 'database'
         database_formatter
       else
-        raise "unsupported type: #{type}"
+        base_formatter
       end
     end
 

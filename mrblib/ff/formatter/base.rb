@@ -33,8 +33,11 @@ module FF
       #
       # @return [ String ]
       def format(format, params)
-        raise "Unknown format: #{format}" unless respond_to? format
-        send(format, params)
+        if respond_to? format
+          send(format, params)
+        else
+          log(params['id'], "unknown format #{format}")
+        end
       end
 
       # Connection formatted to use for CURL.
@@ -44,7 +47,7 @@ module FF
       #
       # @return [ String ]
       def url(params)
-        raise_if_missing(params, 'url')
+        log_if_missing(params, 'url')
         params['url']
       end
 
@@ -68,8 +71,8 @@ module FF
       # @param [ Array<String> ] keys The names of the params to check for.
       #
       # @return [ Void ]
-      def raise_if_missing(params, *keys)
-        keys.each { |attr| raise "unknown #{attr}" unless params[attr] }
+      def log_if_missing(params, *keys)
+        keys.each { |k| log(params['id'], "missing #{k}") unless params[k] }
       end
     end
   end

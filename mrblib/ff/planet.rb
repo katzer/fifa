@@ -23,6 +23,9 @@
 module FF
   # Provides access to the content of the ORBIT_FILE.
   class Planet
+    # Value for unknown property values
+    UNKNOWN = 'unknown'.freeze
+
     # Find planet by ID. Raises an error if no planet could be found.
     #
     # @param [ String ] planet_id The Id of the planet.
@@ -30,7 +33,12 @@ module FF
     # @return [ Planet ]
     def self.find(planet_id)
       planet = planets.find { |i| i['id'] == planet_id }
-      raise 'unknown planet' unless planet
+
+      unless planet
+        log(planet_id, UNKNOWN)
+        planet = { 'id' => planet_id }
+      end
+
       Planet.new(planet)
     end
 
@@ -86,7 +94,7 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
-      @attributes = attributes
+      @attributes = attributes || {}
     end
 
     # Property reader for the attributes.
@@ -105,7 +113,7 @@ module FF
     #
     # @return [ String ]
     def type
-      attributes['type'] || raise('unknown type')
+      @type ||= attributes['type'] || log([id, :type], UNKNOWN)
     end
 
     # The name of the planet.
@@ -113,7 +121,12 @@ module FF
     #
     # @return [ String ]
     def name
-      attributes['name'] || raise('unknown name')
+      @name ||= attributes['name'] || log([id, :name], UNKNOWN)
+    end
+
+    # If the planet's type is unknown
+    def unknown?
+      type == UNKNOWN
     end
 
     # Formatted connection depend on the type (db, web or server).
@@ -122,7 +135,7 @@ module FF
     #
     # @return [ String ]
     def connection(format)
-      Formatter.for_type(type).format(format, attributes)
+      unknown? ? UNKNOWN : Formatter.for_type(type).format(format, attributes)
     end
   end
 end

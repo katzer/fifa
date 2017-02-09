@@ -31,7 +31,7 @@ module FF
       #
       # @return [ String ]
       def jdbc(params)
-        raise_if_missing(params, 'host', 'port', 'sid')
+        log_if_missing(params, 'host', 'port', 'sid')
 
         pre = 'jdbc:oracle:thin'
         suf = "#{params['host']}:#{params['port']}:#{params['sid']}"
@@ -50,7 +50,7 @@ module FF
       #
       # @return [ String ]
       def sqlplus(params)
-        raise_if_missing(params, 'user')
+        log_if_missing(params, 'user')
 
         tns = tns(params)
 
@@ -68,7 +68,7 @@ module FF
       #
       # @return [ String ]
       def tns(params)
-        raise_if_missing(params, 'host', 'port', 'sid')
+        log_if_missing(params, 'host', 'port', 'sid')
         "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{params['host']})(PORT=#{params['port']})))(CONNECT_DATA=(SID=#{params['sid']})))" # rubocop:disable LineLength
       end
 
@@ -79,7 +79,7 @@ module FF
       #
       # @return [ String ]
       def pqdb(params)
-        raise_if_missing(params, 'server', 'db')
+        log_if_missing(params, 'server', 'db')
         "#{params['db']}:#{FF::Planet.find(params['server']).connection(:ssh)}"
       end
 

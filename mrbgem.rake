@@ -28,6 +28,7 @@ gem = MRuby::Gem::Specification.new('ff') do |spec|
   spec.add_dependency 'mruby-terminal-table', github: 'appplant/mruby-terminal-table'
 
   spec.add_dependency 'mruby-print'
+  spec.add_dependency 'mruby-exit'
   spec.add_dependency 'mruby-env'
   spec.add_dependency 'mruby-io'
   spec.add_dependency 'mruby-json'

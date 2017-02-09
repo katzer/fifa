@@ -31,7 +31,7 @@ module FF
       #
       # @return [ String ]
       def ssh(params)
-        raise_if_missing(params, 'user', 'url')
+        log_if_missing(params, 'user', 'url')
         "#{params['user']}@#{params['url']}"
       end
 

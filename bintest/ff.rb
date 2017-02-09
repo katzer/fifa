@@ -74,10 +74,10 @@ assert('unknown flag') do
 end
 
 assert('unknown planet') do
-  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '<unknown>')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, 'unknown')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown planet'
+  assert_include output, 'unknown'
 end
 
 assert('server') do
@@ -216,31 +216,31 @@ assert('type match') do
 end
 
 assert('type missmatch') do
-  _, output, status = Open3.capture3(ORBIT_ENV, BINARY, '-e=db', 'my-app')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'my-app')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'type missmatch'
+  assert_include output, 'missmatch'
 end
 
 assert('incomplete server') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-app')
+  output, status = Open3.capture2(INCMP_ENV, BINARY, 'my-app')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown'
+  assert_include output, 'missing'
 end
 
 assert('incomplete db') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-db')
+  output, status = Open3.capture2(INCMP_ENV, BINARY, 'my-db')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown'
+  assert_include output, 'missing'
 end
 
 assert('incomplete web') do
-  _, output, status = Open3.capture3(INCMP_ENV, BINARY, 'my-web')
+  output, status = Open3.capture2(INCMP_ENV, BINARY, 'my-web')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown'
+  assert_include output, 'missing'
 end
 
 assert('ORBIT_FILE: not set') do

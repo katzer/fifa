@@ -25,6 +25,8 @@ def __main__(_)
 
   validate_options
   execute_request
+
+  exit(1) if logger.errors?
 end
 
 # Raise an error if the tool was invoked with unknown options.
@@ -83,7 +85,7 @@ def print_attributes(planet_ids)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
 
-  planets.each { |planet| validate_type(planet.type) }
+  planets.each { |planet| validate_type(planet) }
   print_values(attribute, planets, values)
 end
 
@@ -96,7 +98,7 @@ def print_connections(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
   connections = planets.map { |planet| planet.connection(@parser.format) }
 
-  planets.each { |planet| validate_type(planet.type) }
+  planets.each { |planet| validate_type(planet) }
   print_values('CONNECTION', planets, connections)
 end
 
@@ -111,7 +113,7 @@ def print_values(column, planets, values)
   if @parser.print_pretty?
     print_as_table column, planets, values
   else
-    values.each { |val| puts val }
+    planets.each_with_index { |p, i| puts msg(p.id, values[i]) }
   end
 end
 
@@ -131,7 +133,7 @@ def print_as_table(column, planets, values)
     t.style    = { all_separators: true }
 
     planets.each_with_index do |p, i|
-      t << ["#{i}.", p.type, p.id, p.name, values[i]]
+      t << ["#{i}.", p.type, p.id, p.name, msg(p.id, values[i])]
     end
 
     t.align_column 0, :right
@@ -142,10 +144,33 @@ end
 
 # Raises an error if the type does not match the expected type.
 #
-# @param [ String ] type The type to check.
+# @param [ FF::Planet ] planet The planet to validate against
 #
 # @return [ Void ]
-def validate_type(type)
-  return if !@parser.validate? || type == @parser.expected_type
-  raise "type missmatch: expected #{@parser.expected_type} but got #{type}"
+def validate_type(planet)
+  expected_type = @parser.expected_type
+  type          = planet.type
+
+  return if !@parser.validate? || planet.unknown? || type == expected_type
+
+  log(planet.id, 'type missmatch')
+end
+
+# Global logger for error messages.
+#
+# @return [ FF::Logger ]
+def logger
+  $logger ||= FF::Logger.new
+end
+
+# See FF::ErrorLogger#add
+#
+def log(*args)
+  logger.add(*args)
+end
+
+# See FF::ErrorLogger#msg
+#
+def msg(*args)
+  logger.msg(*args)
 end

@@ -80,7 +80,7 @@ Get a specific attribute:
 Ensure the right type:
 
     $ ff -e=web db-package
-    $ type missmatch: expected web but got db
+    $ <type missmatch>
 
 Pretty print output:
 
