@@ -25,8 +25,7 @@ require_relative 'mrblib/ff/version'
 gem = MRuby::Gem::Specification.new('ff') do |spec|
   spec.bins = ['ff']
 
-  spec.add_dependency 'mruby-terminal-table', github: 'appplant/mruby-terminal-table'
-
+  spec.add_dependency 'mruby-terminal-table'
   spec.add_dependency 'mruby-print'
   spec.add_dependency 'mruby-exit'
   spec.add_dependency 'mruby-env'
