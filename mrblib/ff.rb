@@ -56,7 +56,7 @@ end
 #
 # @return [ Void ]
 def print_version
-  puts "v#{FF::VERSION}"
+  puts "v#{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})"
 end
 
 # Print out how to use these tool.
