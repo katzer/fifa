@@ -21,9 +21,6 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 def gem_config(conf)
-  # conf.gembox 'default'
-
-  # be sure to include this gem (the cli app)
   conf.gem File.expand_path(File.dirname(__FILE__))
 end
 

@@ -20,32 +20,17 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
-def gem_config(conf)
-  conf.gem File.expand_path(File.dirname(__FILE__))
-end
-
-MRuby::Build.new do |conf|
-  toolchain :gcc
-
-  conf.enable_bintest
-  conf.enable_debug
-  conf.enable_test
-
-  gem_config(conf)
-end
-
-MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
-  toolchain :gcc
-
-  gem_config(conf)
-end
-
-MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
-  toolchain :gcc
-
-  [conf.cc, conf.cxx, conf.linker].each do |cc|
-    cc.flags << '-m32'
-  end
-
-  gem_config(conf)
-end
+compile: &defaults
+  dockerfile: Dockerfile.musl
+  environment:
+    MRUBY_CONFIG: build_config.musl.rb
+    MRUBY_VERSION: ${MRUBY_VERSION}
+bintest:
+  <<: *defaults
+clean:
+  <<: *defaults
+shell:
+  <<: *defaults
+  command: sh
+release:
+  <<: *defaults
