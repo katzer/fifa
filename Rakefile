@@ -52,8 +52,8 @@ APP_VERSION = (app_version.nil? || app_version.empty?) ? "unknown" : app_version
 
 desc "compile binary"
 task :compile => [:all] do
-  %W(#{mruby_root}/build/x86_64-pc-linux-gnu/bin/#{APP_NAME} #{mruby_root}/build/i686-pc-linux-gnu/#{APP_NAME}").each do |bin|
-    sh "strip --strip-unneeded #{bin}" if File.exist?(bin)
+  Dir.glob("#{mruby_root}/build/x86_64-pc-linux-*/bin/#{APP_NAME}").each do |bin|
+    sh "strip --strip-unneeded #{bin}"
   end
 end
 
