@@ -1,4 +1,4 @@
-# ff [![GitHub release](https://img.shields.io/github/release/appPlant/ff.svg)](https://github.com/appPlant/ff/releases) [![Build Status](https://travis-ci.org/appPlant/ff.svg?branch=master)](https://travis-ci.org/appPlant/ff) [![Code Climate](https://codeclimate.com/github/appPlant/ff/badges/gpa.svg)](https://codeclimate.com/github/appPlant/ff)
+# ff [![GitHub release](https://img.shields.io/github/release/appPlant/ff.svg)](https://github.com/appPlant/ff/releases) [![Build Status](https://travis-ci.org/appPlant/ff.svg?branch=master)](https://travis-ci.org/appPlant/ff) [![codebeat badge](https://codebeat.co/badges/5cfefd2d-baeb-4067-9c3a-672dba3a7ee9)](https://codebeat.co/projects/github-com-appplant-ff)
 
 Cross-platform CLI tool to find out the way to any "planet".
 
