@@ -22,10 +22,8 @@
 
 def __main__(_)
   @parser = FF::OptParser.new
-
   validate_options
   execute_request
-
   exit(1) if logger.errors?
 end
 
@@ -63,16 +61,18 @@ end
 #
 # @return [ Void ]
 def print_usage
-  puts 'usage: ff [options...] <planet>...'
-  puts 'Options:'
-  puts '-a=ATTRIBUTE    Show value of attribute'
-  puts '-e=TYPE         Expected type of planet to validate against'
-  puts '-f=FORMAT       Show formatted connection string'
-  puts '                Possible formats are jdbc, sqlplus, url, tns or pqdb'
-  puts '-p, --pretty    Pretty print output as a table'
-  puts '-t, --type      Show type of planet'
-  puts '-h, --help      This help text'
-  puts '-v, --version   Show version number'
+  puts <<-usage
+usage: ff [options...] <planet>...
+Options:
+-a=ATTRIBUTE    Show value of attribute
+-e=TYPE         Expected type of planet to validate against
+-f=FORMAT       Show formatted connection string
+                Possible formats are jdbc, sqlplus, url, tns or pqdb
+-p, --pretty    Pretty print output as a table
+-t, --type      Show type of planet
+-h, --help      This help text
+-v, --version   Show version number
+usage
 end
 
 # Print the attribute value of the specified planets.
@@ -111,35 +111,10 @@ end
 # @return [ Void ]
 def print_values(column, planets, values)
   if @parser.print_pretty?
-    print_as_table column, planets, values
+    puts FF::Table.new(column, planets, values).to_s
   else
     planets.each_with_index { |p, i| puts msg(p.id, values[i]) }
   end
-end
-
-# Print values as a formatted table.
-#
-# print_as_table type, [app-package], [server]
-#
-# @param [ String ] column The name of the value column.
-# @param [ Array<Planet> ] planets Ordered list of requested planets.
-# @param [ Array ] values The entries for the value column.
-#
-# @return [ Void ]
-def print_as_table(column, planets, values)
-  table = Terminal::Table.new do |t|
-    t.title    = ARGV.join ' '
-    t.headings = ['NR.', 'TYPE', 'ID', 'NAME', column.upcase]
-    t.style    = { all_separators: true }
-
-    planets.each_with_index do |p, i|
-      t << ["#{i}.", p.type, p.id, p.name, msg(p.id, values[i])]
-    end
-
-    t.align_column 0, :right
-  end
-
-  puts table.to_s
 end
 
 # Raises an error if the type does not match the expected type.
