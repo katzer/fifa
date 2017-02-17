@@ -8,11 +8,13 @@
    ff -> fifa
    ```
 
-2. Fixed binary stripping for Linux which was broken since v1.2.0.
-
-3. Binaries for Linux BusyBox.
+2. Binaries for Linux BusyBox.
 
   - Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/ff`
+
+3. Fixed binary stripping for Linux which was broken since v1.2.0.
+
+4. Strip OSX binaries.
 
 
 ### 1.3.1 (14.02.2017)
