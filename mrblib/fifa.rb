@@ -62,7 +62,7 @@ end
 # @return [ Void ]
 def print_usage
   puts <<-usage
-usage: ff [options...] <planet>...
+usage: fifa [options...] <planet>...
 Options:
 -a=ATTRIBUTE    Show value of attribute
 -e=TYPE         Expected type of planet to validate against

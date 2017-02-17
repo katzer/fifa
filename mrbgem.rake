@@ -22,8 +22,8 @@
 
 require_relative 'mrblib/ff/version'
 
-gem = MRuby::Gem::Specification.new('ff') do |spec|
-  spec.bins = ['ff']
+gem = MRuby::Gem::Specification.new('fifa') do |spec|
+  spec.bins = ['fifa']
 
   spec.add_dependency 'mruby-terminal-table'
   spec.add_dependency 'mruby-print'

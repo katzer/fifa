@@ -33,7 +33,7 @@ file :mruby do
   end
 end
 
-APP_NAME=ENV["APP_NAME"] || "ff"
+APP_NAME=ENV["APP_NAME"] || "fifa"
 APP_ROOT=ENV["APP_ROOT"] || Dir.pwd
 # avoid redefining constants in mruby Rakefile
 mruby_root=File.expand_path(ENV["MRUBY_ROOT"] || "#{APP_ROOT}/mruby")

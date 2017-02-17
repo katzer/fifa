@@ -2,8 +2,8 @@
 
 Cross-platform CLI tool to find out the way to any "planet".
 
-    $ ff -h
-    usage: ff [options...] <planet>...
+    $ fifa -h
+    usage: fifa [options...] <planet>...
     Options:
     -a=ATTRIBUTE     Show value of attribute
     -e=TYPE          Expected type of planet to validate against
@@ -41,15 +41,15 @@ $ scripts/compile # https://docs.docker.com/engine/installation
 
 You'll be able to find the binaries in the following directories:
 
-- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/ff`
-- Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/ff`
-- Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu-glibc-2.14/bin/ff`
-- Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu-glibc-2.14/bin/ff`
-- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/ff`
-- OS X (64-bit): `mruby/build/x86_64-apple-darwin14/bin/ff`
-- OS X (32-bit): `mruby/build/i386-apple-darwin14/bin/ff`
-- Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/ff`
-- Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/ff`
+- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
+- Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/fifa`
+- Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu-glibc-2.14/bin/fifa`
+- Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu-glibc-2.14/bin/fifa`
+- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/fifa`
+- OS X (64-bit): `mruby/build/x86_64-apple-darwin14/bin/fifa`
+- OS X (32-bit): `mruby/build/i386-apple-darwin14/bin/fifa`
+- Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/fifa`
+- Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/fifa`
 
 ## Basic Usage
 
@@ -57,11 +57,11 @@ Get the connection by type:
 
     $ export ORBIT_FILE=/path/to/orbit.json
 
-    $ ff app-package-1 app-package-2
+    $ fifa app-package-1 app-package-2
     $ user@hostname-1.de
     $ user@hostname-2.de
 
-    $ ff -f=tns db-package
+    $ fifa -f=tns db-package
     $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 
 Passing ids is optional. If no ids are specified, then _ff_ executes the request for all found planets.
@@ -70,22 +70,22 @@ Passing ids is optional. If no ids are specified, then _ff_ executes the request
 
 Get the type:
 
-    $ ff -t db-package
+    $ fifa -t db-package
     $ db
 
 Get a specific attribute:
 
-    $ ff -a=port db-package
+    $ fifa -a=port db-package
     $ 1234
 
 Ensure the right type:
 
-    $ ff -e=web db-package
+    $ fifa -e=web db-package
     $ <type missmatch>
 
 Pretty print output:
 
-    $ ff -p app-package db-package web-package
+    $ fifa -p app-package db-package web-package
     
       NR   PLANET        CONNECTION            
       =========================================
@@ -97,7 +97,7 @@ Pretty print output:
 
 Format used by the _ski_ tool:
 
-    $ ff -f=ski app-package db-package web-package
+    $ fifa -f=ski app-package db-package web-package
     $ server|app-package|My App-Package|user1@url1.de
     $ db|db-package|My DB-Package|OP-DB:user1@url1.de
     $ web|web-package|My Web-Package|https://url.1.net

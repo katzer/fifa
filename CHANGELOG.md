@@ -2,9 +2,15 @@
 
 ### 1.3.2 (not yet released)
 
-1. Fixed binary stripping which was broken since v1.2.0.
+1. Renamed the tool:
 
-2. Binaries for Linux BusyBox.
+   ```
+   ff -> fifa
+   ```
+
+2. Fixed binary stripping for Linux which was broken since v1.2.0.
+
+3. Binaries for Linux BusyBox.
 
   - Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/ff`
 

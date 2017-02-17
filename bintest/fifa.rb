@@ -31,7 +31,7 @@ def orbit_env_get(file = nil)
   end
 end
 
-BINARY    = File.expand_path('../mruby/bin/ff', __dir__)
+BINARY    = File.expand_path('../mruby/bin/fifa', __dir__)
 
 ORBIT_ENV = orbit_env_get.freeze
 PASWD_ENV = orbit_env_get('orbit.password').freeze
