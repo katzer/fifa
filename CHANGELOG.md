@@ -1,12 +1,8 @@
-## Release Notes
+## Release Notes: _fifa_
 
 ### 1.3.2 (not yet released)
 
-1. Renamed the tool:
-
-   ```
-   ff -> fifa
-   ```
+1. Renamed the tool to fifa (<b>Fi</b>nd<b>Fa</b>st).
 
 2. Binaries for Linux BusyBox:
 
