@@ -45,7 +45,7 @@ You'll be able to find the binaries in the following directories:
 - Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/fifa`
 - Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu-glibc-2.14/bin/fifa`
 - Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu-glibc-2.14/bin/fifa`
-- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/fifa`
+- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
 - OS X (64-bit): `mruby/build/x86_64-apple-darwin14/bin/fifa`
 - OS X (32-bit): `mruby/build/i386-apple-darwin14/bin/fifa`
 - Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/fifa`

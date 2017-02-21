@@ -34,7 +34,7 @@ MRuby::Build.new do |conf|
   gem_config(conf)
 end
 
-MRuby::Build.new('x86_64-pc-linux-busybox-musl') do |conf|
+MRuby::Build.new('x86_64-pc-linux-busybox') do |conf|
   toolchain :gcc
 
   gem_config(conf)

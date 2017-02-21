@@ -10,7 +10,7 @@
 
 2. Binaries for Linux BusyBox:
 
-  - Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox-musl/bin/ff`
+  - Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
 
 3. Imroved binary striping:
 
