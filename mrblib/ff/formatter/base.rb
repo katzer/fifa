@@ -60,7 +60,7 @@ module FF
       #
       # @return [ String ]
       def ski(params)
-        "#{params['type']}|#{params['id']}|#{params['name']}|#{default(params)}"
+        "#{params['id']}|#{params['type']}|#{params['name']}|#{default(params)}"
       end
 
       private

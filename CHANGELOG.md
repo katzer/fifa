@@ -14,6 +14,8 @@
   - Added support for OSX and Windows binaries
   - Shrinks binary size to 1/4
 
+4. Changed order of columns and ski format.
+
 
 ### 1.3.1 (14.02.2017)
 
@@ -52,35 +54,35 @@
 
    ```
    $ ff -f=ski app-package-1
-   server|app-package-1|App-Package 1|user@hostname-1.de
+   app-package-1|server|App-Package 1|user@hostname-1.de
    ```
 
 5. Improved pretty table output:
 
    ```
    $ ff -p app-package-1
-   +-----+--------+---------------+---------------+----------------+
+   +-----+---------------+--------+---------------+----------------+
    |                      ff -p app-package-1                      |
-   +-----+--------+---------------+---------------+----------------+
-   | NR. | TYPE   | ID            | NAME          | CONNECTION     |
-   +-----+--------+---------------+---------------+----------------+
-   |  0. | server | app-package-1 | App-Package 1 | <missing user> |
-   +-----+--------+---------------+---------------+----------------+
+   +-----+---------------+--------+---------------+----------------+
+   | NR. | ID            | TYPE   | NAME          | CONNECTION     |
+   +-----+---------------+--------+---------------+----------------+
+   |  0. | app-package-1 | server | App-Package 1 | <missing user> |
+   +-----+---------------+--------+---------------+----------------+
    ```
 
 6. Missing properties or unknown ids do not throw runtime errors anymore:
 
    ```
    $ ff -p incomplete-id unknown-id
-   +-----+---------+---------------+---------------+----------------+
+   +-----+---------------+---------+---------------+----------------+
    |                 ff -p incomplete-id unknown-id                 |
-   +-----+---------+---------------+---------------+----------------+
-   | NR. | TYPE    | ID            | NAME          | CONNECTION     |
-   +-----+---------+---------------+---------------+----------------+
-   |  0. | server  | incomplete-id | App-Package 1 | <missing user> |
-   +-----+---------+---------------+---------------+----------------+
-   |  1. | unknown | unknown-id    | unknown       | <unknown>      |
-   +-----+---------+---------------+---------------+----------------+
+   +-----+---------------+---------+---------------+----------------+
+   | NR. | ID            | TYPE    | NAME          | CONNECTION     |
+   +-----+---------------+---------+---------------+----------------+
+   |  0. | incomplete-id | server  | App-Package 1 | <missing user> |
+   +-----+---------------+---------+---------------+----------------+
+   |  1. | unknown-id    | unknown | unknown       | <unknown>      |
+   +-----+---------------+---------+---------------+----------------+
    ```
 
 

@@ -98,9 +98,9 @@ Pretty print output:
 Format used by the _ski_ tool:
 
     $ fifa -f=ski app-package db-package web-package
-    $ server|app-package|My App-Package|user1@url1.de
-    $ db|db-package|My DB-Package|OP-DB:user1@url1.de
-    $ web|web-package|My Web-Package|https://url.1.net
+    $ app-package|server|My App-Package|user1@url1.de
+    $ db-package|db|My DB-Package|OP-DB:user1@url1.de
+    $ web-package|web|My Web-Package|https://url.1.net
 
 The general format is `type|id|name|type specific connection`.
 

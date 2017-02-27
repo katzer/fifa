@@ -90,7 +90,7 @@ module FF
       #
       # @return [ String ]
       def ski(params)
-        "db|#{params['id']}|#{params['name']}|#{pqdb(params)}"
+        "#{params['id']}|db|#{params['name']}|#{pqdb(params)}"
       end
     end
   end

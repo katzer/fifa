@@ -32,7 +32,7 @@ module FF
     # @return [ Void ]
     def initialize(column, planets, values)
       @title   = ARGV.join(' ')
-      @columns = ['NR.', 'TYPE', 'ID', 'NAME', column.upcase]
+      @columns = ['NR.', 'ID', 'TYPE', 'NAME', column.upcase]
       @style   = { all_separators: true }
       @rows    = convert_to_rows(planets, values)
     end
@@ -69,7 +69,7 @@ module FF
       rows = []
 
       planets.each_with_index do |p, i|
-        rows << ["#{i}.", p.type, p.id, p.name, msg(p.id, values[i])]
+        rows << ["#{i}.", p.id, p.type, p.name, msg(p.id, values[i])]
       end
 
       rows
