@@ -31,7 +31,6 @@ module FF
       '-h', '--help',
       '-t', '--type',
       '-p', '--pretty',
-      '-e=',
       '-a=',
       '-f='
     ]
@@ -89,25 +88,11 @@ module FF
       @args.include?('-p') || @args.include?('--pretty')
     end
 
-    # If the tool should validate the type.
-    #
-    # @return [ Boolean ] Yes if the options include -e.
-    def validate?
-      @args.any? { |opt| opt[0..2] == '-e=' }
-    end
-
     # The attribute to find for.
     #
     # @return [ String ] Ddefaults to: type.
     def attribute
       param_value('-a', 'type')
-    end
-
-    # The expected type to validate against.
-    #
-    # @return [ String ] Ddefaults to: nil.
-    def expected_type
-      param_value('-e')
     end
 
     # The format of the connection string.

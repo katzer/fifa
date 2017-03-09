@@ -6,7 +6,6 @@ Cross-platform CLI tool to find out the way to any "planet".
     usage: fifa [options...] <planet>...
     Options:
     -a=ATTRIBUTE     Show value of attribute
-    -e=TYPE          Expected type of planet to validate against
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url, tns or pqdb
     -p, --pretty     Pretty print output as a table
@@ -77,11 +76,6 @@ Get a specific attribute:
 
     $ fifa -a=port db-package
     $ 1234
-
-Ensure the right type:
-
-    $ fifa -e=web db-package
-    $ <type missmatch>
 
 Pretty print output:
 

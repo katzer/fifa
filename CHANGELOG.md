@@ -1,5 +1,9 @@
 ## Release Notes: _fifa_
 
+### 1.4.0 (not yet released)
+
+1. Removed -e flag
+
 ### 1.3.2 (01.03.2017)
 
 1. Renamed the tool to fifa (<b>Fi</b>nd<b>Fa</b>st).

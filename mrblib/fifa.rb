@@ -65,7 +65,6 @@ def print_usage
 usage: fifa [options...] <planet>...
 Options:
 -a=ATTRIBUTE    Show value of attribute
--e=TYPE         Expected type of planet to validate against
 -f=FORMAT       Show formatted connection string
                 Possible formats are jdbc, sqlplus, url, tns or pqdb
 -p, --pretty    Pretty print output as a table
@@ -85,7 +84,6 @@ def print_attributes(planet_ids)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
 
-  planets.each { |planet| validate_type(planet) }
   print_values(attribute, planets, values)
 end
 
@@ -98,7 +96,6 @@ def print_connections(planet_ids)
   planets     = FF::Planet.find_all(planet_ids)
   connections = planets.map { |planet| planet.connection(@parser.format) }
 
-  planets.each { |planet| validate_type(planet) }
   print_values('CONNECTION', planets, connections)
 end
 
@@ -115,20 +112,6 @@ def print_values(column, planets, values)
   else
     planets.each_with_index { |p, i| puts msg(p.id, values[i]) }
   end
-end
-
-# Raises an error if the type does not match the expected type.
-#
-# @param [ FF::Planet ] planet The planet to validate against
-#
-# @return [ Void ]
-def validate_type(planet)
-  expected_type = @parser.expected_type
-  type          = planet.type
-
-  return if !@parser.validate? || planet.unknown? || type == expected_type
-
-  log(planet.id, 'type missmatch')
 end
 
 # Global logger for error messages.
