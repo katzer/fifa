@@ -23,6 +23,9 @@
         "name": "Webserver",
         "type": "web",
         "user": "user1",
-        "url": "https://url.1.net"
+        "url": "https://url.1.net",
+        "tags": [
+            "gfv3", "sles11"
+        ]
     }
 ]

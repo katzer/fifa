@@ -104,9 +104,10 @@ module FF
 
     # The passed planet ids.
     #
-    # @return [ Array<String> ]
+    # @return [ Array<FF::Matcher> ]
     def planets
       @args.select { |opt| opt[0] != '-' }
+           .map { |m| FF::Matcher.new(m) }
     end
 
     private

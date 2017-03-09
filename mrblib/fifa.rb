@@ -76,11 +76,11 @@ end
 
 # Print the attribute value of the specified planets.
 #
-# @param [ String ] planet_ids The ids of the planets.
+# @param [ Array<String> ] matchers List of matchers.
 #
 # @return [ Void ]
-def print_attributes(planet_ids)
-  planets   = FF::Planet.find_all(planet_ids)
+def print_attributes(matchers)
+  planets   = FF::Planet.find_all(matchers)
   attribute = @parser.attribute
   values    = planets.map { |planet| planet.attributes[attribute] }
 
@@ -89,11 +89,11 @@ end
 
 # Print the connection string of the specified planets.
 #
-# @param [ String ] planet_ids The ids of the planets.
+# @param [ Array<String> ] matchers List of matchers.
 #
 # @return [ Void ]
-def print_connections(planet_ids)
-  planets     = FF::Planet.find_all(planet_ids)
+def print_connections(matchers)
+  planets     = FF::Planet.find_all(matchers)
   connections = planets.map { |planet| planet.connection(@parser.format) }
 
   print_values('CONNECTION', planets, connections)
