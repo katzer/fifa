@@ -37,7 +37,7 @@ module FF
       when 'db', 'database'
         database_formatter
       else
-        base_formatter
+        unknown_formatter
       end
     end
 
@@ -62,11 +62,11 @@ module FF
       @web ||= Web.new
     end
 
-    # Instance of an basic formatter.
+    # Instance of an unknown formatter.
     #
     # @return [ Formatter::Web ]
-    def self.base_formatter
-      @base ||= Base.new
+    def self.unknown_formatter
+      @unknown ||= Unknown.new
     end
   end
 end

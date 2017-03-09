@@ -77,7 +77,7 @@ assert('unknown planet') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, 'unknown')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown'
+  assert_include output, 'missing'
 end
 
 assert('server') do
@@ -186,6 +186,13 @@ assert('ski format') do
   assert_include output, 'my-web|web|Webserver|https://url.1.net'
 end
 
+assert('unknown ski format') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=ski', 'id')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, 'id|unknown||'
+end
+
 assert('pretty type') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, '-t', '-p', 'my-app')
 
@@ -207,19 +214,6 @@ assert('attribute match') do
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '666'
-end
-
-assert('type match') do
-  _, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'my-db')
-
-  assert_true status.success?, 'Process did not exit cleanly'
-end
-
-assert('type missmatch') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-e=db', 'my-app')
-
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'missmatch'
 end
 
 assert('incomplete server') do

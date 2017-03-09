@@ -4,6 +4,13 @@
 
 1. Removed -e flag
 
+2. Unknown planets return full connection details in _ski_ format:
+
+   ```
+   $ ff -f=ski unknown-id
+   unknown-id|unknown||
+   ```
+
 ### 1.3.2 (01.03.2017)
 
 1. Renamed the tool to fifa (<b>Fi</b>nd<b>Fa</b>st).

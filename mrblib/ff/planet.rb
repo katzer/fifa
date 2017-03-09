@@ -32,12 +32,8 @@ module FF
     #
     # @return [ Planet ]
     def self.find(planet_id)
-      planet = planets.find { |i| i['id'] == planet_id }
-
-      unless planet
-        log(planet_id, UNKNOWN)
-        planet = { 'id' => planet_id }
-      end
+      planet   = planets.find { |i| i['id'] == planet_id }
+      planet ||= { 'id' => planet_id }
 
       Planet.new(planet)
     end
@@ -105,7 +101,7 @@ module FF
     #
     # @return [ String ]
     def id
-      attributes['id'] || raise('unknown id')
+      attributes['id'] || raise('missing id')
     end
 
     # The type of the planet.
@@ -124,18 +120,13 @@ module FF
       @name ||= attributes['name'] || log([id, :name], UNKNOWN)
     end
 
-    # If the planet's type is unknown
-    def unknown?
-      type == UNKNOWN
-    end
-
     # Formatted connection depend on the type (db, web or server).
     #
     # @param [ String ] format Possible values are url, tns, jdbc, ...
     #
     # @return [ String ]
     def connection(format)
-      unknown? ? UNKNOWN : Formatter.for_type(type).format(format, attributes)
+      Formatter.for_type(type).format(format, attributes)
     end
   end
 end
