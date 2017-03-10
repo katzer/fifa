@@ -26,9 +26,9 @@ module FF
     # Link of crumbs
     CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)?$/
     # Single crumb
-    SPLIT_PATTERN = /([@%][^@%]+)/
+    SPLIT_PATTERN  = /([@%][^@%]+)/
     # Single crumb
-    CRUMB_PATTERN = /^(@|%)?([^:=]*)(.)?(.*)$/
+    CRUMB_PATTERN  = /^(@|%)?([^:=]*)(.)?(.*)$/
 
     # Initializes the matcher by specified crumbs.
     #
@@ -36,8 +36,11 @@ module FF
     #
     # @return [ FF::Matcher ]
     def initialize(matcher)
-      crumbs = matcher.split(/\s+/)
+      @string = matcher
+
+      crumbs  = matcher.split(/\s+/)
       validate(crumbs)
+
       @crumbs = crumbs.map { |crumb| Crumbs.new(crumb) }
     end
 
@@ -48,6 +51,13 @@ module FF
     # @return [ Boolean ]
     def match?(map)
       @crumbs.all? { |crumb| crumb.match? map }
+    end
+
+    # The matcher's string representation.
+    #
+    # @return [ String ]
+    def to_s
+      @string.to_s
     end
 
     private

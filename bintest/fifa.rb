@@ -129,6 +129,13 @@ assert('matchers') do
   assert_equal output.split.count, 1
 end
 
+assert('count') do
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '-c', 'my-db')
+  assert_include output, '1'
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '--count', 'type:db|web')
+  assert_include output, '2'
+end
+
 assert('multi connections') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, 'my-db', 'my-web')
 

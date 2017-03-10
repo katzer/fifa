@@ -25,16 +25,18 @@ module FF
   class Table
     # Print values as a formatted table.
     #
-    # @param [ String ] column The name of the value column.
-    # @param [ Array<Planet> ] planets Ordered list of requested planets.
-    # @param [ Array ] values The entries for the value column.
+    # @param [ Array<Planet> ] planets List of planets.
+    # @param [ Array<String> ] columns List of additional column names.
+    # @param [ Array<String> ] values Values for each additional column.
     #
     # @return [ Void ]
-    def initialize(column, planets, values)
+    def initialize(planets, columns, values)
       @title   = ARGV.join(' ')
-      @columns = ['NR.', 'ID', 'TYPE', 'NAME', column.upcase]
+      @columns = ['NR.', 'ID', 'TYPE', 'NAME']
       @style   = { all_separators: true }
       @rows    = convert_to_rows(planets, values)
+
+      columns.each { |col| @columns << col.upcase }
     end
 
     # Pretty formatted terminal table string.
@@ -69,7 +71,13 @@ module FF
       rows = []
 
       planets.each_with_index do |p, i|
-        rows << ["#{i}.", p.id, p.type, p.name, msg(p.id, values[i])]
+        cells = values[i]
+        row   = ["#{i}.", p.id, p.type, p.name]
+
+        cells[-1] = msg(p.id, cells[-1])
+        cells.each { |cell| row << cell }
+
+        rows << row
       end
 
       rows
