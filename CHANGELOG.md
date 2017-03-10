@@ -7,7 +7,29 @@
 2. Find planets by generic match queries:
 
    ```
-   $ ff type=server@env=prod type=db%tags:Jens
+   $ fifa type=server@env=prod type=db%tags:Jens
+   ```
+
+3. Get count of matching planets per query:
+
+   ```
+   $ fifa -c type=db@tags:ora10 type=db@tags:ora11
+   0
+   25
+   ```
+
+   ```
+   $ fifa -p -c type=server "type:db|web"
+  +-----+------------+--------+-----------+-------------+------------------------+-------+
+   |                          ./fifa -p -c type=server type:db|web                        |
+  +-----+------------+--------+-----------+-------------+------------------------+-------+
+   | NR. | ID         | TYPE   | NAME      | MATCHER     | CONNECTION             | COUNT |
+   +-----+------------+--------+-----------+-------------+------------------------+-------+
+   |  0. | my-app     | server | Server    | type=server | user1@url1.de          | 1     |
+   +-----+------------+--------+-----------+-------------+------------------------+-------+
+   |  1. | my-db      | db     | Database  | type:db|web | url_url1.bla.blergh.de | 2     |
+   |     | my-web     | web    | Webserver |             | https://url.1.net      |       |
+   +-----+------------+--------+-----------+-------------+------------------------+-------+
    ```
 
 ### 1.3.2 (01.03.2017)

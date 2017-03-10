@@ -74,7 +74,13 @@ Get the type:
 Get a specific attribute:
 
     $ fifa -a=port db-package
-    $ 1234
+    $ 12343
+
+Get count of matching planets:
+
+    $ fifa -c type=db@tags:ora10 type=db@tags:ora11
+    0
+    25
 
 Pretty print output:
 
