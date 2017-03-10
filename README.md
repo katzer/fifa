@@ -3,13 +3,14 @@
 Cross-platform CLI tool to find out the way to any "planet".
 
     $ fifa -h
-    usage: fifa [options...] <planet>...
+    usage: fifa [options...] <matcher>...
     Options:
     -a=ATTRIBUTE     Show value of attribute
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url, tns or pqdb
     -p, --pretty     Pretty print output as a table
     -t, --type       Show type of planet
+    -c, --count      Show count of matching planets
     -h, --help       This help text
     -v, --version    Show version number
 

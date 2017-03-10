@@ -27,6 +27,7 @@ module FF
   class OptParser
     # List of all supported options
     OPTIONS = [
+      '-c', '--count',
       '-v', '--version',
       '-h', '--help',
       '-t', '--type',
@@ -64,14 +65,14 @@ module FF
     #
     # @return [ Boolean ] Yes if the options include -v or --version.
     def print_version?
-      @args.include?('-v') || @args.include?('--version')
+      flag_given? 'version'
     end
 
     # If the tool should print out the usage.
     #
     # @return [ Boolean ] Yes if the options include -h or --help.
     def print_usage?
-      @args.include?('-h') || @args.include?('--help')
+      flag_given? 'help'
     end
 
     # If the tool should print out attributes other then the connection.
@@ -85,7 +86,21 @@ module FF
     #
     # @return [ Boolean ] Yes if the options include -p, --pretty.
     def print_pretty?
-      @args.include?('-p') || @args.include?('--pretty')
+      flag_given? 'pretty'
+    end
+
+    # If the tool should print out the count of matching planets.
+    #
+    # @return [ Boolean ] Yes if the options include -c, --count.
+    def print_count?
+      flag_given? 'count'
+    end
+
+    # If the specified flag is given in args list.
+    #
+    # @param [ String ] name The (long) flag name.
+    def flag_given?(flag)
+      @args.include?("-#{flag[0]}") || @args.include?("--#{flag}")
     end
 
     # The attribute to find for.
@@ -105,9 +120,13 @@ module FF
     # The passed planet ids.
     #
     # @return [ Array<FF::Matcher> ]
-    def planets
-      @args.select { |opt| opt[0] != '-' }
-           .map { |m| FF::Matcher.new(m) }
+    def matchers
+      list = @args.select { |opt| opt[0] != '-' }
+                  .map { |m| FF::Matcher.new(m) }
+
+      list << FF::Matcher.new('id:.') if list.empty?
+
+      list
     end
 
     private

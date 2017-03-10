@@ -20,6 +20,8 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
+Object.include FF::PrintMethods
+
 def __main__(_)
   @parser = FF::OptParser.new
   validate_options
@@ -44,9 +46,9 @@ def execute_request
   elsif @parser.print_version?
     print_version
   elsif @parser.print_attribute?
-    print_attributes(@parser.planets)
+    print_attributes(@parser.print_count?)
   else
-    print_connections(@parser.planets)
+    print_connections(@parser.print_count?)
   end
 end
 
@@ -62,56 +64,17 @@ end
 # @return [ Void ]
 def print_usage
   puts <<-usage
-usage: fifa [options...] <planet>...
+usage: fifa [options...] <matcher>...
 Options:
 -a=ATTRIBUTE    Show value of attribute
 -f=FORMAT       Show formatted connection string
                 Possible formats are jdbc, sqlplus, url, tns or pqdb
 -p, --pretty    Pretty print output as a table
 -t, --type      Show type of planet
+-c, --count     Show count of matching planets
 -h, --help      This help text
 -v, --version   Show version number
 usage
-end
-
-# Print the attribute value of the specified planets.
-#
-# @param [ Array<String> ] matchers List of matchers.
-#
-# @return [ Void ]
-def print_attributes(matchers)
-  planets   = FF::Planet.find_all(matchers)
-  attribute = @parser.attribute
-  values    = planets.map { |planet| planet.attributes[attribute] }
-
-  print_values(attribute, planets, values)
-end
-
-# Print the connection string of the specified planets.
-#
-# @param [ Array<String> ] matchers List of matchers.
-#
-# @return [ Void ]
-def print_connections(matchers)
-  planets     = FF::Planet.find_all(matchers)
-  connections = planets.map { |planet| planet.connection(@parser.format) }
-
-  print_values('CONNECTION', planets, connections)
-end
-
-# Print values to stdout.
-#
-# @param [ String ] column See `print_as_table`.
-# @param [ Array<Planet> ] planets See `print_as_table`.
-# @param [ Array ] values See `print_as_table`.
-#
-# @return [ Void ]
-def print_values(column, planets, values)
-  if @parser.print_pretty?
-    puts FF::Table.new(column, planets, values).to_s
-  else
-    planets.each_with_index { |p, i| puts msg(p.id, values[i]) }
-  end
 end
 
 # Global logger for error messages.
