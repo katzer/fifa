@@ -124,9 +124,7 @@ module FF
       list = @args.select { |opt| opt[0] != '-' }
                   .map { |m| FF::Matcher.new(m) }
 
-      list << FF::Matcher.new('id:.') if list.empty?
-
-      list
+      list.empty? ? list << FF::Matcher.new('id:.') : list
     end
 
     private

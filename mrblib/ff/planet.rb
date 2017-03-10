@@ -38,20 +38,14 @@ module FF
       Planet.new(planet)
     end
 
-    # Find planets by matchers. Returns all planets if no ids are specified.
-    # Raises an error if a planet could not be found.
+    # Find planets by matchers.
     #
-    # @param [ Array<FF::Matcher> ] matchers Optional list of matchers.
+    # @param [ Array<FF::Matcher> ] matchers List of matchers.
     #
     # @return [ Array<Planet> ]
-    def self.find_all(matchers = nil)
-      if planets.nil? || matchers.empty?
-        found_planets = planets
-      else
-        found_planets = planets.select { |p| matchers.any? { |m| m.match? p } }
-      end
-
-      found_planets.map { |p| Planet.new(p) }
+    def self.find_all(matchers)
+      planets.select { |p| matchers.any? { |m| m.match? p } }
+             .map { |p| Planet.new(p) }
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.
