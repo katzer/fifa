@@ -1,6 +1,6 @@
 ## Release Notes: _fifa_
 
-### 1.4.0 (not yet released)
+### 1.4.0 (10.03.2017)
 
 1. Removed -e flag
 
