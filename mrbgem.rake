@@ -32,6 +32,7 @@ gem = MRuby::Gem::Specification.new('fifa') do |spec|
   spec.add_dependency 'mruby-os'
   spec.add_dependency 'mruby-io'
   spec.add_dependency 'mruby-json'
+  spec.add_dependency 'mruby-regexp-pcre'
 end
 
 gem.license = 'Apache 2.0'

@@ -4,11 +4,10 @@
 
 1. Removed -e flag
 
-2. Unknown planets return full connection details in _ski_ format:
+2. Find planets by generic match queries:
 
    ```
-   $ ff -f=ski unknown-id
-   unknown-id|unknown||
+   $ ff type=server@env=prod type=db%tags:Jens
    ```
 
 ### 1.3.2 (01.03.2017)

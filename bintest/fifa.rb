@@ -76,8 +76,8 @@ end
 assert('unknown planet') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, 'unknown')
 
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'missing'
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_true output.empty?
 end
 
 assert('server') do
@@ -108,6 +108,25 @@ assert('all connections') do
   assert_include output, 'user1@url1.de'
   assert_include output, 'url_url1.bla.blergh.de'
   assert_include output, 'https://url.1.net'
+end
+
+assert('matchers') do
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '@my-db')
+  assert_equal output.split.count, 1
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '@id=my-db')
+  assert_equal output.split.count, 1
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '%my-db')
+  assert_equal output.split.count, 2
+  output, = Open3.capture2(ORBIT_ENV, BINARY, 'my-db@type=db')
+  assert_equal output.split.count, 1
+  output, = Open3.capture2(ORBIT_ENV, BINARY, 'my-db%type=db')
+  assert_equal output.split.count, 0
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '%type:^(?!.*db).*$')
+  assert_equal output.split.count, 1
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '@type:db|web')
+  assert_equal output.split.count, 2
+  output, = Open3.capture2(ORBIT_ENV, BINARY, 'tags:gfv3@tags:sles11')
+  assert_equal output.split.count, 1
 end
 
 assert('multi connections') do
@@ -184,13 +203,6 @@ assert('ski format') do
   assert_include output, 'my-app|server|Server|user1@url1.de'
   assert_include output, 'my-db|db|Database|OP_DB:user1@url1.de'
   assert_include output, 'my-web|web|Webserver|https://url.1.net'
-end
-
-assert('unknown ski format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=ski', 'id')
-
-  assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'id|unknown||'
 end
 
 assert('pretty type') do
