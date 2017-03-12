@@ -25,12 +25,12 @@ require_relative 'mrblib/ff/version'
 gem = MRuby::Gem::Specification.new('fifa') do |spec|
   spec.bins = ['fifa']
 
+  spec.add_dependency 'mruby-tiny-io', github: 'mimaki/mruby-tiny-io'
   spec.add_dependency 'mruby-terminal-table'
   spec.add_dependency 'mruby-print'
   spec.add_dependency 'mruby-exit'
   spec.add_dependency 'mruby-env'
   spec.add_dependency 'mruby-os'
-  spec.add_dependency 'mruby-io'
   spec.add_dependency 'mruby-json'
   spec.add_dependency 'mruby-regexp-pcre'
 end

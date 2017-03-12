@@ -52,23 +52,7 @@ module FF
     #
     # @return [ Array<Hash> ]
     def self.planets
-      @planets ||= JSON.parse(IO.read(orbit_file_path))
-    rescue RuntimeError
-      raise "cannot read from #{orbit_file_path}"
-    end
-
-    # The file path where to find the ORBIT_FILE.
-    # Raises an error if the env variable is not set.
-    #
-    # @return [ String ]
-    def self.orbit_file_path
-      if ENV.include? 'ORBIT_FILE'
-        ENV['ORBIT_FILE']
-      else
-        File.join(ENV.fetch('ORBIT_HOME'), 'config/orbit.json')
-      end
-    rescue KeyError
-      raise 'env ORBIT_HOME not set'
+      @planets ||= OrbitFile.parse
     end
 
     # A planet is a single entry found in the ORBIT_FILE.
