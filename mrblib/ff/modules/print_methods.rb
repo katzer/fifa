@@ -76,7 +76,7 @@ module FF
       if parser.print_pretty?
         puts FF::Table.new(planets, columns, values).to_s
       else
-        planets.each_with_index { |p, i| puts msg(p.id, values[i].last) }
+        planets.each_with_index { |p, i| puts msg(p.id, values[i].last, true) }
       end
     end
   end

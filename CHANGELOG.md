@@ -6,6 +6,8 @@
 
 2. Added --no-color flag to disable the colorized output.
 
+3. Print errors without line breaks if not pretty printed.
+
 ### 1.4.0 (10.03.2017)
 
 1. Removed -e flag
