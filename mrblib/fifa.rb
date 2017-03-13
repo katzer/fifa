@@ -24,12 +24,7 @@ Object.include FF::PrintMethods
 
 def __main__(_)
   validate_options
-
-  return print_usage   if parser.print_usage?
-  return print_version if parser.print_version?
-
   execute_request
-
   exit(1) if logger.errors?
 end
 
@@ -45,11 +40,10 @@ end
 #
 # @return [ Void ]
 def execute_request
-  if parser.print_attribute?
-    print_attributes
-  else
-    print_connections
-  end
+  return print_usage      if parser.print_usage?
+  return print_version    if parser.print_version?
+  return print_attributes if parser.print_attribute?
+  print_connections
 end
 
 # Print out the version number of the tool.
