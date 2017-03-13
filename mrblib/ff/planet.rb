@@ -32,8 +32,12 @@ module FF
     #
     # @return [ Planet ]
     def self.find(planet_id)
-      planet   = planets.find { |i| i['id'] == planet_id }
-      planet ||= { 'id' => planet_id }
+      planet = planets.find { |i| i['id'] == planet_id }
+
+      unless planet
+        planet = { 'id' => planet_id }
+        log(planet_id, "unknown planet: #{planet_id}")
+      end
 
       Planet.new(planet)
     end
@@ -62,21 +66,13 @@ module FF
     # @return [ Planet ]
     def initialize(attributes)
       @attributes = attributes || {}
+      @id         = @attributes['id']
     end
 
     # Property reader for the attributes.
-    attr_reader :attributes
-
-    # The id of the planet.
-    # Raises an error if not set.
-    #
-    # @return [ String ]
-    def id
-      attributes['id'] || raise('missing id')
-    end
+    attr_reader :id, :attributes
 
     # The type of the planet.
-    # Raises an error if not set.
     #
     # @return [ String ]
     def type
@@ -84,7 +80,6 @@ module FF
     end
 
     # The name of the planet.
-    # Raises an error if not set.
     #
     # @return [ String ]
     def name

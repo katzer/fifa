@@ -38,10 +38,15 @@ module FF
     # @param [ Object ] key Usually the planet id.
     # @param [ String ] msg The error message.
     #
-    # @return [ String ] The passed msg
+    # @return [ Void ]
     def add(key, msg)
-      (@errors[key] ||= []) << "<#{msg}>"
-      msg
+      bucket = (@errors[key] ||= [])
+
+      if msg.is_a? String
+        bucket << "<#{msg}>"
+      else
+        bucket.concat msg
+      end
     end
 
     # If the given key corresponds to error messages.

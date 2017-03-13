@@ -80,7 +80,13 @@ module FF
       # @return [ String ]
       def pqdb(params)
         log_if_missing(params, 'server', 'db')
-        "#{params['db']}:#{FF::Planet.find(params['server']).connection(:ssh)}"
+
+        planet = FF::Planet.find(params['server'])
+        errors = logger.errors(planet.id)
+
+        log(params['id'], errors) if errors.any?
+
+        "#{params['db']}:#{planet.connection(:ssh)}"
       end
 
       # Connection formatted to use for internals.
