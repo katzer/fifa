@@ -55,7 +55,7 @@ module FF
     #
     # @return [ Array<String> ]
     def errors(key)
-      errors?(key) ? @errors[key].dup : []
+      errors?(key) ? @errors[key].uniq : []
     end
 
     # Return the joined error messages logged for the key or the provided
