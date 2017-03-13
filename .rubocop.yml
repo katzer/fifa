@@ -1,2 +1,5 @@
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false

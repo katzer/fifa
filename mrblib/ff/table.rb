@@ -68,19 +68,12 @@ module FF
     #
     # @return [ Array ]
     def convert_to_rows(planets, values)
-      rows = []
+      planets.zip(values).map do |p, cells|
+        row       = ["#{planets.index(p)}.", p.id, p.type, p.name]
+        cells[-1] = msg(p.id, cells.last)
 
-      planets.each_with_index do |p, i|
-        cells = values[i]
-        row   = ["#{i}.", p.id, p.type, p.name]
-
-        cells[-1] = msg(p.id, cells[-1])
-        cells.each { |cell| row << cell }
-
-        rows << row
+        row.concat(cells)
       end
-
-      rows
     end
   end
 end

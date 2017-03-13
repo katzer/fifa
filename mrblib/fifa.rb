@@ -24,7 +24,12 @@ Object.include FF::PrintMethods
 
 def __main__(_)
   validate_options
+
+  return print_usage   if parser.print_usage?
+  return print_version if parser.print_version?
+
   execute_request
+
   exit(1) if logger.errors?
 end
 
@@ -40,11 +45,7 @@ end
 #
 # @return [ Void ]
 def execute_request
-  if parser.print_usage?
-    print_usage
-  elsif parser.print_version?
-    print_version
-  elsif parser.print_attribute?
+  if parser.print_attribute?
     print_attributes
   else
     print_connections

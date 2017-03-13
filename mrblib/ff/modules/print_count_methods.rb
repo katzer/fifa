@@ -25,6 +25,7 @@ module FF
   module PrintCountMethods
     MATCHER = 'MATCHER'.freeze
     COUNT   = 'COUNT'.freeze
+    LB      = "\n".freeze
 
     # Print the connection string of the specified planets.
     #
@@ -54,14 +55,13 @@ module FF
     #
     # @return [ Array<Planets[], String[]>]
     def planets_and_counts(&block)
-      planets  = []
-      values   = []
+      planets, values = [], []
 
       parser.matchers.each do |matcher|
         stars = FF::Planet.find_all([matcher])
-        conns = stars.map(&block)
+        conns = stars.map(&block).join(LB)
 
-        values  << [matcher.to_s, conns.join("\n"), stars.size]
+        values  << [matcher.to_s, conns, stars.size]
         planets << mash_planets(stars)
       end
 
@@ -75,9 +75,9 @@ module FF
     # @return [ FF::Planet ]
     def mash_planets(planets)
       FF::Planet.new(
-        'id' => planets.map(&:id).join("\n"),
-        'type' => planets.map(&:type).join("\n"),
-        'name' => planets.map(&:name).join("\n")
+        'id' => planets.map(&:id).join(LB),
+        'type' => planets.map(&:type).join(LB),
+        'name' => planets.map(&:name).join(LB)
       )
     end
   end
