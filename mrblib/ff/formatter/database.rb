@@ -80,13 +80,7 @@ module FF
       # @return [ String ]
       def pqdb(params)
         log_if_missing(params, 'server', 'db')
-
-        planet = FF::Planet.find(params['server'])
-        errors = logger.errors(planet.id)
-
-        log(params['id'], errors) if errors.any?
-
-        "#{params['db']}:#{planet.connection(:ssh)}"
+        "#{params['db']}:#{find_planet(params).connection(:ssh)}"
       end
 
       # Connection formatted to use for internals.
@@ -97,6 +91,22 @@ module FF
       # @return [ String ]
       def ski(params)
         "#{params['id']}|db|#{params['name']}|#{pqdb(params)}"
+      end
+
+      private
+
+      # The references planet
+      #
+      # @param [ Array<String> ] params List of attributes where to look for.
+      #
+      # @return [ FF::Planet ]
+      def find_planet(params)
+        planet = FF::Planet.find(params['server'])
+        errors = logger.errors(planet.id)
+
+        log(params['id'], errors) if errors.any?
+
+        planet
       end
     end
   end
