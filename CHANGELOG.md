@@ -10,6 +10,8 @@
 
 4. Log errors if referenced server is unknown or invalid.
 
+5. Return result set in sorted order.
+
 ### 1.4.0 (10.03.2017)
 
 1. Removed -e flag

@@ -50,6 +50,7 @@ module FF
     def self.find_all(matchers)
       planets.select { |p| matchers.any? { |m| m.match? p } }
              .map { |p| Planet.new(p) }
+             .sort!
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.
@@ -84,6 +85,15 @@ module FF
     # @return [ String ]
     def name
       @attributes['name'] || ''
+    end
+
+    # Compare with another planet.
+    #
+    # @param [ FF::Planet ] planet The other planet.
+    #
+    # @return [ Int ] -1, 0 or 1
+    def <=>(other)
+      [type, name, id] <=> [other.type, other.name, other.id]
     end
 
     # Formatted connection depend on the type (db, web or server).
