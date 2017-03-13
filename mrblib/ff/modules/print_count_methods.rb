@@ -30,7 +30,7 @@ module FF
     #
     # @return [ Void ]
     def print_attributes_with_count
-      property        = @parser.attribute
+      property        = parser.attribute
       planets, values = planets_and_counts { |p| [p.attributes[property]] }
 
       print_values(planets, [MATCHER, property, COUNT], values)
@@ -40,7 +40,7 @@ module FF
     #
     # @return [ Void ]
     def print_connections_with_count
-      format          = @parser.format
+      format          = parser.format
       planets, values = planets_and_counts { |p| [p.connection(format)] }
 
       print_values(planets, [MATCHER, CONNECTION, COUNT], values)
@@ -57,7 +57,7 @@ module FF
       planets  = []
       values   = []
 
-      @parser.matchers.each do |matcher|
+      parser.matchers.each do |matcher|
         stars = FF::Planet.find_all([matcher])
         conns = stars.map(&block)
 

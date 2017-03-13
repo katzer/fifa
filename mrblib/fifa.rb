@@ -23,7 +23,6 @@
 Object.include FF::PrintMethods
 
 def __main__(_)
-  @parser = FF::OptParser.new
   validate_options
   execute_request
   exit(1) if logger.errors?
@@ -33,22 +32,22 @@ end
 #
 # @return [ Void ]
 def validate_options
-  return unless @parser.unknown_opts?
-  raise "unknown option: #{@parser.unknown_opts.join ', '}"
+  return unless parser.unknown_opts?
+  raise "unknown option: #{parser.unknown_opts.join ', '}"
 end
 
 # Execute the request.
 #
 # @return [ Void ]
 def execute_request
-  if @parser.print_usage?
+  if parser.print_usage?
     print_usage
-  elsif @parser.print_version?
+  elsif parser.print_version?
     print_version
-  elsif @parser.print_attribute?
-    print_attributes(@parser.print_count?)
+  elsif parser.print_attribute?
+    print_attributes
   else
-    print_connections(@parser.print_count?)
+    print_connections
   end
 end
 
@@ -69,6 +68,7 @@ Options:
 -a=ATTRIBUTE    Show value of attribute
 -f=FORMAT       Show formatted connection string
                 Possible formats are jdbc, sqlplus, url, tns or pqdb
+--no-color      Print errors without colors
 -p, --pretty    Pretty print output as a table
 -t, --type      Show type of planet
 -c, --count     Show count of matching planets
@@ -77,11 +77,18 @@ Options:
 usage
 end
 
+# Global opt parser.
+#
+# @return [ FF::OptParser ]
+def parser
+  @parser ||= FF::OptParser.new
+end
+
 # Global logger for error messages.
 #
 # @return [ FF::Logger ]
 def logger
-  $logger ||= FF::Logger.new
+  $logger ||= FF::Logger.new(parser.no_color? ? :default : :red)
 end
 
 # See FF::ErrorLogger#add

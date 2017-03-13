@@ -1,5 +1,11 @@
 ## Release Notes: _fifa_
 
+### 1.4.1 (not yet released)
+
+1. Colorized error output across all platforms.
+
+2. Added --no-color flag to disable the colorized output.
+
 ### 1.4.0 (10.03.2017)
 
 1. Removed -e flag

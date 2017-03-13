@@ -29,13 +29,11 @@ module FF
 
     # Print the attribute value of the specified planets.
     #
-    # @param [ Boolean ] with_count Print additional count column.
-    #
     # @return [ Void ]
-    def print_attributes(with_count = false)
-      return print_attributes_with_count if with_count
+    def print_attributes
+      return print_attributes_with_count if parser.print_count?
 
-      property        = @parser.attribute
+      property        = parser.attribute
       planets, values = planets_and_values { |p| [p.attributes[property]] }
 
       print_values(planets, [property], values)
@@ -43,13 +41,11 @@ module FF
 
     # Print the connection string of the specified planets.
     #
-    # @param [ Boolean ] with_count Print additional count column.
-    #
     # @return [ Void ]
-    def print_connections(with_count = false)
-      return print_connections_with_count if with_count
+    def print_connections
+      return print_connections_with_count if parser.print_count?
 
-      format          = @parser.format
+      format          = parser.format
       planets, values = planets_and_values { |p| [p.connection(format)] }
 
       print_values(planets, [CONNECTION], values)
@@ -63,7 +59,7 @@ module FF
     #
     # @return [ Array<Planets[], String[]>]
     def planets_and_values(&block)
-      planets = FF::Planet.find_all(@parser.matchers)
+      planets = FF::Planet.find_all(parser.matchers)
       values  = planets.map(&block)
 
       [planets, values]
@@ -77,7 +73,7 @@ module FF
     #
     # @return [ Void ]
     def print_values(planets, columns, values)
-      if @parser.print_pretty?
+      if parser.print_pretty?
         puts FF::Table.new(planets, columns, values).to_s
       else
         planets.each_with_index { |p, i| puts msg(p.id, values[i].last) }

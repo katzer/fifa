@@ -8,6 +8,7 @@ Cross-platform CLI tool to find out the way to any "planet".
     -a=ATTRIBUTE     Show value of attribute
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url, tns or pqdb
+    --no-color       Print errors without colors
     -p, --pretty     Pretty print output as a table
     -t, --type       Show type of planet
     -c, --count      Show count of matching planets
@@ -128,7 +129,7 @@ Lets find all productive server Jens has to take care about:
 
 Format used by the _ski_ tool:
 
-    $ fifa -f=ski app-package db-package web-package
+    $ fifa --no-colors -f=ski app-package db-package web-package
     $ app-package|server|My App-Package|user1@url1.de
     $ db-package|db|My DB-Package|OP-DB:user1@url1.de
     $ web-package|web|My Web-Package|https://url.1.net

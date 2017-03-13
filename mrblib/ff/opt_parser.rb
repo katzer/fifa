@@ -32,6 +32,7 @@ module FF
       '-h', '--help',
       '-t', '--type',
       '-p', '--pretty',
+      '--no-color',
       '-a=',
       '-f='
     ]
@@ -96,11 +97,22 @@ module FF
       flag_given? 'count'
     end
 
+    # If the tool should print out errors without color.
+    #
+    # @return [ Boolean ] Yes if the options include --no-color.
+    def no_color?
+      flag_given? '--no-color'
+    end
+
     # If the specified flag is given in args list.
     #
     # @param [ String ] name The (long) flag name.
     def flag_given?(flag)
-      @args.include?("-#{flag[0]}") || @args.include?("--#{flag}")
+      if flag.start_with? '-'
+        @args.include?(flag)
+      else
+        @args.include?("-#{flag[0]}") || @args.include?("--#{flag}")
+      end
     end
 
     # The attribute to find for.

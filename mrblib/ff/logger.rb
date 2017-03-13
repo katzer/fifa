@@ -25,7 +25,11 @@ module FF
   class Logger
     # Initializes the logger.
     #
-    def initialize
+    # @param [ Symbol ] color Optional color to use for error messages.
+    #
+    # @return [ FF::Logger ]
+    def initialize(color = :default)
+      @color  = color
       @errors = {}
     end
 
@@ -66,7 +70,20 @@ module FF
     #
     # @return [ String ]
     def msg(key, msg = '')
-      errors?(key) ? errors(key).join("\n") : msg
+      errors?(key) ? colorize(key) : msg
+    end
+
+    private
+
+    # Colorized output for the error messages specified by the key.
+    #
+    # @param [ Object] key Usually the planet id.
+    #
+    # @return [ String ]
+    def colorize(key)
+      msgs = errors(key)
+      msgs.map! { |e| e.set_color(@color) } if @color != :default
+      msgs.join("\n")
     end
   end
 end

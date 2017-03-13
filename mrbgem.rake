@@ -33,6 +33,7 @@ gem = MRuby::Gem::Specification.new('fifa') do |spec|
   spec.add_dependency 'mruby-os'
   spec.add_dependency 'mruby-json'
   spec.add_dependency 'mruby-regexp-pcre'
+  spec.add_dependency 'mruby-ansi-colors', github: 'katzer/mruby-ansi-colors'
 end
 
 gem.license = 'Apache 2.0'
