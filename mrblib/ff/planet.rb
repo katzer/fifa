@@ -76,14 +76,14 @@ module FF
     #
     # @return [ String ]
     def type
-      @type ||= attributes['type'] || log([id, :type], UNKNOWN)
+      @attributes['type'] || UNKNOWN
     end
 
     # The name of the planet.
     #
     # @return [ String ]
     def name
-      @name ||= attributes['name'] || log([id, :name], UNKNOWN)
+      @attributes['name'] || ''
     end
 
     # Formatted connection depend on the type (db, web or server).

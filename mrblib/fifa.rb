@@ -58,6 +58,8 @@ def print_version
   puts "v#{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})"
 end
 
+# codebeat:disable[LOC]
+
 # Print out how to use these tool.
 #
 # @return [ Void ]
@@ -76,6 +78,8 @@ Options:
 -v, --version   Show version number
 usage
 end
+
+# codebeat:enable[LOC]
 
 # Global opt parser.
 #
