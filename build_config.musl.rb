@@ -34,8 +34,12 @@ MRuby::Build.new do |conf|
   gem_config(conf)
 end
 
-MRuby::Build.new('x86_64-pc-linux-busybox') do |conf|
-  toolchain :gcc
+unless ARGV.include? 'test:bintest'
 
-  gem_config(conf)
+  MRuby::Build.new('x86_64-pc-linux-busybox') do |conf|
+    toolchain :gcc
+
+    gem_config(conf)
+  end
+
 end

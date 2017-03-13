@@ -23,12 +23,6 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 scripts/clean
-docker-compose -f docker-compose.common.yml -f docker-compose.musl.yml build bintest
-docker-compose -f docker-compose.common.yml -f docker-compose.musl.yml run bintest
-scripts/clean
-
-docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.12.yml build bintest
-docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.12.yml run bintest
 
 docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.14.yml build bintest
 docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.14.yml run bintest
