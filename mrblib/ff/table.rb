@@ -69,11 +69,20 @@ module FF
     # @return [ Array ]
     def convert_to_rows(planets, values)
       planets.zip(values).map do |p, cells|
-        row       = ["#{planets.index(p)}.", p.id, p.type, p.name]
+        row       = ["#{planets.index(p)}.", p.id, colorize_type(p), p.name]
         cells[-1] = msg(p.id, cells.last)
 
         row.concat(cells)
       end
+    end
+
+    # The type of the planet, colorized with unknown.
+    #
+    # @param [ FF::Planet ] planet The planet to use for.
+    #
+    # @return [ String ]
+    def colorize_type(p)
+      p.unknown? && !parser.no_color? ? p.type.set_color(:red) : p.type
     end
   end
 end

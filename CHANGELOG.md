@@ -2,7 +2,7 @@
 
 ### 1.4.1 (not yet released)
 
-1. Colorized error output across all platforms.
+1. Colorized error output.
 
 2. Added --no-color flag to disable the colorized output.
 
@@ -11,6 +11,8 @@
 4. Log errors if referenced server is unknown or invalid.
 
 5. Return result set in sorted order.
+
+6. Exit with failure if type is missing.
 
 ### 1.4.0 (10.03.2017)
 

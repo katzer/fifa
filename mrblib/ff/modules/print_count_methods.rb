@@ -32,7 +32,7 @@ module FF
     # @return [ Void ]
     def print_attributes_with_count
       property        = parser.attribute
-      planets, values = planets_and_counts { |p| [p.attributes[property]] }
+      planets, values = planets_and_counts { |p| p[property] }
 
       print_values(planets, [MATCHER, property, COUNT], values)
     end
@@ -42,7 +42,7 @@ module FF
     # @return [ Void ]
     def print_connections_with_count
       format          = parser.format
-      planets, values = planets_and_counts { |p| [p.connection(format)] }
+      planets, values = planets_and_counts { |p| p.connection(format) }
 
       print_values(planets, [MATCHER, CONNECTION, COUNT], values)
     end
@@ -54,12 +54,12 @@ module FF
     # @param [ Proc ] block A codeblock to map a planet to a value.
     #
     # @return [ Array<Planets[], String[]>]
-    def planets_and_counts(&block)
+    def planets_and_counts
       planets, values = [], []
 
       parser.matchers.each do |matcher|
         stars = FF::Planet.find_all([matcher])
-        conns = stars.map(&block).join(LB)
+        conns = stars.map { |p| [yield(p)] }.join(LB)
 
         values  << [matcher.to_s, conns, stars.size]
         planets << mash_planets(stars)

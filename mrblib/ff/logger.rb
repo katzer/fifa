@@ -43,7 +43,7 @@ module FF
       bucket = (@errors[key] ||= [])
 
       if msg.is_a? String
-        bucket << "<#{msg}>"
+        bucket << msg
       else
         bucket.concat msg
       end

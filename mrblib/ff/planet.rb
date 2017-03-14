@@ -36,7 +36,7 @@ module FF
 
       unless planet
         planet = { 'id' => planet_id }
-        log(planet_id, "unknown planet: #{planet_id}")
+        log(planet_id, "unknown server: #{planet_id}")
       end
 
       Planet.new(planet)
@@ -66,12 +66,12 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
-      @attributes = attributes || {}
+      @attributes = attributes.dup || {}
       @id         = @attributes['id']
     end
 
     # Property reader for the attributes.
-    attr_reader :id, :attributes
+    attr_reader :id
 
     # The type of the planet.
     #
@@ -85,6 +85,23 @@ module FF
     # @return [ String ]
     def name
       @attributes['name'] || ''
+    end
+
+    # The value for the given attribute.
+    #
+    # @param [ String ] The name of the attribute.
+    #
+    # @return [ Object ] The value of the attribute.
+    def [](attr)
+      log(id, "#{UNKNOWN} type") if attr == 'type' && unknown?
+      @attributes[attr]
+    end
+
+    # If the type is unknown.
+    #
+    # @return [ Boolean ]
+    def unknown?
+      type == UNKNOWN
     end
 
     # Compare with another planet.
@@ -102,7 +119,7 @@ module FF
     #
     # @return [ String ]
     def connection(format)
-      Formatter.for_type(type).format(format, attributes)
+      Formatter.for_type(type).format(format, @attributes.dup)
     end
   end
 end

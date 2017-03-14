@@ -33,11 +33,9 @@ module FF
       #
       # @return [ String ]
       def format(format, params)
-        if respond_to? format
-          send(format, params)
-        else
-          log(params['id'], "unknown format #{format}")
-        end
+        send(format, params)
+      rescue NoMethodError
+        log(params['id'], "unknown format: #{format}")
       end
 
       # Connection formatted to use for CURL.

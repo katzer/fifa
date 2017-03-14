@@ -3,3 +3,7 @@ Style/FrozenStringLiteralComment:
 
 Style/ParallelAssignment:
   Enabled: false
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 15
