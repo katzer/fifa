@@ -27,7 +27,7 @@ module FF
       # Connection formatted to use for JDBC driver.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def jdbc(params)
@@ -46,7 +46,7 @@ module FF
       # Connection formatted to use with SqlPlus
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def sqlplus(params)
@@ -64,7 +64,7 @@ module FF
       # Connection formatted to use for TNS listener.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def tns(params)
@@ -75,7 +75,7 @@ module FF
       # Connection formatted to use for qpdb.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def pqdb(params)
@@ -83,21 +83,13 @@ module FF
         "#{params['db']}:#{find_planet(params).connection(:ssh)}"
       end
 
-      # Connection formatted to use for internals.
-      # Raises an error if a required attribute is missing!
-      #
-      # @param [ Array<String> ] params List of attributes where to look for.
-      #
-      # @return [ String ]
-      def ski(params)
-        "#{params['id']}|db|#{params['name']}|#{pqdb(params)}"
-      end
-
       private
+
+      alias ski_value pqdb
 
       # The references planet
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ FF::Planet ]
       def find_planet(params)

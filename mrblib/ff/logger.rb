@@ -37,15 +37,20 @@ module FF
     #
     # @param [ Object ] key Usually the planet id.
     # @param [ String ] msg The error message.
+    # @param [ Boolean ] replace Remove all previously logged messages.
     #
-    # @return [ Void ]
-    def add(key, msg)
+    # @return [ String ]
+    def add(key, msg, replace = false)
       bucket = (@errors[key] ||= [])
+
+      bucket.clear if replace
 
       if msg.is_a? String
         bucket << msg
+        msg
       else
-        bucket.concat msg
+        bucket.concat(msg)
+        msg.first
       end
     end
 

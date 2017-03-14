@@ -59,23 +59,23 @@ Get the connection by type:
     $ export ORBIT_FILE=/path/to/orbit.json
 
     $ fifa app-package-1 app-package-2
-    $ user@hostname-1.de
-    $ user@hostname-2.de
+    user@hostname-1.de
+    user@hostname-2.de
 
     $ fifa -f=tns db-package
-    $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
+    (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 
 Passing ids is optional. If no ids are specified, then _ff_ executes the request for all found planets.
 
 Get the type:
 
     $ fifa -t db-package
-    $ db
+    db
 
 Get a specific attribute:
 
     $ fifa -a=port db-package
-    $ 12343
+    12343
 
 Get count of matching planets:
 
@@ -129,10 +129,11 @@ Lets find all productive server Jens has to take care about:
 
 Format used by the _ski_ tool:
 
-    $ fifa --no-colors -f=ski app-package db-package web-package
-    $ app-package|server|My App-Package|user1@url1.de
-    $ db-package|db|My DB-Package|OP-DB:user1@url1.de
-    $ web-package|web|My Web-Package|https://url.1.net
+    $ fifa --no-colors -f=ski
+    1|app-package|server|My App-Package|user1@url1.de
+    0|other-package|server|Other Package|missing user
+    1|db-package|db|My DB-Package|OP-DB:user1@url1.de
+    1|web-package|web|My Web-Package|https://url.1.net
 
 The general format is `type|id|name|type specific connection`.
 

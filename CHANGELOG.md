@@ -4,15 +4,23 @@
 
 1. Colorized error output.
 
-2. Added --no-color flag to disable the colorized output.
+2. Added column to ski format to indicate if the planet is valid:
 
-3. Print errors without line breaks if not pretty printed.
+   ```
+   $ ff -f=ski valid-package invalid-package
+   1|valid-package|server|App Package|user@hostname-1.de
+   0|valid-package|server|App Package|missing user
+   ```
 
-4. Log errors if referenced server is unknown or invalid.
+3. Added --no-color flag to disable the colorized output.
 
-5. Return result set in sorted order.
+4. Print errors without line breaks if not pretty printed.
 
-6. Exit with failure if type is missing.
+5. Log errors if referenced server is unknown or invalid.
+
+6. Return result set in sorted order.
+
+7. Exit with failure if type is missing.
 
 ### 1.4.0 (10.03.2017)
 
@@ -34,9 +42,9 @@
 
    ```
    $ fifa -p -c type=server "type:db|web"
-  +-----+------------+--------+-----------+-------------+------------------------+-------+
+   +-----+------------+--------+-----------+-------------+------------------------+-------+
    |                          ./fifa -p -c type=server type:db|web                        |
-  +-----+------------+--------+-----------+-------------+------------------------+-------+
+   +-----+------------+--------+-----------+-------------+------------------------+-------+
    | NR. | ID         | TYPE   | NAME      | MATCHER     | CONNECTION             | COUNT |
    +-----+------------+--------+-----------+-------------+------------------------+-------+
    |  0. | my-app     | server | Server    | type=server | user1@url1.de          | 1     |

@@ -27,7 +27,7 @@ module FF
       # Connection formatted to use for SSH.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def ssh(params)

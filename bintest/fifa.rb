@@ -214,9 +214,16 @@ assert('ski format') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=ski')
 
   assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, 'my-app|server|Server|user1@url1.de'
-  assert_include output, 'my-db|db|Database|OP_DB:user1@url1.de'
-  assert_include output, 'my-web|web|Webserver|https://url.1.net'
+  assert_include output, '1|my-app|server|Server|user1@url1.de'
+  assert_include output, '1|my-db|db|Database|OP_DB:user1@url1.de'
+  assert_include output, '1|my-web|web|Webserver|https://url.1.net'
+
+  output, status = Open3.capture2(INCMP_ENV, BINARY, '-f=ski')
+
+  assert_false status.success?, 'Process did exit cleanly'
+  assert_include output, '0|my-app|server||'
+  assert_include output, '0|my-db|db||'
+  assert_include output, '0|my-web|web||'
 end
 
 assert('pretty type') do
