@@ -1,6 +1,6 @@
 ## Release Notes: _fifa_
 
-### 1.4.1 (not yet released)
+### 1.4.1 (15.03.2017)
 
 1. Colorized error output.
 
