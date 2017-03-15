@@ -29,7 +29,7 @@ module FF
       # or the format is not supported!
       #
       # @param [ Symbol ] format The name of the format.
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def format(format, params)
@@ -41,7 +41,7 @@ module FF
       # Connection formatted to use for CURL.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
       def url(params)
@@ -54,18 +54,34 @@ module FF
       # Connection formatted to use for internals.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       #
       # @return [ String ]
-      def ski(params)
-        "#{params['id']}|#{params['type']}|#{params['name']}|#{default(params)}"
+      def ski(p)
+        id     = p['id']
+        value  = ski_value(p)
+        bit    = logger.errors?(id) ? 0 : 1
+        format = "#{bit}|#{id}|#{p['type']}|#{p['name']}|#{value}"
+
+        log(id, format, !parser.print_pretty?) unless bit == 1
+
+        format
       end
 
       private
 
+      # The content for the ski format.
+      #
+      # @param [ Hash ] params JSON decoded planet.
+      #
+      # @return [ String ]
+      def ski_value(params)
+        default(params)
+      end
+
       # Raises an error if a provided attribute is missing.
       #
-      # @param [ Array<String> ] params List of attributes where to look for.
+      # @param [ Hash ] params JSON decoded planet.
       # @param [ Array<String> ] keys The names of the params to check for.
       #
       # @return [ Void ]
