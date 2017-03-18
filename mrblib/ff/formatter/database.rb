@@ -27,17 +27,17 @@ module FF
       # Connection formatted to use for JDBC driver.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def jdbc(params)
-        log_if_missing(params, 'host', 'port', 'sid')
+      def jdbc(planet)
+        log_if_missing(planet, 'host', 'port', 'sid')
 
         pre = 'jdbc:oracle:thin'
-        suf = "#{params['host']}:#{params['port']}:#{params['sid']}"
+        suf = "#{planet['host']}:#{planet['port']}:#{planet['sid']}"
 
-        if params['password']
-          "#{pre}:#{params['user']}/#{params['password']}@#{suf}"
+        if planet['password']
+          "#{pre}:#{planet['user']}/#{planet['password']}@#{suf}"
         else
           "#{pre}:@#{suf}"
         end
@@ -46,41 +46,48 @@ module FF
       # Connection formatted to use with SqlPlus
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def sqlplus(params)
-        log_if_missing(params, 'user')
+      def sqlplus(planet)
+        log_if_missing(planet, 'user')
 
-        tns = tns(params)
+        tns = tns(planet)
 
-        if params['password']
-          "#{params['user']}/#{params['password']}@\"@#{tns}\""
+        if planet['password']
+          "#{planet['user']}/#{planet['password']}@\"@#{tns}\""
         else
-          "#{params['user']}@\"@#{tns}\""
+          "#{planet['user']}@\"@#{tns}\""
         end
       end
 
       # Connection formatted to use for TNS listener.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def tns(params)
-        log_if_missing(params, 'host', 'port', 'sid')
-        "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{params['host']})(PORT=#{params['port']})))(CONNECT_DATA=(SID=#{params['sid']})))" # rubocop:disable LineLength
+      def tns(planet)
+        log_if_missing(planet, 'host', 'port', 'sid')
+        "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{planet['host']})(PORT=#{planet['port']})))(CONNECT_DATA=(SID=#{planet['sid']})))" # rubocop:disable LineLength
       end
 
       # Connection formatted to use for qpdb.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def pqdb(params)
-        log_if_missing(params, 'server', 'db')
-        "#{params['db']}:#{find_planet(params).connection(:ssh)}"
+      def pqdb(planet)
+        log_if_missing(planet, 'server', 'db')
+
+        server = find_server(planet)
+        value  = server.connection(:ssh)
+
+        errors = logger.errors(server.id)
+        log(planet.id, errors) if errors.any?
+
+        "#{planet['db']}:#{value}"
       end
 
       private
@@ -89,16 +96,15 @@ module FF
 
       # The references planet
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ FF::Planet ]
-      def find_planet(params)
-        planet = FF::Planet.find(params['server'])
-        errors = logger.errors(planet.id)
-
-        log(params['id'], errors) if errors.any?
-
-        planet
+      def find_server(planet)
+        if planet['server']
+          FF::Planet.find(planet['server'])
+        else
+          FF::Planet.new('id' => planet.id, 'type' => FF::Planet::UNKNOWN)
+        end
       end
     end
   end

@@ -12,6 +12,6 @@
         "type": "web"
     },
     {
-        "id": "unknown-type"
+        "id": "missing-type"
     }
 ]

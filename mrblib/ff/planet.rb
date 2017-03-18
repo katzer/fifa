@@ -24,7 +24,7 @@ module FF
   # Provides access to the content of the ORBIT_FILE.
   class Planet
     # Value for unknown property values
-    UNKNOWN = 'unknown'.freeze
+    UNKNOWN = 'missing'.freeze
 
     # Find planet by ID. Raises an error if no planet could be found.
     #
@@ -35,7 +35,7 @@ module FF
       planet = planets.find { |i| i['id'] == planet_id }
 
       unless planet
-        planet = { 'id' => planet_id }
+        planet = { 'id' => planet_id, 'type' => UNKNOWN }
         log(planet_id, "unknown server: #{planet_id}")
       end
 
@@ -66,8 +66,10 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
-      @attributes = attributes.dup || {}
+      @attributes = attributes.dup
       @id         = @attributes['id']
+
+      log(id, "#{UNKNOWN} type") unless attributes['type']
     end
 
     # Property reader for the attributes.
@@ -93,7 +95,6 @@ module FF
     #
     # @return [ Object ] The value of the attribute.
     def [](attr)
-      log(id, "#{UNKNOWN} type") if attr == 'type' && unknown?
       @attributes[attr]
     end
 
@@ -119,7 +120,7 @@ module FF
     #
     # @return [ String ]
     def connection(format)
-      Formatter.for_type(type).format(format, @attributes.dup)
+      Formatter.for_type(type).format(format, self)
     end
   end
 end

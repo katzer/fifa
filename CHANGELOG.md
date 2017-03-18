@@ -1,5 +1,11 @@
 ## Release Notes: _fifa_
 
+### 1.4.2 (not yet released)
+
+1. Bug fixes for edge cases like if type attribute is missing.
+
+1. Colorized error output.
+
 ### 1.4.1 (15.03.2017)
 
 1. Colorized error output.

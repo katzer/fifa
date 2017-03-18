@@ -27,12 +27,12 @@ module FF
       # Connection formatted to use for SSH.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def ssh(params)
-        log_if_missing(params, 'user', 'url')
-        "#{params['user']}@#{params['url']}"
+      def ssh(planet)
+        log_if_missing(planet, 'user', 'url')
+        "#{planet['user']}@#{planet['url']}"
       end
 
       alias default ssh

@@ -161,11 +161,11 @@ assert('multi types') do
   assert_include output, 'web'
 end
 
-assert('unknown type') do
-  output, status = Open3.capture2(INCMP_ENV, BINARY, '-t', 'unknown-type')
+assert('missing type') do
+  output, status = Open3.capture2(INCMP_ENV, BINARY, '-t', 'missing-type')
 
   assert_false status.success?, 'Process did exit cleanly'
-  assert_include output, 'unknown'
+  assert_false output.empty?
 end
 
 assert('jdbc format') do

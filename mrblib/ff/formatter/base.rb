@@ -29,24 +29,24 @@ module FF
       # or the format is not supported!
       #
       # @param [ Symbol ] format The name of the format.
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def format(format, params)
-        send(format, params)
+      def format(format, planet)
+        send(format, planet)
       rescue NoMethodError
-        log(params['id'], "unknown format: #{format}")
+        log(planet.id, "unknown format: #{format}") unless planet.unknown?
       end
 
       # Connection formatted to use for CURL.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def url(params)
-        log_if_missing(params, 'url')
-        params['url']
+      def url(planet)
+        log_if_missing(planet, 'url')
+        planet['url']
       end
 
       alias default url
@@ -54,16 +54,15 @@ module FF
       # Connection formatted to use for internals.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def ski(p)
-        id     = p['id']
-        value  = ski_value(p)
-        bit    = logger.errors?(id) ? 0 : 1
-        format = "#{bit}|#{id}|#{p['type']}|#{p['name']}|#{value}"
+        value  = msg(p.id, ski_value(p))
+        bit    = logger.errors?(p.id) ? 0 : 1
+        format = "#{bit}|#{p.id}|#{p.type}|#{p.name}|#{value}"
 
-        log(id, format, !parser.print_pretty?) unless bit == 1
+        log(p.id, format, !parser.print_pretty?) if bit != 1
 
         format
       end
@@ -72,21 +71,21 @@ module FF
 
       # The content for the ski format.
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       #
       # @return [ String ]
-      def ski_value(params)
-        default(params)
+      def ski_value(planet)
+        default(planet)
       end
 
       # Raises an error if a provided attribute is missing.
       #
-      # @param [ Hash ] params JSON decoded planet.
+      # @param [ FF::Planet ] planet The planet to format.
       # @param [ Array<String> ] keys The names of the params to check for.
       #
       # @return [ Void ]
-      def log_if_missing(params, *keys)
-        keys.each { |k| log(params['id'], "missing #{k}") unless params[k] }
+      def log_if_missing(planet, *keys)
+        keys.each { |k| log(planet['id'], "missing #{k}") unless planet[k] }
       end
     end
   end
