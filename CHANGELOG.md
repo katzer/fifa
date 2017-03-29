@@ -4,7 +4,9 @@
 
 1. Bug fixes for edge cases like if type attribute is missing.
 
-1. Colorized error output.
+2. Colorized error output.
+
+3. Proper print complex attributes.
 
 ### 1.4.1 (15.03.2017)
 

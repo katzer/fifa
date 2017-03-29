@@ -82,7 +82,10 @@ module FF
     #
     # @return [ String ]
     def msg(key, msg = '', compact = false)
-      errors?(key) ? colorize(key, compact) : msg
+      values = errors?(key) ? colorize(key) : msg
+
+      return values unless values.is_a? Array
+      values.join(compact ? ', ' : "\n")
     end
 
     private
@@ -90,13 +93,11 @@ module FF
     # Colorized output for the error messages specified by the key.
     #
     # @param [ Object] key Usually the planet id.
-    # @param [ Boolean ] compact Join multiple message by whitespace.
     #
     # @return [ String ]
-    def colorize(key, compact)
+    def colorize(key)
       msgs = errors(key)
       msgs.map! { |e| e.set_color(@color) } if @color != :default
-      msgs.join(compact ? ', ' : "\n")
     end
   end
 end
