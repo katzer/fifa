@@ -31,7 +31,7 @@ module FF
     #
     # @return [ Void ]
     def initialize(planets, columns, values)
-      @title   = ARGV.join(' ')
+      @title   = ARGV.join(' ').sub(/^(.*?)(?=fifa)/, '')
       @columns = ['NR.', 'ID', 'TYPE', 'NAME']
       @style   = { all_separators: true }
       @rows    = convert_to_rows(planets, values)
