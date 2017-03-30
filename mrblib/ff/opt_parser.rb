@@ -32,6 +32,7 @@ module FF
       '-h', '--help',
       '-t', '--type',
       '-p', '--pretty',
+      '-s', '--sort',
       '--no-color',
       '-a=',
       '-f='
@@ -95,6 +96,13 @@ module FF
     # @return [ Boolean ] Yes if the options include -c, --count.
     def print_count?
       flag_given? 'count'
+    end
+
+    # If the tool should print out the planets in sorted order.
+    #
+    # @return [ Boolean ] Yes if the options include -s, --sort.
+    def print_sorted?
+      flag_given? 's'
     end
 
     # If the tool should print out errors without color.

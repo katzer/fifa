@@ -8,6 +8,12 @@
 
 3. Proper print complex attributes.
 
+4. Return result set in sorted order only if -s flag is given.
+
+   ```
+   $ ff -s type=db
+   ```
+
 ### 1.4.1 (15.03.2017)
 
 1. Colorized error output.

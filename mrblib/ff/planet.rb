@@ -48,9 +48,11 @@ module FF
     #
     # @return [ Array<Planet> ]
     def self.find_all(matchers)
-      planets.select { |p| matchers.any? { |m| m.match? p } }
-             .map { |p| Planet.new(p) }
-             .sort!
+      items = planets.select { |p| matchers.any? { |m| m.match? p } }
+                     .map! { |p| Planet.new(p) }
+
+      items.sort! if parser.print_sorted?
+      items
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.

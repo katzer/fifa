@@ -10,6 +10,7 @@ Cross-platform CLI tool to find out the way to any "planet".
                      Possible formats are jdbc, sqlplus, url, tns or pqdb
     --no-color       Print errors without colors
     -p, --pretty     Pretty print output as a table
+    -s, --sort       Print planets in sorted order
     -t, --type       Show type of planet
     -c, --count      Show count of matching planets
     -h, --help       This help text
