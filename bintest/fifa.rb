@@ -168,6 +168,13 @@ assert('missing type') do
   assert_false output.empty?
 end
 
+assert('sorted output [-s]') do
+  output, = Open3.capture2(ORBIT_ENV, BINARY, '-s', '-t', 'my-web', 'my-app')
+
+  assert_include output.split.first, 'server'
+  assert_include output.split.last, 'web'
+end
+
 assert('jdbc format') do
   output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=jdbc', 'my-db')
 

@@ -68,7 +68,7 @@ module FF
     #
     # @return [ Planet ]
     def initialize(attributes)
-      @attributes = attributes.dup
+      @attributes = attributes
       @id         = @attributes['id']
 
       log(id, "#{UNKNOWN} type") unless attributes['type']
@@ -81,14 +81,14 @@ module FF
     #
     # @return [ String ]
     def type
-      @attributes['type'] || UNKNOWN
+      @type ||= @attributes['type'] || UNKNOWN
     end
 
     # The name of the planet.
     #
     # @return [ String ]
     def name
-      @attributes['name'] || ''
+      @name ||= @attributes['name'] || ''
     end
 
     # The value for the given attribute.
