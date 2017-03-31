@@ -24,7 +24,7 @@ module FF
   # Identify planets by regular expressions
   class Matcher
     # Link of crumbs
-    CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)?$/
+    CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)*$/
     # Single crumb
     SPLIT_PATTERN  = /([@%][^@%]+)/
     # Single crumb
