@@ -22,21 +22,19 @@
 
 require_relative 'mrblib/ff/version'
 
-gem = MRuby::Gem::Specification.new('fifa') do |spec|
-  spec.bins = ['fifa']
+MRuby::Gem::Specification.new('fifa') do |spec|
+  spec.license = 'Apache 2.0'
+  spec.author  = 'Sebastián Katzer, appPlant GmbH'
+  spec.version = FF::VERSION
+  spec.bins    = ['fifa']
 
-  spec.add_dependency 'mruby-tiny-io', github: 'mimaki/mruby-tiny-io'
   spec.add_dependency 'mruby-terminal-table'
+  spec.add_dependency 'mruby-ansi-colors'
+  spec.add_dependency 'mruby-tiny-io'
   spec.add_dependency 'mruby-print'
   spec.add_dependency 'mruby-exit'
   spec.add_dependency 'mruby-env'
   spec.add_dependency 'mruby-os'
   spec.add_dependency 'mruby-json'
   spec.add_dependency 'mruby-regexp-pcre'
-  spec.add_dependency 'mruby-ansi-colors'
 end
-
-gem.license = 'Apache 2.0'
-gem.author  = 'Sebastián Katzer, appPlant GmbH'
-gem.summary = 'Fastest way to find informations about planets'
-gem.version = FF::VERSION

@@ -14,7 +14,9 @@
    $ ff -s type=db
    ```
 
-5. Performance enhancements
+5. Performance enhancements.
+
+6. Switched from gcc to clang compiler.
 
 ### 1.4.1 (15.03.2017)
 
