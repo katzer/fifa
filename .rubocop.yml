@@ -4,6 +4,13 @@ Style/FrozenStringLiteralComment:
 Style/ParallelAssignment:
   Enabled: false
 
+Layout/IndentHeredoc:
+  Enabled: false
+
+Metrics/LineLength:
+  Heredocs:
+    Exclude: true
+
 Metrics/AbcSize:
   Enabled: true
   Max: 11
