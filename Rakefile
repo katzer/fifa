@@ -22,7 +22,8 @@
 
 require 'fileutils'
 
-mruby_version = ENV.fetch('MRUBY_VERSION', '1.2.0')
+mruby_version = ENV['MRUBY_VERSION']
+mruby_version = '1.2.0' if !mruby_version || mruby_version.empty?
 
 file :mruby do
   if mruby_version == 'head'
@@ -102,6 +103,11 @@ task :test => ["test:mtest", "test:bintest"]
 
 desc "cleanup"
 task :clean do
+  sh "rake clean"
+end
+
+desc "cleanup"
+task :cleanall do
   sh "rake deep_clean"
 end
 
