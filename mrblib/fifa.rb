@@ -60,7 +60,10 @@ end
 # @return [ Void ]
 def print_usage
   puts <<-usage
-usage: fifa [options...] <matcher>...
+
+#{logo}
+
+usage: fifa [options...] [matchers...]
 Options:
 -a=ATTRIBUTE    Show value of attribute
 -f=FORMAT       Show formatted connection string
@@ -73,6 +76,37 @@ Options:
 -h, --help      This help text
 -v, --version   Show version number
 usage
+end
+
+# Colorized logo of Orbit.
+#
+# @return [ String ]
+def logo(color = OS.posix? ? 208 : :light_yellow)
+  <<-logo.set_color(color)
+          `-/++++++/:-`
+      `/yhyo/:....-:/+syyy+:`
+    .yd+`                `-+yds:     `
+   om/                        -+``sdyshh.
+  sd`                            hy    om
+ /N.                             od.  `yd
+ do                               /yyyy+`.`
+`N:                                      /ms`
+`M-                                        +m+
+ m+                                         .+`
+ od                                            +`
+ .N:                     -oyyyyyo-             N.         +m.   /.
+  om`                  -dy-     -yd-    `  .`  N. `.`           d/``
+   hy                 -N-         -N-   Nss+/  Nys+/oh+   -m  -oNyoo
+   `dy                yy           yy   N/     N-    `m:  -m    d:
+    `dy               om           mo   N.     N.     h/  -m    d:
+      yd.              hd.       .hh`   N.     N.    -N.  -m    d:
+       +m:              :hho///ohh:     N.     Nys++sy-   -m    oh+o
+        .dy`               .:::.                  ``              ``
+          +m+
+           `od+
+             `od+`
+               `+ds
+logo
 end
 
 # codebeat:enable[LOC]
