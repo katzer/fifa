@@ -18,6 +18,13 @@
 
 6. Switched from gcc to clang compiler.
 
+7. Support connection details in _json_ format:
+
+   ```
+   $ ff -f=json app-package-1
+   {"id":"app-package-1","name":"App-Package 1","type":"server",...}
+   ```
+
 ### 1.4.1 (15.03.2017)
 
 1. Colorized error output.

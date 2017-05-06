@@ -67,6 +67,15 @@ module FF
         format
       end
 
+      # Connection formatted as JSON.
+      #
+      # @param [ FF::Planet ] planet The planet to format.
+      #
+      # @return [ String ]
+      def json(planet)
+        planet.attributes.to_json
+      end
+
       private
 
       # The content for the ski format.

@@ -21,6 +21,7 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 require 'open3'
+require 'json'
 require_relative '../mrblib/ff/version'
 
 def orbit_env_get(file = nil)
@@ -231,6 +232,14 @@ assert('ski format') do
   assert_include output, '0|my-app|server||'
   assert_include output, '0|my-db|db||'
   assert_include output, '0|my-web|web||'
+end
+
+assert('json format') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=json', 'my-app')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_nothing_raised { JSON.parse output }
+  assert_kind_of Hash, JSON.parse(output)
 end
 
 assert('pretty type') do

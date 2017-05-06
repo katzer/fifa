@@ -75,7 +75,7 @@ module FF
     end
 
     # Property reader for the attributes.
-    attr_reader :id
+    attr_reader :id, :attributes
 
     # The type of the planet.
     #
