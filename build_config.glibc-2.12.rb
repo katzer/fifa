@@ -34,22 +34,18 @@ MRuby::Build.new do |conf|
   gem_config(conf)
 end
 
-unless ARGV.include? 'test:bintest'
+MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
+  toolchain :clang
 
-  MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
-    toolchain :clang
+  gem_config(conf)
+end
 
-    gem_config(conf)
+MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
+  toolchain :clang
+
+  [conf.cc, conf.cxx, conf.linker].each do |cc|
+    cc.flags << '-m32'
   end
 
-  MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
-    toolchain :clang
-
-    [conf.cc, conf.cxx, conf.linker].each do |cc|
-      cc.flags << '-m32'
-    end
-
-    gem_config(conf)
-  end
-
+  gem_config(conf)
 end

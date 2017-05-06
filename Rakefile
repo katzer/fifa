@@ -153,9 +153,18 @@ namespace :local do
   end
 end
 
-def is_in_a_docker_container?
+def in_a_docker_container?
   `grep -q docker /proc/self/cgroup`
   $?.success?
+end
+
+MRuby.targets.keep_if { |_, t| t.bintest_enabled? } if ARGV[0] == 'test:bintest'
+MRuby.targets.keep_if { |_, t| t.test_enabled? }    if ARGV[0] == 'test:mtest'
+
+if ARGV[0].start_with? 'test'
+  Rake::Task['all'].prerequisites.keep_if do |p|
+    MRuby.targets.any? { |n, _| p =~ %r{mruby/bin|/#{n}/} }
+  end
 end
 
 Rake.application.tasks.each do |task|
@@ -167,7 +176,7 @@ Rake.application.tasks.each do |task|
     desc old_task.full_comment
     task old_task.name => old_task.prerequisites do
       abort("Not running in docker, you should type \"docker-compose run <task>\".") \
-        unless is_in_a_docker_container?
+        unless in_a_docker_container?
       old_task.invoke
     end
   end
