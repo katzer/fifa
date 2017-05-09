@@ -58,7 +58,7 @@ task :compile => [:all] do
   end
 
   Dir["#{mruby_root}/build/*-apple-*/bin/*"].each do |bin|
-    sh "x86_64-apple-darwin14-strip -u -r -arch all #{bin}"
+    sh "x86_64-apple-darwin15-strip -u -r -arch all #{bin}"
   end
 end
 

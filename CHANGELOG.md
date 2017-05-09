@@ -25,6 +25,8 @@
    {"id":"app-package-1","name":"App-Package 1","type":"server",...}
    ```
 
+8. Compile binary for OSX with MacOSX10.11 SDK (Darwin15).
+
 ### 1.4.1 (15.03.2017)
 
 1. Colorized error output.
