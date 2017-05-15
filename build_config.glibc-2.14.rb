@@ -25,7 +25,7 @@ def gem_config(conf)
 end
 
 MRuby::Build.new do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   conf.enable_bintest
   conf.enable_debug
@@ -35,13 +35,13 @@ MRuby::Build.new do |conf|
 end
 
 MRuby::Build.new('x86_64-pc-linux-gnu') do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   gem_config(conf)
 end
 
 MRuby::CrossBuild.new('i686-pc-linux-gnu') do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   [conf.cc, conf.cxx, conf.linker].each do |cc|
     cc.flags << '-m32'
@@ -51,7 +51,7 @@ MRuby::CrossBuild.new('i686-pc-linux-gnu') do |conf|
 end
 
 MRuby::CrossBuild.new('x86_64-apple-darwin15') do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'x86_64-apple-darwin15-clang'
@@ -66,7 +66,7 @@ MRuby::CrossBuild.new('x86_64-apple-darwin15') do |conf|
 end
 
 MRuby::CrossBuild.new('i386-apple-darwin15') do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'i386-apple-darwin15-clang'
@@ -81,7 +81,7 @@ MRuby::CrossBuild.new('i386-apple-darwin15') do |conf|
 end
 
 MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
-  toolchain :gcc
+  toolchain ENV.fetch('CC', :gcc)
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'x86_64-w64-mingw32-gcc'
@@ -98,7 +98,7 @@ MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
 end
 
 MRuby::CrossBuild.new('i686-w64-mingw32') do |conf|
-  toolchain :gcc
+  toolchain ENV.fetch('CC', :gcc)
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'i686-w64-mingw32-gcc'

@@ -25,7 +25,7 @@ def gem_config(conf)
 end
 
 MRuby::Build.new do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   conf.enable_bintest
   conf.enable_debug
@@ -35,7 +35,7 @@ MRuby::Build.new do |conf|
 end
 
 MRuby::Build.new('x86_64-pc-linux-busybox') do |conf|
-  toolchain :clang
+  toolchain ENV.fetch('CC', :clang)
 
   gem_config(conf)
 end
