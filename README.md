@@ -1,4 +1,4 @@
-# fifa [![GitHub release](https://img.shields.io/github/release/appPlant/ff.svg)](https://github.com/appPlant/ff/releases) [![Build Status](https://travis-ci.org/appPlant/ff.svg?branch=master)](https://travis-ci.org/appPlant/ff) [![codebeat badge](https://codebeat.co/badges/5cfefd2d-baeb-4067-9c3a-672dba3a7ee9)](https://codebeat.co/projects/github-com-appplant-ff)
+# fifa [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appPlant/fifa/releases) [![Build Status](https://travis-ci.org/appPlant/fifa.svg?branch=master)](https://travis-ci.org/appPlant/fifa) [![codebeat badge](https://codebeat.co/badges/5cfefd2d-baeb-4067-9c3a-672dba3a7ee9)](https://codebeat.co/projects/github-com-appplant-ff)
 
 Cross-platform CLI tool to find out the way to any "planet".
 
@@ -29,7 +29,7 @@ Download the latest version from the [release page][releases] and add the execut
 
 Clone the repo:
     
-    $ git clone https://github.com/appPlant/ff.git && cd ff/
+    $ git clone https://github.com/appPlant/fifa.git && cd ff/
 
 Make the scripts executable
 
@@ -152,7 +152,7 @@ To run all tests:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/appplant/ff.
+Bug reports and pull requests are welcome on GitHub at https://github.com/appplant/fifa.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -169,7 +169,7 @@ Made with :yum: from Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
-[releases]: https://github.com/appPlant/ff/releases
+[releases]: https://github.com/appPlant/fifa/releases
 [docker]: https://docs.docker.com/engine/installation
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de
