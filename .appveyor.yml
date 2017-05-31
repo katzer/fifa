@@ -27,12 +27,12 @@ environment:
   global:
     VCVARSALL: C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
     MRUBY_CLI_LOCAL: 1
-    CC: gcc
+    TOOLCHAIN: gcc
   matrix:
   - MRUBY_VERSION: 1.2.0
-    COMPILER: C:\MinGW # MinGW 32-bit 5.3.0
+    COMPILER: C:\MinGW
   - MRUBY_VERSION: head
-    COMPILER: C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0 # MinGW-w64 5.3.0
+    COMPILER: C:\MinGW
 
 matrix:
   allow_failures:
