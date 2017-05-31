@@ -24,19 +24,12 @@ sudo: false
 os:
 - linux
 
-services:
-- docker
-
-env:
-- MRUBY_VERSION=1.2.0
-
 matrix:
-  fast_finish: true
   include:
+  - env: MRUBY_VERSION=1.2.0
+    services: [docker]
   - env: MRUBY_VERSION=head
     services: [docker]
-  allow_failures:
-  - env: MRUBY_VERSION=head
 
 before_script:
 - chmod u+x scripts/*
