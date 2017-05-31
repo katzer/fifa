@@ -34,10 +34,6 @@ environment:
   - MRUBY_VERSION: head
     COMPILER: C:\MinGW
 
-matrix:
-  allow_failures:
-  - MRUBY_VERSION: head
-
 init:
 - CALL "%VCVARSALL%" amd64
 - SET PATH=%COMPILER%\bin;%PATH%
