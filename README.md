@@ -29,35 +29,6 @@ You'll need to add your `ORBIT_FILE` first to your profile:
 Download the latest version from the [release page][releases] and add the executable to your `PATH`.
 
 
-## Development
-
-Clone the repo:
-    
-    $ git clone https://github.com/appPlant/fifa.git && cd ff/
-
-Make the scripts executable
-
-    $ chmod u+x scripts/*
-
-And then execute:
-
-```bash
-$ scripts/compile # https://docs.docker.com/engine/installation
-```
-
-You'll be able to find the binaries in the following directories:
-
-- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
-- Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/fifa`
-- Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu/bin/fifa`
-- Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu/bin/fifa`
-- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
-- OS X (64-bit): `mruby/build/x86_64-apple-darwin15/bin/fifa`
-- OS X (32-bit): `mruby/build/i386-apple-darwin15/bin/fifa`
-- Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/fifa`
-- Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/fifa`
-
-
 ## Basic Usage
 
 Get the connection by type:
@@ -146,11 +117,46 @@ Format used by the _ski_ tool:
 The general format is `type|id|name|type specific connection`.
 
 
+## Development
+
+Clone the repo:
+    
+    $ git clone https://github.com/appPlant/fifa.git && cd fifa/
+
+Make the scripts executable:
+
+    $ chmod u+x scripts/*
+
+And then execute:
+
+```bash
+$ scripts/compile # https://docs.docker.com/engine/installation
+```
+
+To compile the sources locally for the host machine only:
+
+    $ MRUBY_CLI_LOCAL=1 rake compile
+
+
+You'll be able to find the binaries in the following directories:
+
+- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
+- Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu/bin/fifa`
+- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
+- Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu/bin/fifa`
+- Linux (32-bit, for old distros): `mruby/build/i686-pc-linux-gnu-glibc-2.12/bin/fifa`
+- OS X (64-bit): `mruby/build/x86_64-apple-darwin15/bin/fifa`
+- OS X (32-bit): `mruby/build/i386-apple-darwin15/bin/fifa`
+- Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/fifa`
+- Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/fifa`
+- Host: `mruby/build/host2/bin/fifa`
+
+
 ## Releases
 
     $ scripts/release
 
-Affer this command finishes, you'll see the /releases for each target in the releases directory.
+After this command finishes, you'll see the /releases for each target in the releases directory.
 
 
 ## Tests
