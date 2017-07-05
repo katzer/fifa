@@ -32,6 +32,8 @@ matrix:
   - env: MRUBY_VERSION=head
     services: [docker]
     sudo: false
+  allow_failures:
+  - env: MRUBY_VERSION=head
 
 before_script:
 - chmod u+x scripts/*
