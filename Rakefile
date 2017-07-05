@@ -23,7 +23,7 @@
 require 'fileutils'
 
 mruby_version = ENV['MRUBY_VERSION']
-mruby_version = '1.2.0' if !mruby_version || mruby_version.empty?
+mruby_version = '1.3.0' if !mruby_version || mruby_version.empty?
 
 file :mruby do
   if mruby_version == 'head'

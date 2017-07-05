@@ -1,5 +1,9 @@
 ## Release Notes: _fifa_
 
+### 1.4.3-dev (not yet released)
+
+1. Upgrade to mruby-1.3.0 from mruby-1.2.0
+
 ### 1.4.2 (31.05.2017)
 
 1. Bug fixes for edge cases like if type attribute is missing.

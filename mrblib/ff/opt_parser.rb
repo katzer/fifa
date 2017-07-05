@@ -20,8 +20,6 @@
 #
 # @APPPLANT_LICENSE_HEADER_END@
 
-# rubocop:disable MutableConstant
-
 module FF
   # Class for command-line option analysis.
   class OptParser
@@ -36,7 +34,7 @@ module FF
       '--no-color',
       '-a=',
       '-f='
-    ]
+    ].freeze
 
     # Initialize the parser and check for unknown options
     #
@@ -141,7 +139,7 @@ module FF
     #
     # @return [ Array<FF::Matcher> ]
     def matchers
-      list = @args.select { |opt| opt[0] != '-' }
+      list = @args.reject { |opt| opt[0] == '-' }
                   .map { |m| FF::Matcher.new(m) }
 
       list.empty? ? list << FF::Matcher.new('id:.') : list
