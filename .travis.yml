@@ -28,8 +28,10 @@ matrix:
   include:
   - env: MRUBY_VERSION=1.3.0
     services: [docker]
+    sudo: false
   - env: MRUBY_VERSION=head
     services: [docker]
+    sudo: false
 
 before_script:
 - chmod u+x scripts/*
