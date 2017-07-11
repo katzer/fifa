@@ -32,6 +32,8 @@ matrix:
   - env: MRUBY_VERSION=head
     services: [docker]
     sudo: false
+    before_install:
+    - if [ "$TRAVIS_TAG" ]; then travis_terminate 0; fi;
   allow_failures:
   - env: MRUBY_VERSION=head
 
@@ -40,14 +42,16 @@ before_script:
 
 script:
 - "[[ $TRAVIS_COMMIT_MESSAGE == *\\[ci-compile\\]* ]] && scripts/compile || echo 'skip compile'"
-- scripts/bintest
+- "[[ -z $TRAVIS_TAG ]] && scripts/bintest || echo 'skip bintest'"
 
 before_deploy:
 - scripts/release
 - mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa -v
 - mruby/build/x86_64-pc-linux-gnu/bin/fifa -v
-- export BUILD_VERSION=`rake local:version`
 - sudo chmod -R 1777 releases
+- sudo chmod -R u+r mruby/build/host/mrbgems
+- export BUILD_VERSION=`rake local:version`
+- echo $BUILD_VERSION
 - ls -la releases
 - ls -la releases/v$BUILD_VERSION
 
@@ -67,6 +71,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    branch: master
     condition:
     - "$MRUBY_VERSION == 1.3.0"
     - "$TRAVIS_OS_NAME == linux"
