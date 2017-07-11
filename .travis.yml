@@ -49,7 +49,7 @@ before_deploy:
 - mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa -v
 - mruby/build/x86_64-pc-linux-gnu/bin/fifa -v
 - sudo chmod -R 1777 releases
-- sudo chmod -R u+r mruby/build/host/mrbgems
+- sudo chmod -R 1777 mruby/build/host/mrbgems
 - export BUILD_VERSION=`rake local:version`
 - echo $BUILD_VERSION
 - ls -la releases
