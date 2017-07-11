@@ -35,13 +35,13 @@ MRuby::Build.new do |conf|
 end
 
 MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
-  toolchain ENV.fetch('TOOLCHAIN', :clang)
+  toolchain :clang
 
   gem_config(conf)
 end
 
 MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
-  toolchain ENV.fetch('TOOLCHAIN', :clang)
+  toolchain :clang
 
   [conf.cc, conf.cxx, conf.linker].each do |cc|
     cc.flags << '-m32'
