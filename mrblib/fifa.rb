@@ -43,6 +43,7 @@ def execute_request
   return print_usage      if parser.print_usage?
   return print_version    if parser.print_version?
   return print_attributes if parser.print_attribute?
+
   print_connections
 end
 
@@ -50,7 +51,7 @@ end
 #
 # @return [ Void ]
 def print_version
-  puts "v#{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})"
+  puts "fifa v#{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})" # rubocop:disable LineLength
 end
 
 # codebeat:disable[LOC]
