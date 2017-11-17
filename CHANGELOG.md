@@ -1,5 +1,9 @@
 ## Release Notes: _fifa_
 
+### 1.4.4 (17.11.2017)
+
+No notable changes
+
 ### 1.4.3 (11.07.2017)
 
 1. Upgrade to mruby-1.3.0 from mruby-1.2.0
