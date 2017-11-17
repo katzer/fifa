@@ -59,7 +59,7 @@ end
 #
 # @return [ Void ]
 def print_usage
-  puts <<-usage
+  puts <<-USAGE
 
 #{logo}
 
@@ -75,14 +75,14 @@ Options:
 -c, --count     Show count of matching planets
 -h, --help      This help text
 -v, --version   Show version number
-usage
+USAGE
 end
 
 # Colorized logo of Orbit.
 #
 # @return [ String ]
 def logo(color = OS.posix? ? 208 : :light_yellow)
-  <<-logo.set_color(color)
+  <<-LOGO.set_color(color)
           `-/++++++/:-`
       `/yhyo/:....-:/+syyy+:`
     .yd+`                `-+yds:     `
@@ -106,7 +106,7 @@ def logo(color = OS.posix? ? 208 : :light_yellow)
            `od+
              `od+`
                `+ds
-logo
+LOGO
 end
 
 # codebeat:enable[LOC]
