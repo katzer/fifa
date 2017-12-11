@@ -21,5 +21,5 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 module FF
-  VERSION = '1.4.4'.freeze
+  VERSION = '1.4.5.beta'.freeze
 end
