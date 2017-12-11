@@ -121,7 +121,7 @@ The general format is `type|id|name|type specific connection`.
 
 Clone the repo:
     
-    $ git clone https://github.com/appPlant/fifa.git && cd fifa/
+    $ git clone https://github.com/appplant/fifa.git && cd fifa/
 
 Make the scripts executable:
 
@@ -140,7 +140,7 @@ To compile the sources locally for the host machine only:
 
 You'll be able to find the binaries in the following directories:
 
-- Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
+- Linux (64-bit Musl): `mruby/build/x86_64-alpine-linux-musl/bin/fifa`
 - Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu/bin/fifa`
 - Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
 - Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu/bin/fifa`

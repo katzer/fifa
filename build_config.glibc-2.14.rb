@@ -21,7 +21,7 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 def gem_config(conf)
-  conf.gem File.expand_path(File.dirname(__FILE__))
+  conf.gem __dir__
 end
 
 MRuby::Build.new do |conf|
@@ -37,6 +37,10 @@ end
 MRuby::Build.new('x86_64-pc-linux-gnu') do |conf|
   toolchain :clang
 
+  [conf.cc, conf.cxx, conf.linker].each do |cc|
+    cc.flags << '-Oz'
+  end
+
   gem_config(conf)
 end
 
@@ -44,18 +48,18 @@ MRuby::CrossBuild.new('i686-pc-linux-gnu') do |conf|
   toolchain :clang
 
   [conf.cc, conf.cxx, conf.linker].each do |cc|
-    cc.flags << '-m32'
+    cc.flags += %w[-Oz -m32]
   end
 
   gem_config(conf)
 end
 
-MRuby::CrossBuild.new('x86_64-pc-linux-busybox') do |conf|
+MRuby::CrossBuild.new('x86_64-alpine-linux-musl') do |conf|
   toolchain :gcc
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'musl-gcc'
-    cc.flags << '-static -Os'
+    cc.flags << '-Os'
   end
 
   gem_config(conf)
@@ -66,6 +70,7 @@ MRuby::CrossBuild.new('x86_64-apple-darwin15') do |conf|
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'x86_64-apple-darwin15-clang'
+    cc.flags << '-Oz'
   end
   conf.cxx.command      = 'x86_64-apple-darwin15-clang++'
   conf.archiver.command = 'x86_64-apple-darwin15-ar'
@@ -81,6 +86,7 @@ MRuby::CrossBuild.new('i386-apple-darwin15') do |conf|
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'i386-apple-darwin15-clang'
+    cc.flags << '-Oz'
   end
   conf.cxx.command      = 'i386-apple-darwin15-clang++'
   conf.archiver.command = 'i386-apple-darwin15-ar'
@@ -96,7 +102,7 @@ MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'x86_64-w64-mingw32-gcc'
-    cc.flags << '-DPCRE_STATIC'
+    cc.flags += %w[-Os -DPCRE_STATIC]
   end
   conf.cxx.command      = 'x86_64-w64-mingw32-cpp'
   conf.archiver.command = 'x86_64-w64-mingw32-gcc-ar'
@@ -113,7 +119,7 @@ MRuby::CrossBuild.new('i686-w64-mingw32') do |conf|
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'i686-w64-mingw32-gcc'
-    cc.flags << '-DPCRE_STATIC'
+    cc.flags += %w[-Os -DPCRE_STATIC]
   end
   conf.cxx.command      = 'i686-w64-mingw32-cpp'
   conf.archiver.command = 'i686-w64-mingw32-gcc-ar'

@@ -1,5 +1,13 @@
 ## Release Notes: _fifa_
 
+### 1.4.5 (not yet released)
+
+1. Renamed target x86_64-pc-linux-busybox to x86_64-alpine-linux-musl
+
+2. Improved compiler optimizations:
+
+  - Shrinks binary size by 1/4
+
 ### 1.4.4 (17.11.2017)
 
 No notable changes
@@ -97,7 +105,7 @@ No notable changes
 
   - Linux (64-bit BusyBox): `mruby/build/x86_64-pc-linux-busybox/bin/fifa`
 
-3. Imroved binary striping:
+3. Improved binary striping:
 
   - Fixed for Linux which was broken since v1.2.0
   - Added support for OSX and Windows binaries

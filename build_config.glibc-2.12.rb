@@ -21,7 +21,7 @@
 # @APPPLANT_LICENSE_HEADER_END@
 
 def gem_config(conf)
-  conf.gem File.expand_path(File.dirname(__FILE__))
+  conf.gem __dir__
 end
 
 MRuby::Build.new do |conf|
@@ -37,6 +37,10 @@ end
 MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
   toolchain :clang
 
+  [conf.cc, conf.cxx, conf.linker].each do |cc|
+    cc.flags << '-Oz'
+  end
+
   gem_config(conf)
 end
 
@@ -44,7 +48,7 @@ MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
   toolchain :clang
 
   [conf.cc, conf.cxx, conf.linker].each do |cc|
-    cc.flags << '-m32'
+    cc.flags += %w[-Oz -m32]
   end
 
   gem_config(conf)
