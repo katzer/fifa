@@ -1,6 +1,6 @@
-# fifa [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appPlant/fifa/releases) [![Build Status](https://travis-ci.org/appPlant/fifa.svg?branch=master)](https://travis-ci.org/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![codebeat badge](https://codebeat.co/badges/daa86bf9-f801-48f9-867d-8d446d7402a4)](https://codebeat.co/projects/github-com-appplant-fifa-master)
+# fifa <br> [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appPlant/fifa/releases) [![Build Status](https://travis-ci.org/appPlant/fifa.svg?branch=master)](https://travis-ci.org/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![codebeat badge](https://codebeat.co/badges/daa86bf9-f801-48f9-867d-8d446d7402a4)](https://codebeat.co/projects/github-com-appplant-fifa-master)
 
-Cross-platform CLI tool to find out the way to any "planet".
+A cross-platform tool to find out the way to any "planet".
 
     $ fifa -h
     usage: fifa [options...] <matcher>...
@@ -16,18 +16,15 @@ Cross-platform CLI tool to find out the way to any "planet".
     -h, --help       This help text
     -v, --version    Show version number
 
-
 ## Prerequisites
 
 You'll need to add your `ORBIT_FILE` first to your profile:
 
     $ export ORBIT_FILE=/path/to/orbit.json
 
-
 ## Installation
 
 Download the latest version from the [release page][releases] and add the executable to your `PATH`.
-
 
 ## Basic Usage
 
@@ -76,7 +73,6 @@ Pretty print output:
     |  2. | web-package | web    | Webserver | https://url.1.net      |
     +-----+-------------+--------+-----------+------------------------+
 
-
 ## Matchers
 
 As its done the good old way:
@@ -103,7 +99,6 @@ Lets find all productive server Jens has to take care about:
 
     $ ff type=server@env=prod@tags:Jens
 
-
 ## Internal features
 
 Format used by the _ski_ tool:
@@ -115,7 +110,6 @@ Format used by the _ski_ tool:
     1|web-package|web|My Web-Package|https://url.1.net
 
 The general format is `type|id|name|type specific connection`.
-
 
 ## Development
 
@@ -137,7 +131,6 @@ To compile the sources locally for the host machine only:
 
     $ MRUBY_CLI_LOCAL=1 rake compile
 
-
 You'll be able to find the binaries in the following directories:
 
 - Linux (64-bit Musl): `mruby/build/x86_64-alpine-linux-musl/bin/fifa`
@@ -151,20 +144,9 @@ You'll be able to find the binaries in the following directories:
 - Windows (32-bit): `mruby/build/i686-w64-mingw32/bin/fifa`
 - Host: `mruby/build/host2/bin/fifa`
 
+For the complete list of build tasks:
 
-## Releases
-
-    $ scripts/release
-
-After this command finishes, you'll see the /releases for each target in the releases directory.
-
-
-## Tests
-
-To run all tests:
-
-    $ scripts/bintest
-
+    $ rake -T
 
 ## Contributing
 
@@ -175,7 +157,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/apppla
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
 
 ## License
 
