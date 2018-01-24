@@ -69,7 +69,8 @@ module FF
     # @return [ Array ]
     def convert_to_rows(planets, values)
       planets.zip(values).map do |p, cells|
-        row       = ["#{planets.index(p)}.", p.id, colorize_type(p), p.name]
+        pos       = 1 + planets.index(p)
+        row       = ["#{pos}.", p.id, colorize_type(p), p.name]
         cells[-1] = msg(p.id, cells.last)
 
         row.concat(cells)

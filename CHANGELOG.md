@@ -2,9 +2,11 @@
 
 ### 1.4.5 (not yet released)
 
-1. Renamed target x86_64-pc-linux-busybox to x86_64-alpine-linux-musl
+1. Row number for table output starts with 1. instead of 0.
 
-2. Improved compiler optimizations:
+2. Renamed target x86_64-pc-linux-busybox to x86_64-alpine-linux-musl
+
+3. Improved compiler optimizations:
 
   - Shrinks binary size by 1/4
 

@@ -22,6 +22,11 @@
 
 Object.include FF::PrintMethods
 
+# Entry point of the tool.
+#
+# @param [ Array<String> ] args The ARGV array.
+#
+# @return [ Void ]
 def __main__(_)
   validate_options
   execute_request
@@ -128,12 +133,14 @@ end
 
 # See FF::ErrorLogger#add
 #
+# @return [ Void ]
 def log(*args)
   logger.add(*args)
 end
 
 # See FF::ErrorLogger#msg
 #
+# @return [ Void ]
 def msg(*args)
   logger.msg(*args)
 end
