@@ -10,6 +10,8 @@
 
   - Shrinks binary size by 1/4
 
+4. Upgrade to mruby-1.4.0
+
 ### 1.4.4 (17.11.2017)
 
 No notable changes
