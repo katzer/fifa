@@ -299,3 +299,10 @@ assert('ORBIT_FILE: wrong path') do
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, 'cannot read'
 end
+
+assert('group by') do
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-g', 'type')
+
+  assert_true status.success?, 'Process did not exit cleanly'
+  assert_equal 3, output.split.size
+end

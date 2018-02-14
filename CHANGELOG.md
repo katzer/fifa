@@ -12,6 +12,22 @@
 
 4. Upgrade to mruby-1.4.0
 
+5. Added --group flag
+
+   ```sh
+   $ fifa -c type=server type=web type=db type=tool
+   41
+   82
+   84
+   85
+
+   $ fifa -c -g type # Finds out types dynamically
+   41
+   82
+   84
+   85
+   ```
+
 ### 1.4.4 (17.11.2017)
 
 No notable changes
@@ -31,7 +47,7 @@ No notable changes
 4. Return result set in sorted order only if -s flag is given.
 
    ```
-   $ ff -s type=db
+   $ fifa -s type=db
    ```
 
 5. Performance enhancements.
@@ -41,7 +57,7 @@ No notable changes
 7. Support connection details in _json_ format:
 
    ```
-   $ ff -f=json app-package-1
+   $ fifa -f=json app-package-1
    {"id":"app-package-1","name":"App-Package 1","type":"server",...}
    ```
 
@@ -54,7 +70,7 @@ No notable changes
 2. Added column to ski format to indicate if the planet is valid:
 
    ```
-   $ ff -f=ski valid-package invalid-package
+   $ fifa -f=ski valid-package invalid-package
    1|valid-package|server|App Package|user@hostname-1.de
    0|valid-package|server|App Package|missing user
    ```
@@ -123,7 +139,7 @@ No notable changes
 1. The version flag gives more information about the compiled binary and the host system:
 
    ```
-   $ ff -v
+   $ fifa -v
    v1.3.1 - Linux 32-Bit (x86_64)
    ```
 
@@ -139,7 +155,7 @@ No notable changes
 2. Support empty list of planet ids to go through all configured items:
 
    ```
-   $ ff -f=url
+   $ fifa -f=url
    user@hostname-1.de
    user@hostname-2.de
    ```
@@ -147,21 +163,21 @@ No notable changes
 3. Strict command argument validation:
 
    ```
-   $ ff -xyz app-package-1
+   $ fifa -xyz app-package-1
    unknown option: -xyz
    ```
 
 4. Support connection details in _ski_ format:
 
    ```
-   $ ff -f=ski app-package-1
+   $ fifa -f=ski app-package-1
    app-package-1|server|App-Package 1|user@hostname-1.de
    ```
 
 5. Improved pretty table output:
 
    ```
-   $ ff -p app-package-1
+   $ fifa -p app-package-1
    +-----+---------------+--------+---------------+----------------+
    |                      ff -p app-package-1                      |
    +-----+---------------+--------+---------------+----------------+
@@ -174,7 +190,7 @@ No notable changes
 6. Missing properties or unknown ids do not throw runtime errors anymore:
 
    ```
-   $ ff -p incomplete-id unknown-id
+   $ fifa -p incomplete-id unknown-id
    +-----+---------------+---------+---------------+----------------+
    |                 ff -p incomplete-id unknown-id                 |
    +-----+---------------+---------+---------------+----------------+
@@ -220,7 +236,7 @@ No notable changes
    ```
 
    ```
-   $ ff -f=pqdb db-package
+   $ fifa -f=pqdb db-package
    OP_DB:user@server.de
    ```
 
@@ -235,7 +251,7 @@ No notable changes
 1. Support for multiple planets:
 
    ```
-   $ ff app-package-1 app-package-2
+   $ fifa app-package-1 app-package-2
    user@hostname-1.de
    user@hostname-2.de
    ```
@@ -243,7 +259,7 @@ No notable changes
 2. Added flag for pretty printed output:
 
    ```
-   $ ff -p app-package db-package web-package
+   $ fifa -p app-package db-package web-package
 
      NR   PLANET        CONNECTION            
      =========================================
@@ -258,7 +274,7 @@ No notable changes
 1. Get a specific attribute:
 
    ```
-   $ ff -a=port db-package
+   $ fifa -a=port db-package
    1234
    ```
 
@@ -268,7 +284,7 @@ No notable changes
 Cross-platform CLI tool to find out the way to any "planet".
 
 ```
-$ ff -h
+$ fifa -h
 usage: ff [options...] <planet>
 Options:
 -e=TYPE          Expected type of planet to validate against
@@ -286,10 +302,10 @@ Get the connection by type:
 ```
 $ export ORBIT_FILE=/path/to/orbit.json
 
-$ ff app-package
+$ fifa app-package
 $ user@hostname.de
 
-$ ff -f=tns db-package
+$ fifa -f=tns db-package
 $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 ```
 
@@ -298,14 +314,13 @@ $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(
 Get the type:
 
 ```
-$ ff -t db-package
+$ fifa -t db-package
 $ db
 ```
 
 Ensure the right type:
 
 ```
-$ ff -e=web db-package
+$ fifa -e=web db-package
 $ type missmatch: expected web but got db
 ```
-

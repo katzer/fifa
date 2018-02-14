@@ -25,6 +25,7 @@ module FF
   class OptParser
     # List of all supported options
     OPTIONS = [
+      '-g', '--group',
       '-c', '--count',
       '-v', '--version',
       '-h', '--help',
@@ -103,22 +104,18 @@ module FF
       flag_given? 's'
     end
 
+    # If the tool should group all planets by attribute value.
+    #
+    # @return [ Boolean ] Yes if the options include --group.
+    def group_by?
+      flag_given? 'group'
+    end
+
     # If the tool should print out errors without color.
     #
     # @return [ Boolean ] Yes if the options include --no-color.
     def no_color?
       flag_given? '--no-color'
-    end
-
-    # If the specified flag is given in args list.
-    #
-    # @param [ String ] name The (long) flag name.
-    def flag_given?(flag)
-      if flag.start_with? '-'
-        @args.include?(flag)
-      else
-        @args.include?("-#{flag[0]}") || @args.include?("--#{flag}")
-      end
     end
 
     # The attribute to find for.
@@ -139,13 +136,38 @@ module FF
     #
     # @return [ Array<FF::Matcher> ]
     def matchers
-      list = @args.reject { |opt| opt[0] == '-' }
-                  .map { |m| FF::Matcher.new(m) }
-
-      list.empty? ? list << FF::Matcher.new('id:.') : list
+      list = tail.map { |m| FF::Matcher.new(m) }
+      list.empty? ? [FF::Matcher.new('id:.')] : list
     end
 
     private
+
+    # If the specified flag is given in args list.
+    #
+    # @param [ String ] name The (long) flag name.
+    def flag_given?(flag)
+      if flag.start_with? '-'
+        @args.include?(flag)
+      else
+        @args.include?("-#{flag[0]}") || @args.include?("--#{flag}")
+      end
+    end
+
+    # The tail of the command arguments.
+    #
+    # @return [ Array<String> ]
+    def tail
+      tail = @args.reject { |opt| opt[0] == '-' }
+
+      return tail unless group_by?
+
+      list = {}
+      attr = tail[0]
+
+      Planet.planets.each { |p| list[p[attr]] = 0 }
+
+      list.keys.map { |v| "#{attr}=#{v}" }
+    end
 
     # Extract the value of the specified options.
     # Raises an error if the option has been specified but without an value.

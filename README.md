@@ -9,6 +9,7 @@ A cross-platform tool to find out the way to any "planet".
     -f=FORMAT        Show formatted connection string
                      Possible formats are jdbc, sqlplus, url, tns or pqdb
     --no-color       Print errors without colors
+    -g, --group      Group planets by attribute value
     -p, --pretty     Pretty print output as a table
     -s, --sort       Print planets in sorted order
     -t, --type       Show type of planet
@@ -56,6 +57,14 @@ Get count of matching planets:
     $ fifa -c type=db@tags:ora10 type=db@tags:ora11
     0
     25
+
+Get count of planets group by type:
+
+    $ fifa -c -g type
+    41
+    82
+    84
+    85
 
 Pretty print output:
 
