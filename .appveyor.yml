@@ -28,7 +28,7 @@ environment:
     MRUBY_CLI_LOCAL: 1
     TOOLCHAIN: gcc
   matrix:
-  - MRUBY_VERSION: 1.4.0
+  - MRUBY_VERSION: 1.4.1
   - MRUBY_VERSION: head
 
 matrix:

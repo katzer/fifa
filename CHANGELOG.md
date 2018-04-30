@@ -10,7 +10,7 @@
 
   - Shrinks binary size by 1/4
 
-4. Upgrade to mruby-1.4.0
+4. Upgrade to mruby-1.4.1
 
 5. Added --group flag
 
