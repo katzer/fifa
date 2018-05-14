@@ -1,6 +1,6 @@
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-version: "{build}"
+image: Visual Studio 2017
 
 environment:
   global:
-    COMPILER: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1
-    MRUBY_CLI_LOCAL: 1
+    COMPILER: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64
     TOOLCHAIN: gcc
+    MRUBY_CLI_LOCAL: 1
   matrix:
   - MRUBY_VERSION: 1.4.1
   - MRUBY_VERSION: head
@@ -36,8 +36,7 @@ matrix:
   - MRUBY_VERSION: head
 
 init:
-- SET PATH=C:\Windows\system32;C:\Windows;C:\Program Files\Git\cmd;%PATH%
-- SET PATH=%COMPILER%\bin;C:\Ruby25-x64\bin;%PATH%;C:\cygwin\bin;
+- SET PATH=%COMPILER%\bin;C:\Ruby25-x64\bin;%PATH%;C:\cygwin64\bin
 - gcc --version
 
 build_script:
