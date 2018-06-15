@@ -164,9 +164,9 @@ module FF
       list = {}
       attr = tail[0]
 
-      Planet.planets.each { |p| list[p[attr]] = 0 }
+      Planet.planets.each { |p| list[p[attr]] = 0 unless p[attr].to_s.empty? }
 
-      list.keys.map { |v| "#{attr}=#{v}" }
+      list.keys.map { |v| "#{attr}=#{v}#{"@#{tail[1]}" if tail[1]}" }
     end
 
     # Extract the value of the specified options.
