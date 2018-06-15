@@ -22,7 +22,7 @@
 
 module FF
   # Identify planets by regular expressions
-  class Matcher
+  class Matcher < BasicObject
     # Link of crumbs
     CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)*$/
     # Single crumb
@@ -74,7 +74,7 @@ module FF
     end
 
     # Multiple crumbs combined by 'and'
-    class Crumbs
+    class Crumbs < BasicObject
       # Initializes all crumbs.
       #
       # @param [ String ] crumbs A crumb like 'env=prod+env=int'
@@ -96,7 +96,7 @@ module FF
       end
 
       # Single crumb
-      class Crumb
+      class Crumb < BasicObject
         # Initializes a crumb.
         #
         # @param [ String ] crmb A crumb like '+env:prod'
@@ -123,7 +123,7 @@ module FF
           @not ? (value !~ @exp) : (value =~ @exp)
         end
 
-        private
+        # private
 
         # Get the string parsed value for the given key.
         #

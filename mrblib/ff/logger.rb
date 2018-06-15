@@ -22,7 +22,7 @@
 
 module FF
   # Loggs all errors seperated by planet id
-  class Logger
+  class Logger < BasicObject
     # Initializes the logger.
     #
     # @param [ Symbol ] color Optional color to use for error messages.
