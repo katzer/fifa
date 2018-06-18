@@ -21,5 +21,5 @@
 # SOFTWARE.
 
 module FF
-  VERSION = '1.4.5.beta'.freeze
+  VERSION = '1.4.5-rc'.freeze
 end
