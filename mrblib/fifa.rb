@@ -27,7 +27,7 @@ Object.include FF::PrintMethods
 # @param [ Array<String> ] args The ARGV array.
 #
 # @return [ Void ]
-def __main__(_)
+def __main__(*)
   validate_options
   execute_request
   exit(1) if logger.errors?
@@ -56,7 +56,7 @@ end
 #
 # @return [ Void ]
 def print_version
-  puts "fifa v#{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})" # rubocop:disable LineLength
+  puts "fifa #{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})" # rubocop:disable LineLength
 end
 
 # codebeat:disable[LOC]
