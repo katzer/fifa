@@ -1,6 +1,6 @@
 ## Release Notes: _fifa_
 
-### 1.4.5 (not yet released)
+### 1.4.5 (26.06.2018)
 
 1. Row number for table output starts with 1. instead of 0.
 
