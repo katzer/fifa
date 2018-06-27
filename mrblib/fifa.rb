@@ -89,7 +89,7 @@ end
 #
 # @return [ String ]
 def logo(color = OS.posix? ? 208 : :light_yellow)
-  <<-LOGO.set_color(color)
+  <<-LOGO.chomp.set_color(color)
           `-/++++++/:-`
       `/yhyo/:....-:/+syyy+:`
     .yd+`                `-+yds:     `
