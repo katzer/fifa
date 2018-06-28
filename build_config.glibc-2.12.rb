@@ -43,13 +43,3 @@ MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.12') do |conf|
 
   gem_config(conf)
 end
-
-MRuby::CrossBuild.new('i686-pc-linux-gnu-glibc-2.12') do |conf|
-  toolchain :clang
-
-  [conf.cc, conf.cxx, conf.linker].each do |cc|
-    cc.flags += %w[-Oz -m32]
-  end
-
-  gem_config(conf)
-end
