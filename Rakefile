@@ -56,11 +56,11 @@ APP_VERSION = (app_version.nil? || app_version.empty?) ? "unknown" : app_version
 desc "compile binary"
 task :compile => [:all] do
   Dir["#{mruby_root}/build/*-[linux|mingw]*/bin/*"].each do |bin|
-    sh "strip --strip-unneeded #{bin}"
+    sh "strip --strip-unneeded #{bin}" rescue nil
   end
 
   Dir["#{mruby_root}/build/*-apple-*/bin/*"].each do |bin|
-    sh "x86_64-apple-darwin15-strip -u -r -arch all #{bin}"
+    sh "x86_64-apple-darwin15-strip -u -r -arch all #{bin}" rescue nil
   end
 end
 
