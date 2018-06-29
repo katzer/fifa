@@ -1,6 +1,6 @@
-# fifa <br> [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appPlant/fifa/releases) [![Build Status](https://travis-ci.org/appPlant/fifa.svg?branch=master)](https://travis-ci.org/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![codebeat badge](https://codebeat.co/badges/daa86bf9-f801-48f9-867d-8d446d7402a4)](https://codebeat.co/projects/github-com-appplant-fifa-master)
+# fifa [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appPlant/fifa/releases) [![Build Status](https://travis-ci.org/appPlant/fifa.svg?branch=master)](https://travis-ci.org/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![codebeat badge](https://codebeat.co/badges/daa86bf9-f801-48f9-867d-8d446d7402a4)](https://codebeat.co/projects/github-com-appplant-fifa-master)
 
-A cross-platform tool to find out the way to any "planet".
+A tool to find out the way to any "planet".
 
     $ fifa -h
     usage: fifa [options...] <matcher>...
