@@ -21,15 +21,23 @@
 # SOFTWARE.
 
 compile: &defaults
-  dockerfile: Dockerfile.glibc-2.12
+  image: appplant/mruby-cli:${MRUBY_CLI_TAG}
+  working_dir: /home/mruby/code
+  volumes:
+    - .:/home/mruby/code:rw
   environment:
-    MRUBY_CONFIG: build_config.glibc-2.12.rb
+    MRUBY_CONFIG: build_config.${MRUBY_CLI_TAG}.rb
     MRUBY_VERSION: ${MRUBY_VERSION}
-bintest:
+  command: rake compile
+test:
   <<: *defaults
+  command: rake test:bintest
 clean:
   <<: *defaults
+  command: rake clean
 shell:
   <<: *defaults
+  command: bash
 release:
   <<: *defaults
+  command: rake release

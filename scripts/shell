@@ -22,8 +22,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-if [[ $1 == "-b" ]]
-  then docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.14.yml build shell
-fi
-
-docker-compose -f docker-compose.common.yml -f docker-compose.glibc-2.14.yml run shell
+MRUBY_CLI_TAG="glibc-2.14" docker-compose run shell

@@ -44,7 +44,7 @@ before_script:
 
 script:
 - if [[ $TRAVIS_COMMIT_MESSAGE == *\\[ci-compile\\]* ]]; then scripts/compile; else echo 'skip compile'; fi;
-- if [[ $TRAVIS_TAG ]]; then echo 'skip bintest'; else scripts/bintest; fi;
+- if [[ $TRAVIS_TAG ]]; then echo 'skip test'; else scripts/test; fi;
 
 before_deploy:
 - scripts/release
