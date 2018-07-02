@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Apache 2.0 License
 #
 # Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
@@ -22,4 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRUBY_CLI_TAG="glibc-2.14" docker-compose run shell
+unless in_a_docker_container?
+  desc 'open shell'
+  task(:shell) { docker_run 'shell', 'glibc-2.14', '1.4.1' }
+end

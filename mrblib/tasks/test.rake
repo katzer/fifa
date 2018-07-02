@@ -1,6 +1,6 @@
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-compile: &defaults
-  image: appplant/mruby-cli:${MRUBY_CLI_TAG}
-  working_dir: /home/mruby/code
-  volumes:
-    - .:/home/mruby/code:rw
-  environment:
-    MRUBY_CONFIG: build_config.${MRUBY_CLI_TAG}.rb
-    MRUBY_VERSION: ${MRUBY_VERSION}
-  command: rake compile
-test:
-  <<: *defaults
-  command: rake test
-bintest:
-  <<: *defaults
-  command: rake test:bintest
-mtest:
-  <<: *defaults
-  command: rake test:mtest
-clean:
-  <<: *defaults
-  command: rake clean
-shell:
-  <<: *defaults
-  command: bash
-release:
-  <<: *defaults
-  command: rake release
+desc 'run all tests'
+task test: 'environment' do
+  if in_a_docker_container? || ENV['MRUBY_CLI_LOCAL']
+    %w[deps tuneup].each { |t| Rake::Task["mruby:#{t}"].invoke }
+    Dir.chdir('mruby') { Rake::Task['mruby:test'].invoke }
+  else
+    docker_run 'test', 'glibc-2.12'
+  end
+end

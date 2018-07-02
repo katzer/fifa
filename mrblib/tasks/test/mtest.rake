@@ -1,8 +1,6 @@
-#!/bin/sh
-
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,5 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRUBY_CLI_TAG="glibc-2.12" docker-compose run release
-MRUBY_CLI_TAG="glibc-2.14" docker-compose run release
+namespace :test do
+  desc 'run unit tests'
+  task mtest: 'environment' do
+    if in_a_docker_container? || ENV['MRUBY_CLI_LOCAL']
+      %w[mruby:deps mruby:tuneup compile].each { |t| Rake::Task[t].invoke }
+      MRuby.each_target do |t|
+        t.enable_bintest = false
+        t.run_test if t.test_enabled?
+      end
+    else
+      docker_run 'mtest', 'glibc-2.12'
+    end
+  end
+end

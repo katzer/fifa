@@ -1,8 +1,6 @@
-#!/bin/sh
-
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,4 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRUBY_CLI_TAG="glibc-2.12" docker-compose run test
+desc 'clean build artefacts'
+task clean: 'environment' do
+  if File.directory? ENV['MRUBY_ROOT']
+    if in_a_docker_container? || ENV['MRUBY_CLI_LOCAL']
+      %w[environment clean].each { |t| Rake::Task["mruby:#{t}"].invoke }
+    else
+      %w[12 14].each { |v| docker_run 'clean', "glibc-2.#{v}" }
+    end
+  end
+end

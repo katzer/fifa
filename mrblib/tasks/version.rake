@@ -1,8 +1,6 @@
-#!/bin/sh
-
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,5 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRUBY_CLI_TAG="glibc-2.12" docker-compose run compile
-MRUBY_CLI_TAG="glibc-2.14" docker-compose run compile
+desc 'show version'
+task version: 'mruby:environment' do
+  puts MRuby::Gem.current.version || 'unknown'
+end

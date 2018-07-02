@@ -1,6 +1,6 @@
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-compile: &defaults
-  image: appplant/mruby-cli:${MRUBY_CLI_TAG}
-  working_dir: /home/mruby/code
-  volumes:
-    - .:/home/mruby/code:rw
-  environment:
-    MRUBY_CONFIG: build_config.${MRUBY_CLI_TAG}.rb
-    MRUBY_VERSION: ${MRUBY_VERSION}
-  command: rake compile
-test:
-  <<: *defaults
-  command: rake test
-bintest:
-  <<: *defaults
-  command: rake test:bintest
-mtest:
-  <<: *defaults
-  command: rake test:mtest
-clean:
-  <<: *defaults
-  command: rake clean
-shell:
-  <<: *defaults
-  command: bash
-release:
-  <<: *defaults
-  command: rake release
+namespace :mruby do
+  desc 'optimize build'
+  task tuneup: 'mruby:environment' do
+    args = "#{ARGV.join(' ')} local=#{ENV['MRUBY_CLI_LOCAL'].to_i}"
+
+    MRuby.targets.keep_if do |name, spec|
+      case args
+      when /local=1/ then name == 'host'
+      when /compile/ then true
+      when /bintest/ then spec.bintest_enabled?
+      when /test/    then spec.bintest_enabled? || spec.test_enabled?
+      else                true
+      end
+    end
+
+    Rake::Task['mruby:all'].prerequisites.keep_if do |p|
+      MRuby.targets.any? { |n, _| p =~ %r{mruby/bin|/#{n}/} }
+    end
+  end
+end

@@ -39,20 +39,17 @@ matrix:
   allow_failures:
   - env: MRUBY_VERSION=head
 
-before_script:
-- chmod u+x scripts/*
-
 script:
-- if [[ $TRAVIS_COMMIT_MESSAGE == *\\[ci-compile\\]* ]]; then scripts/compile; else echo 'skip compile'; fi;
-- if [[ $TRAVIS_TAG ]]; then echo 'skip test'; else scripts/test; fi;
+- if [[ $TRAVIS_COMMIT_MESSAGE == *\\[ci-compile\\]* ]]; then rake compile; else echo 'skip compile'; fi;
+- if [[ $TRAVIS_TAG ]]; then echo 'skip test'; else rake test:bintest; fi;
 
 before_deploy:
-- scripts/release
+- rake release
 - mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa -v
 - mruby/build/x86_64-pc-linux-gnu/bin/fifa -v
 - sudo chmod -R 1777 releases
 - sudo chmod -R 1777 mruby/build/host/mrbgems
-- export BUILD_VERSION=`rake local:version`
+- export BUILD_VERSION=`rake version`
 - echo $BUILD_VERSION
 - ls -la releases
 - ls -la releases/v$BUILD_VERSION
