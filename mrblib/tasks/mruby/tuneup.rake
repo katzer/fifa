@@ -28,7 +28,7 @@ namespace :mruby do
     MRuby.targets.keep_if do |name, spec|
       case args
       when /local=1/ then name == 'host'
-      when /compile/ then true
+      when /compile/ then name != 'host' || !in_a_docker_container?
       when /bintest/ then spec.bintest_enabled?
       when /test/    then spec.bintest_enabled? || spec.test_enabled?
       else                true
