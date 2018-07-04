@@ -23,12 +23,10 @@
 namespace :mruby do
   desc 'optimize build'
   task tuneup: 'mruby:environment' do
-    args = "#{ARGV.join(' ')} local=#{ENV['MRUBY_CLI_LOCAL'].to_i}"
-
     MRuby.targets.keep_if do |name, spec|
-      case args
+      case "#{ARGV.join(' ')} local=#{ENV['MRUBY_CLI_LOCAL'].to_i}"
       when /local=1/ then name == 'host'
-      when /compile/ then name != 'host' || !in_a_docker_container?
+      when /compile/ then true
       when /bintest/ then spec.bintest_enabled?
       when /test/    then spec.bintest_enabled? || spec.test_enabled?
       else                true

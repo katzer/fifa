@@ -23,7 +23,7 @@
 require 'open3'
 
 def in_a_docker_container?
-  @docker ||= Open3.capture2e('grep -q docker /proc/self/cgroup')[-1].success?
+  Open3.capture2e('grep -q docker /proc/self/cgroup')[-1].success?
 end
 
 def docker_run(cmd, tag = 'glibc-2.14', ver = ENV['MRUBY_VERSION'])
