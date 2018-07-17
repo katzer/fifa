@@ -40,7 +40,7 @@ Get the connection by type:
     $ fifa -f=tns db-package
     (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 
-Passing ids is optional. If no ids are specified, then _ff_ executes the request for all found planets.
+Passing ids is optional. If no ids are specified, then _fifa_ executes the request for all found planets.
 
 Get the type:
 
@@ -126,15 +126,9 @@ Clone the repo:
     
     $ git clone https://github.com/appplant/fifa.git && cd fifa/
 
-Make the scripts executable:
-
-    $ chmod u+x scripts/*
-
 And then execute:
 
-```bash
-$ scripts/compile # https://docs.docker.com/engine/installation
-```
+    $ rake compile
 
 To compile the sources locally for the host machine only:
 
@@ -171,7 +165,6 @@ Made with :yum: from Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
-[releases]: https://github.com/appPlant/fifa/releases
-[docker]: https://docs.docker.com/engine/installation
+[releases]: https://github.com/appplant/fifa/releases
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de
