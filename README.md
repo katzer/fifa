@@ -3,19 +3,20 @@
 A tool to find out the way to any "planet".
 
     $ fifa -h
-    usage: fifa [options...] <matcher>...
+        
+    Usage: fifa [options...] [matchers...]
     Options:
-    -a=ATTRIBUTE     Show value of attribute
-    -f=FORMAT        Show formatted connection string
-                     Possible formats are jdbc, sqlplus, url, tns or pqdb
-    --no-color       Print errors without colors
-    -g, --group      Group planets by attribute value
-    -p, --pretty     Pretty print output as a table
-    -s, --sort       Print planets in sorted order
-    -t, --type       Show type of planet
-    -c, --count      Show count of matching planets
-    -h, --help       This help text
-    -v, --version    Show version number
+    -a=ATTRIBUTE    Show value of attribute
+    -f=FORMAT       Show formatted connection string
+                    Possible formats are jdbc, sqlplus, url, tns or pqdb
+    --no-color      Print errors without colors
+    -g, --group     Group planets by attribute value
+    -p, --pretty    Pretty print output as a table
+    -s, --sort      Print planets in sorted order
+    -t, --type      Show type of planet
+    -c, --count     Show count of matching planets
+    -h, --help      This help text
+    -v, --version   Show version number
 
 ## Prerequisites
 

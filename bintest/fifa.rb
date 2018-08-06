@@ -57,14 +57,14 @@ assert('usage [-h]') do
   output, status = Open3.capture2(BINARY, '-h')
 
   assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, 'usage'
+  assert_include output, 'Usage'
 end
 
 assert('usage [--help]') do
   output, status = Open3.capture2(BINARY, '--help')
 
   assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, 'usage'
+  assert_include output, 'Usage'
 end
 
 assert('unknown flag') do

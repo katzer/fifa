@@ -69,7 +69,7 @@ def print_usage
 
 #{logo}
 
-usage: fifa [options...] [matchers...]
+Usage: fifa [options...] [matchers...]
 Options:
 -a=ATTRIBUTE    Show value of attribute
 -f=FORMAT       Show formatted connection string
