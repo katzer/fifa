@@ -1,5 +1,10 @@
 ## Release Notes: _fifa_
 
+### 1.4.6 (16.08.2018)
+
+1. Increase MacOSX min SDK version from 10.5 to to 10.11
+2. Remove 32-bit build targets .
+
 ### 1.4.5 (26.06.2018)
 
 1. Row number for table output starts with 1. instead of 0.
