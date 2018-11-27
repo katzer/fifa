@@ -22,7 +22,7 @@
 
 require 'open3'
 require 'json'
-require_relative '../mrblib/ff/version'
+require_relative '../mrblib/fifa/version'
 
 def orbit_env_get(file = nil)
   if file
@@ -43,14 +43,14 @@ assert('version [-v]') do
   output, status = Open3.capture2(BINARY, '-v')
 
   assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, FF::VERSION
+  assert_include output, Fifa::VERSION
 end
 
 assert('version [--version]') do
   output, status = Open3.capture2(BINARY, '--version')
 
   assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, FF::VERSION
+  assert_include output, Fifa::VERSION
 end
 
 assert('usage [-h]') do
@@ -177,56 +177,56 @@ assert('sorted output [-s]') do
 end
 
 assert('jdbc format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=jdbc', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'jdbc', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'host1.bla:666:horst1'
 end
 
 assert('jdbc format with password') do
-  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=jdbc', 'my-db')
+  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f', 'jdbc', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1/uwish@host1.bla:666:horst1'
 end
 
 assert('tns format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=tns', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'tns', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))' # rubocop:disable LineLength
 end
 
 assert('sqlplus format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=sqlplus', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'sqlplus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
 assert('sqlplus format with password') do
-  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f=sqlplus', 'my-db')
+  output, status = Open3.capture2(PASWD_ENV, BINARY, '-f', 'sqlplus', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'user1/uwish@"@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1.bla)(PORT=666)))(CONNECT_DATA=(SID=horst1)))"' # rubocop:disable LineLength
 end
 
 assert('pqdb format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=pqdb', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'pqdb', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, 'OP_DB:user1@url1.de'
 end
 
 assert('ski format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=ski')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'ski')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '1|my-app|server|Server|user1@url1.de'
   assert_include output, '1|my-db|db|Database|OP_DB:user1@url1.de'
   assert_include output, '1|my-web|web|Webserver|https://url.1.net'
 
-  output, status = Open3.capture2(INCMP_ENV, BINARY, '-f=ski')
+  output, status = Open3.capture2(INCMP_ENV, BINARY, '-f', 'ski')
 
   assert_false status.success?, 'Process did exit cleanly'
   assert_include output, '0|my-app|server||'
@@ -235,7 +235,7 @@ assert('ski format') do
 end
 
 assert('json format') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f=json', 'my-app')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-f', 'json', 'my-app')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_nothing_raised { JSON.parse output }
@@ -259,7 +259,7 @@ assert('pretty connection') do
 end
 
 assert('attribute match') do
-  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-a=port', 'my-db')
+  output, status = Open3.capture2(ORBIT_ENV, BINARY, '-a', 'port', 'my-db')
 
   assert_true status.success?, 'Process did not exit cleanly'
   assert_include output, '666'

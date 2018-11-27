@@ -6,8 +6,8 @@ A tool to find out the way to any "planet".
         
     Usage: fifa [options...] [matchers...]
     Options:
-    -a=ATTRIBUTE    Show value of attribute
-    -f=FORMAT       Show formatted connection string
+    -a ATTRIBUTE    Show value of attribute
+    -f FORMAT       Show formatted connection string
                     Possible formats are jdbc, sqlplus, url, tns or pqdb
     --no-color      Print errors without colors
     -g, --group     Group planets by attribute value
@@ -38,7 +38,7 @@ Get the connection by type:
     user@hostname-1.de
     user@hostname-2.de
 
-    $ fifa -f=tns db-package
+    $ fifa -f tns db-package
     (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 
 Passing ids is optional. If no ids are specified, then _fifa_ executes the request for all found planets.
@@ -50,7 +50,7 @@ Get the type:
 
 Get a specific attribute:
 
-    $ fifa -a=port db-package
+    $ fifa -a port db-package
     12343
 
 Get count of matching planets:
@@ -113,7 +113,7 @@ Lets find all productive server Jens has to take care about:
 
 Format used by the _ski_ tool:
 
-    $ fifa --no-colors -f=ski
+    $ fifa --no-colors -f ski
     1|app-package|server|My App-Package|user1@url1.de
     0|other-package|server|Other Package|missing user
     1|db-package|db|My DB-Package|OP-DB:user1@url1.de

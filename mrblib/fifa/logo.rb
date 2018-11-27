@@ -20,76 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-Object.include FF::PrintMethods
-
-# Entry point of the tool.
-#
-# @param [ Array<String> ] args The ARGV array.
-#
-# @return [ Void ]
-def __main__(*)
-  validate_options
-  execute_request
-  exit(1) if logger.errors?
-end
-
-# Raise an error if the tool was invoked with unknown options.
-#
-# @return [ Void ]
-def validate_options
-  return unless parser.unknown_opts?
-  raise "unknown option: #{parser.unknown_opts.join ', '}"
-end
-
-# Execute the request.
-#
-# @return [ Void ]
-def execute_request
-  return print_usage      if parser.print_usage?
-  return print_version    if parser.print_version?
-  return print_attributes if parser.print_attribute?
-
-  print_connections
-end
-
-# Print out the version number of the tool.
-#
-# @return [ Void ]
-def print_version
-  puts "fifa #{FF::VERSION} - #{OS.sysname} #{OS.bits(:binary)}-Bit (#{OS.machine})" # rubocop:disable LineLength
-end
-
-# codebeat:disable[LOC]
-
-# Print out how to use these tool.
-#
-# @return [ Void ]
-def print_usage
-  puts <<-USAGE
-
-#{logo}
-
-Usage: fifa [options...] [matchers...]
-Options:
--a=ATTRIBUTE    Show value of attribute
--f=FORMAT       Show formatted connection string
-                Possible formats are jdbc, sqlplus, url, tns or pqdb
---no-color      Print errors without colors
--g, --group     Group planets by attribute value
--p, --pretty    Pretty print output as a table
--s, --sort      Print planets in sorted order
--t, --type      Show type of planet
--c, --count     Show count of matching planets
--h, --help      This help text
--v, --version   Show version number
-USAGE
-end
-
-# Colorized logo of Orbit.
-#
-# @return [ String ]
-def logo(color = OS.posix? ? 208 : :light_yellow)
-  <<-LOGO.chomp.set_color(color)
+module Fifa
+  # Colorized ORBIT logo
+  LOGO = <<-LOGO.chomp.set_color(OS.posix? ? 208 : :light_yellow).freeze
           `-/++++++/:-`
       `/yhyo/:....-:/+syyy+:`
     .yd+`                `-+yds:     `
@@ -114,34 +47,4 @@ def logo(color = OS.posix? ? 208 : :light_yellow)
              `od+`
                `+ds
 LOGO
-end
-
-# codebeat:enable[LOC]
-
-# Global opt parser.
-#
-# @return [ FF::OptParser ]
-def parser
-  @parser ||= FF::OptParser.new
-end
-
-# Global logger for error messages.
-#
-# @return [ FF::Logger ]
-def logger
-  $logger ||= FF::Logger.new(parser.no_color? ? :default : :red)
-end
-
-# See FF::ErrorLogger#add
-#
-# @return [ Void ]
-def log(*args)
-  logger.add(*args)
-end
-
-# See FF::ErrorLogger#msg
-#
-# @return [ Void ]
-def msg(*args)
-  logger.msg(*args)
 end

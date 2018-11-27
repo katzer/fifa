@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   module Formatter
     # Formatter for web specific formats
     class Web < Base

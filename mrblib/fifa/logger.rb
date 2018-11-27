@@ -20,18 +20,50 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   # Loggs all errors seperated by planet id
   class Logger < BasicObject
+    # Global logger for messages.
+    #
+    # @return [ Fifa::Logger ]
+    def self.instance
+      @instance ||= new($opts[:'no-color'] ? :default : :red)
+    end
+
+    # See Fifa::Logger#add
+    #
+    # @return [ Void ]
+    def self.log(*args)
+      instance.add(*args)
+    end
+
+    # See Fifa::Logger#msg
+    #
+    # @return [ Void ]
+    def self.msg(*args)
+      instance.msg(*args)
+    end
+
+    # See Fifa::Logger#errors?
+    #
+    # @return [ Void ]
+    def self.errors?(*args)
+      instance.errors?(*args)
+    end
+
+    private
+
     # Initializes the logger.
     #
     # @param [ Symbol ] color Optional color to use for error messages.
     #
-    # @return [ FF::Logger ]
+    # @return [ Fifa::Logger ]
     def initialize(color = :default)
       @color  = color
       @errors = {}
     end
+
+    public
 
     # Add an error message to the logger.
     #
@@ -85,6 +117,7 @@ module FF
       values = errors?(key) ? colorize(key) : msg
 
       return values unless values.is_a? Array
+
       values.join(compact ? ', ' : "\n")
     end
 

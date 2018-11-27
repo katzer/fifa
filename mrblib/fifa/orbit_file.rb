@@ -20,11 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   # Extracted code to deal with the orbit json file
   class OrbitFile
     # File separator
-    SEPARATOR = OS.windows? ? '\\' : '/'
+    SEP = OS.windows? ? '\\' : '/'
 
     # The JSON encoded file content.
     #
@@ -39,7 +39,8 @@ module FF
     # @return [ String ]
     def path
       return ENV['ORBIT_FILE'] if ENV.include? 'ORBIT_FILE'
-      [ENV.fetch('ORBIT_HOME'), 'config', 'orbit.json'].join(SEPARATOR)
+
+      [ENV.fetch('ORBIT_HOME'), 'config', 'orbit.json'].join(SEP)
     rescue KeyError
       raise 'env ORBIT_HOME not set'
     end

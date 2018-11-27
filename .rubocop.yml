@@ -32,6 +32,9 @@ Style/ParallelAssignment:
 Layout/IndentHeredoc:
   Enabled: false
 
+Layout/ClosingHeredocIndentation:
+  Enabled: false
+
 Metrics/LineLength:
   Heredocs:
     Exclude: true

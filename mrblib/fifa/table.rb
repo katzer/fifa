@@ -20,43 +20,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   # Wrapper around the Terminal::Table
-  class Table
-    # Print values as a formatted table.
+  class Table < BasicObject
+    # Initialize a new table object.
     #
-    # @param [ Array<Planet> ] planets List of planets.
-    # @param [ Array<String> ] columns List of additional column names.
-    # @param [ Array<String> ] values Values for each additional column.
+    # @param [ Hash ]   spec The parsed command line arguments.
+    # @param [ String ] cols The name of the columns.
     #
     # @return [ Void ]
-    def initialize(planets, columns, values)
-      @title   = ARGV.join(' ').sub(/^(.*?)(?=fifa)/, '')
-      @columns = ['NR.', 'ID', 'TYPE', 'NAME']
-      @style   = { all_separators: true }
-      @rows    = convert_to_rows(planets, values)
-
-      columns.each { |col| @columns << col.upcase }
+    def initialize(spec, cols)
+      @spec = spec
+      @cols = %w[NR. ID TYPE NAME].concat(cols.map!(&:upcase))
     end
 
     # Pretty formatted terminal table string.
     #
+    # @param [ Array<Planet> ] planets Ordered list of requested planets.
+    # @param [ Array ]         values  The entries for the value column.
+    #
     # @return [ String ]
-    def to_s
-      table.to_s
+    def render(planets, values)
+      table(planets, values).to_s
     end
 
     private
 
     # Internal table object.
     #
+    # @param [ Array<Planet> ] planets Ordered list of requested planets.
+    # @param [ Array ]         values  The entries for the value column.
+    #
     # @return [ Terminal::Table ]
-    def table
-      Terminal::Table.new do |t|
-        t.headings = @columns
-        t.style    = @style
-        t.rows     = @rows
-        t.title    = @title
+    def table(planets, values)
+      ::Terminal::Table.new do |t|
+        t.title    = ARGV.join(' ').sub(/^(.*?)(?=fifa)/, '')
+        t.headings = @cols
+        t.style    = { all_separators: true }
+        t.rows     = rows(planets, values)
         t.align_column 0, :right
       end
     end
@@ -64,26 +65,26 @@ module FF
     # Converts the planets and values into table row structures.
     #
     # @param [ Array<Planet> ] planets Ordered list of requested planets.
-    # @param [ Array ] values The entries for the value column.
+    # @param [ Array ]         values  The entries for the value column.
     #
     # @return [ Array ]
-    def convert_to_rows(planets, values)
-      planets.zip(values).map do |p, cells|
-        pos       = 1 + planets.index(p)
-        row       = ["#{pos}.", p.id, colorize_type(p), p.name]
-        cells[-1] = msg(p.id, cells.last)
+    def rows(planets, values)
+      planets.each_with_index do |p, idx|
+        row          = ["#{idx}.", p.id, colorize_type(p), p.name]
+        cells        = values.shift
+        cells[-1]    = Logger.msg(p.id, cells.last)
 
-        row.concat(cells)
+        planets[idx] = row.concat(cells)
       end
     end
 
     # The type of the planet, colorized with unknown.
     #
-    # @param [ FF::Planet ] planet The planet to use for.
+    # @param [ Fifa::Planet ] planet The planet to use for.
     #
     # @return [ String ]
     def colorize_type(p)
-      p.unknown? && !parser.no_color? ? p.type.set_color(:red) : p.type
+      p.unknown? && !@spec[:'no-color'] ? p.type.set_color(:red) : p.type
     end
   end
 end

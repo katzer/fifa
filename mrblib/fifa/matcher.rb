@@ -20,21 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   # Identify planets by regular expressions
   class Matcher < BasicObject
     # Link of crumbs
-    CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)*$/
+    CRUMBS_PATTERN = /^[@%]?[^:=]*[:=]?[^@%]+(?:[@%]?[^:=]*[:=]?[^@%]+)*$/.freeze
     # Single crumb
-    SPLIT_PATTERN  = /([@%][^@%]+)/
+    SPLIT_PATTERN  = /([@%][^@%]+)/.freeze
     # Single crumb
-    CRUMB_PATTERN  = /^(@|%)?([^:=]*)(.)?(.*)$/
+    CRUMB_PATTERN  = /^(@|%)?([^:=]*)(.)?(.*)$/.freeze
 
     # Initializes the matcher by specified crumbs.
     #
     # @param [ String ] matcher The matcher like 'env:prod'
     #
-    # @return [ FF::Matcher ]
+    # @return [ Fifa::Matcher ]
     def initialize(matcher)
       @string = matcher
 
@@ -69,7 +69,7 @@ module FF
     # @return [ Void ]
     def validate(crumbs)
       crumbs.each do |crumb|
-        raise "invalid matcher: #{crumb}" unless crumb =~ CRUMBS_PATTERN
+        Kernel.raise "invalid matcher: #{crumb}" unless crumb =~ CRUMBS_PATTERN
       end
     end
 
@@ -79,7 +79,7 @@ module FF
       #
       # @param [ String ] crumbs A crumb like 'env=prod+env=int'
       #
-      # @return [ FF::Matcher::Crumbs ]
+      # @return [ Fifa::Matcher::Crumbs ]
       def initialize(crumbs)
         @crumbs = crumbs.split(SPLIT_PATTERN)
                         .reject(&:empty?)
@@ -101,7 +101,7 @@ module FF
         #
         # @param [ String ] crmb A crumb like '+env:prod'
         #
-        # @return [ FF::Matcher::Crumb ]
+        # @return [ Fifa::Matcher::Crumb ]
         def initialize(crumb)
           match = crumb.match(CRUMB_PATTERN)
           value = match[3] ? match[4] : match[2]
@@ -123,7 +123,7 @@ module FF
           @not ? (value !~ @exp) : (value =~ @exp)
         end
 
-        # private
+        private
 
         # Get the string parsed value for the given key.
         #

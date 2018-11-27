@@ -20,23 +20,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   # Provides access to the content of the ORBIT_FILE.
-  class Planet
+  class Planet < BasicObject
     # Value for unknown property values
     UNKNOWN = 'missing'.freeze
 
     # Find planet by ID. Raises an error if no planet could be found.
     #
-    # @param [ String ] planet_id The Id of the planet.
+    # @param [ String ] id The Id of the planet.
     #
     # @return [ Planet ]
-    def self.find(planet_id)
-      planet = planets.find { |i| i['id'] == planet_id }
+    def self.find(id)
+      planet = planets.find { |i| i['id'] == id }
 
       unless planet
-        planet = { 'id' => planet_id, 'type' => UNKNOWN }
-        log(planet_id, "unknown server: #{planet_id}")
+        planet = { 'id' => id, 'type' => UNKNOWN }
+        Logger.log(id, "unknown server: #{id}")
       end
 
       Planet.new(planet)
@@ -44,15 +44,12 @@ module FF
 
     # Find planets by matchers.
     #
-    # @param [ Array<FF::Matcher> ] matchers List of matchers.
+    # @param [ Array<Fifa::Matcher> ] matchers List of matchers.
     #
     # @return [ Array<Planet> ]
     def self.find_all(matchers)
-      items = planets.select { |p| matchers.any? { |m| m.match? p } }
-                     .map! { |p| Planet.new(p) }
-
-      items.sort! if parser.print_sorted?
-      items
+      planets.select { |p| matchers.any? { |m| m.match? p } }
+             .map! { |p| Planet.new(p) }
     end
 
     # The parsed JSON file. Raises an error if the format is not JSON.
@@ -64,31 +61,33 @@ module FF
 
     # A planet is a single entry found in the ORBIT_FILE.
     #
-    # @param [ Hash ] attributes Extracted attributes from the file.
+    # @param [ Hash ] attrs Extracted attrs from the file.
     #
     # @return [ Planet ]
-    def initialize(attributes)
-      @attributes = attributes
-      @id         = @attributes['id']
+    def initialize(attrs)
+      @attrs = attrs
+      @id    = attrs['id']
 
-      log(id, "#{UNKNOWN} type") unless attributes['type']
+      Logger.log(id, "#{UNKNOWN} type") unless attrs['type']
     end
 
-    # Property reader for the attributes.
-    attr_reader :id, :attributes
+    # The ID of the planet.
+    #
+    # @return [ String ]
+    attr_reader :id
 
     # The type of the planet.
     #
     # @return [ String ]
     def type
-      @type ||= @attributes['type'] || UNKNOWN
+      @type ||= @attrs['type'] || UNKNOWN
     end
 
     # The name of the planet.
     #
     # @return [ String ]
     def name
-      @name ||= @attributes['name'] || ''
+      @name ||= @attrs['name'] || ''
     end
 
     # The value for the given attribute.
@@ -97,7 +96,7 @@ module FF
     #
     # @return [ Object ] The value of the attribute.
     def [](attr)
-      @attributes[attr]
+      @attrs[attr]
     end
 
     # If the type is unknown.
@@ -107,9 +106,16 @@ module FF
       type == UNKNOWN
     end
 
+    # Returns the planet's properties as a JSON string.
+    #
+    # @return [ String ]
+    def to_json
+      @attrs.to_json
+    end
+
     # Compare with another planet.
     #
-    # @param [ FF::Planet ] planet The other planet.
+    # @param [ Fifa::Planet ] planet The other planet.
     #
     # @return [ Int ] -1, 0 or 1
     def <=>(other)

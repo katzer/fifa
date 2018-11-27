@@ -20,14 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   module Formatter
     # Formatter for database specific formats
     class Database < Base
       # Connection formatted to use for JDBC driver.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def jdbc(planet)
@@ -46,7 +46,7 @@ module FF
       # Connection formatted to use with SqlPlus
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def sqlplus(planet)
@@ -64,7 +64,7 @@ module FF
       # Connection formatted to use for TNS listener.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def tns(planet)
@@ -75,7 +75,7 @@ module FF
       # Connection formatted to use for qpdb.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def pqdb(planet)
@@ -84,7 +84,7 @@ module FF
         server = find_server(planet)
         value  = server.connection(:ssh)
 
-        errors = logger.errors(server.id)
+        errors = Logger.instance.errors(server.id)
         log(planet.id, errors) if errors.any?
 
         "#{planet['db']}:#{value}"
@@ -96,14 +96,14 @@ module FF
 
       # The references planet
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
-      # @return [ FF::Planet ]
+      # @return [ Fifa::Planet ]
       def find_server(planet)
         if planet['server']
-          FF::Planet.find(planet['server'])
+          Fifa::Planet.find(planet['server'])
         else
-          FF::Planet.new('id' => planet.id, 'type' => FF::Planet::UNKNOWN)
+          Fifa::Planet.new('id' => planet.id, 'type' => Fifa::Planet::UNKNOWN)
         end
       end
     end

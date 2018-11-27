@@ -20,20 +20,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
+module Fifa
   module Formatter
     # Base formatter for every planet type.
-    class Base
+    class Base < BasicObject
       # Format the params by the given format.
       # Raises an error if a required attribute is missing
       # or the format is not supported!
       #
       # @param [ Symbol ] format The name of the format.
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def format(format, planet)
-        send(format, planet)
+        __send__(format, planet)
       rescue NoMethodError
         log(planet.id, "unknown format: #{format}") unless planet.unknown?
       end
@@ -41,7 +41,7 @@ module FF
       # Connection formatted to use for CURL.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def url(planet)
@@ -54,42 +54,49 @@ module FF
       # Connection formatted to use for internals.
       # Raises an error if a required attribute is missing!
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def ski(p)
-        value  = msg(p.id, ski_value(p))
-        bit    = logger.errors?(p.id) ? 0 : 1
+        value  = Logger.msg(p.id, ski_value(p))
+        bit    = Logger.errors?(p.id) ? 0 : 1
         format = "#{bit}|#{p.id}|#{p.type}|#{p.name}|#{value}"
 
-        log(p.id, format, !parser.print_pretty?) if bit != 1
+        log(p.id, format, !$opts[:pretty]) if bit != 1
 
         format
       end
 
       # Connection formatted as JSON.
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def json(planet)
-        planet.attributes.to_json
+        planet.to_json
       end
 
       private
 
       # The content for the ski format.
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def ski_value(planet)
         default(planet)
       end
 
+      # See Fifa::Logger#add
+      #
+      # @return [ Void ]
+      def log(*args)
+        Logger.log(*args)
+      end
+
       # Raises an error if a provided attribute is missing.
       #
-      # @param [ FF::Planet ] planet The planet to format.
+      # @param [ Fifa::Planet ] planet The planet to format.
       # @param [ Array<String> ] keys The names of the params to check for.
       #
       # @return [ Void ]

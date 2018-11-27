@@ -20,21 +20,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative 'mrblib/ff/version'
+require_relative 'mrblib/fifa/version'
 
 MRuby::Gem::Specification.new('fifa') do |spec|
   spec.license = 'Apache 2.0'
   spec.author  = 'Sebastián Katzer, appPlant GmbH'
-  spec.version = FF::VERSION
+  spec.version = Fifa::VERSION
   spec.bins    = ['fifa']
 
-  spec.add_dependency 'mruby-terminal-table'
-  spec.add_dependency 'mruby-ansi-colors'
-  spec.add_dependency 'mruby-tiny-io'
-  spec.add_dependency 'mruby-print'
-  spec.add_dependency 'mruby-exit'
-  spec.add_dependency 'mruby-env'
-  spec.add_dependency 'mruby-os'
-  spec.add_dependency 'mruby-json'
-  spec.add_dependency 'mruby-regexp-pcre'
+  spec.add_dependency 'mruby-terminal-table',  mgem: 'mruby-terminal-table'
+  spec.add_dependency 'mruby-ansi-colors',     mgem: 'mruby-ansi-colors'
+  spec.add_dependency 'mruby-tiny-io',         mgem: 'mruby-tiny-io'
+  spec.add_dependency 'mruby-print',           core: 'mruby-print'
+  spec.add_dependency 'mruby-exit',            core: 'mruby-exit'
+  spec.add_dependency 'mruby-env',             mgem: 'mruby-env'
+  spec.add_dependency 'mruby-os',              mgem: 'mruby-os'
+  spec.add_dependency 'mruby-json',            mgem: 'mruby-json'
+  spec.add_dependency 'mruby-regexp-pcre',     mgem: 'mruby-regexp-pcre'
+  spec.add_dependency 'mruby-tiny-opt-parser', mgem: 'mruby-tiny-opt-parser'
 end

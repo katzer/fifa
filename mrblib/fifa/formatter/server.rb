@@ -20,53 +20,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module FF
-  # Public interface to interact with the Formatter classes.
+module Fifa
   module Formatter
-    # Find right formatter for planet by type.
-    #
-    # @param [ String ] type The type of the formatter.
-    #
-    # @return [ FF::Formatter::Base ]
-    def self.for_type(type)
-      case type
-      when 'server'
-        server_formatter
-      when 'web'
-        web_formatter
-      when 'db', 'database'
-        database_formatter
-      else
-        base_formatter
+    # Formatter for server specific formats
+    class Server < Base
+      # Connection formatted to use for SSH.
+      # Raises an error if a required attribute is missing!
+      #
+      # @param [ Fifa::Planet ] planet The planet to format.
+      #
+      # @return [ String ]
+      def ssh(planet)
+        log_if_missing(planet, 'user', 'url')
+        "#{planet['user']}@#{planet['url']}"
       end
-    end
 
-    # Instance of formatter for planets of type server.
-    #
-    # @return [ Formatter::Server ]
-    def self.server_formatter
-      @server ||= Server.new
-    end
-
-    # Instance of formatter for planets of type db.
-    #
-    # @return [ Formatter::Database ]
-    def self.database_formatter
-      @db ||= Database.new
-    end
-
-    # Instance of formatter for planets of type web.
-    #
-    # @return [ Formatter::Web ]
-    def self.web_formatter
-      @web ||= Web.new
-    end
-
-    # Instance of an base formatter.
-    #
-    # @return [ Formatter::Base ]
-    def self.base_formatter
-      @base ||= Base.new
+      alias default ssh
     end
   end
 end
