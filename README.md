@@ -9,7 +9,7 @@ A tool to find out the way to any "planet".
     -a ATTRIBUTE    Show value of attribute
     -f FORMAT       Show formatted connection string
                     Possible formats are jdbc, sqlplus, url, tns or pqdb
-    --no-color      Print errors without colors
+    -n, --no-color  Print errors without colors
     -g, --group     Group planets by attribute value
     -p, --pretty    Pretty print output as a table
     -s, --sort      Print planets in sorted order
