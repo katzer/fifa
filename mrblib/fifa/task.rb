@@ -23,7 +23,7 @@
 module Fifa
   # Class reads the passed command-line arguments,
   # loads the date and presents the output.
-  class Task
+  class Task < BasicObject
     # Initialize the task for given spec.
     #
     # @param [ Hash<Symbol,_>] spec The parsed command-line args.
@@ -38,11 +38,7 @@ module Fifa
     #
     # @return [ Void ]
     def exec
-      if print_counts?
-        print_attrs? ? print_attrs_counts : print_connections_counts
-      else
-        print_attrs? ? print_attrs : print_connections
-      end
+      presenter.present
     end
 
     private
@@ -70,117 +66,14 @@ module Fifa
       tail.map { |m| Matcher.new(m) }
     end
 
-    # If the tool should print the count of the matching planets.
+    # The right presenter class based on the specs.
     #
-    # @return [ Boolean ]
-    def print_counts?
-      @spec[:count]
-    end
-
-    # If the tool should print attributes instead of connections.
-    #
-    # @return [ Boolean ]
-    def print_attrs?
-      @spec[:type] || @spec[:attribute]
-    end
-
-    # Print the attribute value of the specified planets.
-    #
-    # @return [ Void ]
-    def print_attrs
-      property        = @spec[:attribute] || 'type'
-      planets, values = planets_and_values { |p| p[property] }
-
-      print_values(planets, [property], values)
-    end
-
-    # Print the connection string of the specified planets.
-    #
-    # @return [ Void ]
-    def print_attrs_counts
-      property        = @spec[:attribute] || 'type'
-      planets, values = planets_and_counts { |p| p[property] }
-
-      print_values(planets, ['MATCHER', property, 'COUNT'], values)
-    end
-
-    # Print the connection string of the specified planets.
-    #
-    # @return [ Void ]
-    def print_connections
-      format          = @spec[:format]
-      planets, values = planets_and_values { |p| p.connection(format) }
-
-      print_values(planets, ['CONNECTION'], values)
-    end
-
-    # Print the connection string of the specified planets.
-    #
-    # @return [ Void ]
-    def print_connections_counts
-      format          = @spec[:format]
-      planets, values = planets_and_counts { |p| p.connection(format) }
-
-      print_values(planets, %w[MATCHER CONNECTION COUNT], values)
-    end
-
-    # Find all matching planets and their value by yielding the provided proc.
-    #
-    # @param [ Proc ] block A codeblock to map a planet to a value.
-    #
-    # @return [ Array<Planets[], String[]>]
-    def planets_and_values
-      planets = Planet.find_all(matchers)
-      planets.sort! if @spec[:sort]
-      values = planets.map { |p| [yield(p)] }
-
-      [planets, values]
-    end
-
-    # Find all matching planets and their value by yielding the provided proc.
-    #
-    # @param [ Proc ] block A codeblock to map a planet to a value.
-    #
-    # @return [ Array<Planets[], String[]>]
-    def planets_and_counts
-      planets, values = [], []
-
-      matchers.each do |matcher|
-        stars = Planet.find_all([matcher])
-        conns = stars.map { |p| [yield(p)] }.join("\n")
-
-        values  << [matcher.to_s, conns, stars.size]
-        planets << mash_planets(stars)
-      end
-
-      [planets, values]
-    end
-
-    # Mash list of planets into one planet by joining all values.
-    #
-    # @param [ Array<Fifa::Planet> ] planets List of planets.
-    #
-    # @return [ Fifa::Planet ]
-    def mash_planets(planets)
-      Planet.new(
-        'id' => planets.map(&:id).join("\n"),
-        'type' => planets.map(&:type).join("\n"),
-        'name' => planets.map(&:name).join("\n")
-      )
-    end
-
-    # Print values to stdout.
-    #
-    # @param [ Array<Planet> ] planets List of planets.
-    # @param [ Array<String> ] columns List of additional column names.
-    # @param [ Array<String> ] values  Values for each additional column.
-    #
-    # @return [ Void ]
-    def print_values(planets, columns, values)
-      if @spec[:pretty]
-        puts Table.new(@spec, columns).render(planets, values)
+    # @return [ Fifa::Presenter::BasePresenter ]
+    def presenter
+      if @spec[:type] || @spec[:attribute]
+        Presenter::PropertyPresenter.new(@spec, matchers)
       else
-        planets.each { |p| puts Logger.msg(p.id, values.shift.last, true) }
+        Presenter::ConnectionPresenter.new(@spec, matchers)
       end
     end
   end
