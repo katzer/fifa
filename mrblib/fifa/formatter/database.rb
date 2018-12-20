@@ -72,14 +72,14 @@ module Fifa
         "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=#{planet['host']})(PORT=#{planet['port']})))(CONNECT_DATA=(SID=#{planet['sid']})))" # rubocop:disable LineLength
       end
 
-      # Connection formatted to use for qpdb.
+      # Connection formatted to use for pqdb.
       # Raises an error if a required attribute is missing!
       #
       # @param [ Fifa::Planet ] planet The planet to format.
       #
       # @return [ String ]
       def pqdb(planet)
-        log_if_missing(planet, 'server', 'db')
+        log_if_missing(planet, 'pqdb')
 
         server = find_server(planet)
         value  = server.connection(:ssh)
@@ -87,7 +87,7 @@ module Fifa
         errors = Logger.instance.errors(server.id)
         log(planet.id, errors) if errors.any?
 
-        "#{planet['db']}:#{value}"
+        "#{planet['pqdb']&.split('@')&.last}:#{value}"
       end
 
       private
@@ -100,11 +100,11 @@ module Fifa
       #
       # @return [ Fifa::Planet ]
       def find_server(planet)
-        if planet['server']
-          Fifa::Planet.find(planet['server'])
-        else
-          Fifa::Planet.new('id' => planet.id, 'type' => Fifa::Planet::UNKNOWN)
-        end
+        server = planet['pqdb']&.split('@')&.first
+
+        return Fifa::Planet.find(server) if server
+
+        Fifa::Planet.new('id' => planet.id, 'type' => Fifa::Planet::UNKNOWN)
       end
     end
   end

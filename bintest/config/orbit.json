@@ -9,8 +9,7 @@
     {
         "id": "my-db",
         "name": "Database",
-        "server": "my-app",
-        "db": "OP_DB",
+        "pqdb": "my-app@OP_DB",
         "type": "db",
         "user": "user1",
         "url": "url_url1.bla.blergh.de",
