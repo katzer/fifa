@@ -21,5 +21,5 @@
 # SOFTWARE.
 
 module Fifa
-  VERSION = '1.4.7-beta'.freeze
+  VERSION = '1.4.7'.freeze
 end

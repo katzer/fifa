@@ -1,8 +1,33 @@
 ## Release Notes: _fifa_
 
+### 1.4.7 (02.01.2019)
+
+1. New command-line argument parser.
+
+   Before:
+   ```
+   $ fifa -f=url
+   ```
+
+   After:
+   ```
+   $ fifa -f url
+   ```
+
+2. Support for the new KeePass properties.
+
+3. Internal code rewrite and restructure.
+
+4. Added -n flag as an alias for --no-color.
+
+5. Removed LVAR section for non test builds.
+
+6. Upgraded to mruby 2.0.0
+
 ### 1.4.6 (16.08.2018)
 
 1. Increase MacOSX min SDK version from 10.5 to to 10.11
+
 2. Remove 32-bit build targets.
 
 ### 1.4.5 (26.06.2018)
