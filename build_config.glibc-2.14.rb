@@ -44,6 +44,16 @@ MRuby::Build.new('x86_64-pc-linux-gnu') do |conf|
   gem_config(conf)
 end
 
+MRuby::Build.new('x86_64-pc-linux-gnu-openssl') do |conf|
+  toolchain :clang
+
+  [conf.cc, conf.cxx, conf.linker].each do |cc|
+    cc.flags << '-Oz'
+  end
+
+  gem_config(conf)
+end
+
 MRuby::CrossBuild.new('x86_64-alpine-linux-musl') do |conf|
   toolchain :gcc
 
