@@ -23,14 +23,16 @@
 def gem_config(conf, glibc_version: '2.19')
   conf.cc.defines << 'MRB_WITHOUT_FLOAT'
 
-  configure_glibc(conf, glibc_version) unless conf.is_a? MRuby::CrossBuild
+  configure_glibc(conf, glibc_version)
 
   conf.gem __dir__
 end
 
-def configure_glibc(conf, version)
+def configure_glibc(conf, ver)
+  return if !ENV['GLIBC_HEADERS'] || conf.is_a?(MRuby::CrossBuild)
+
   [conf.cc, conf.cxx].each do |cc|
-    cc.flags << "-include #{ENV['GLIBC_HEADERS']}/x64/force_link_glibc_#{version}.h"
+    cc.flags << "-include #{ENV['GLIBC_HEADERS']}/x64/force_link_glibc_#{ver}.h"
   end
 end
 
