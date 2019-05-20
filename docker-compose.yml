@@ -21,12 +21,12 @@
 # SOFTWARE.
 
 compile: &defaults
-  image: appplant/mruby-cli:${MRUBY_CLI_TAG}
+  image: appplant/mruby-cli
   working_dir: /home/mruby/code
   volumes:
     - .:/home/mruby/code:rw
   environment:
-    MRUBY_CONFIG: build_config.${MRUBY_CLI_TAG}.rb
+    MRUBY_CONFIG: build_config.rb
     MRUBY_VERSION: ${MRUBY_VERSION}
   command: rake compile
 test:
