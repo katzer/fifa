@@ -21,7 +21,10 @@
 # SOFTWARE.
 
 def gem_config(conf, glibc_version: '2.19')
+  conf.cc.defines << 'MRB_WITHOUT_FLOAT'
+
   configure_glibc(conf, glibc_version) unless conf.is_a? MRuby::CrossBuild
+
   conf.gem __dir__
 end
 
