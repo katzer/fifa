@@ -33,9 +33,6 @@ end
 
 @parser.on! :help do
   <<-USAGE
-
-#{Fifa::LOGO}
-
 Usage: fifa [options...] [matchers...]
 Options:
 -a ATTRIBUTE    Show value of attribute
