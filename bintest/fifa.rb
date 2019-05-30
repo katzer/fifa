@@ -32,39 +32,30 @@ def orbit_env_get(file = nil)
   end
 end
 
-BINARY    = File.expand_path('../mruby/bin/fifa', __dir__)
+BINARY = File.expand_path('../mruby/bin/fifa', __dir__)
 
 ORBIT_ENV = orbit_env_get.freeze
 PASWD_ENV = orbit_env_get('orbit.password').freeze
 INCMP_ENV = orbit_env_get('orbit.incomplete').freeze
 WRONG_ENV = orbit_env_get('wrong').freeze
+EMPTY_ENV = ENV.to_h.merge('ORBIT_HOME' => nil).freeze
 
-assert('version [-v]') do
-  output, status = Open3.capture2(BINARY, '-v')
+%w[-v --version].each do |flag|
+  assert("version [#{flag}]") do
+    output, status = Open3.capture2(EMPTY_ENV, BINARY, flag)
 
-  assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, Fifa::VERSION
+    assert_true status.success?, 'Process did not exit cleanly'
+    assert_include output, Fifa::VERSION
+  end
 end
 
-assert('version [--version]') do
-  output, status = Open3.capture2(BINARY, '--version')
+%w[-h --help].each do |flag|
+  assert("usage [#{flag}]") do
+    output, status = Open3.capture2(EMPTY_ENV, BINARY, flag)
 
-  assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, Fifa::VERSION
-end
-
-assert('usage [-h]') do
-  output, status = Open3.capture2(BINARY, '-h')
-
-  assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, 'Usage'
-end
-
-assert('usage [--help]') do
-  output, status = Open3.capture2(BINARY, '--help')
-
-  assert_true status.success?, 'Process did not exit cleanly'
-  assert_include output, 'Usage'
+    assert_true status.success?, 'Process did not exit cleanly'
+    assert_include output, 'Usage'
+  end
 end
 
 assert('unknown flag') do
