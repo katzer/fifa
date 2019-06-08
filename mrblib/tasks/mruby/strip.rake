@@ -1,6 +1,6 @@
 # Apache 2.0 License
 #
-# Copyright (c) 2016 Sebastian Katzer, appPlant GmbH
+# Copyright (c) 2018 Sebastian Katzer, appPlant GmbH
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,24 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative 'mrblib/fifa/version'
-
-MRuby::Gem::Specification.new('fifa') do |spec|
-  spec.license = 'Apache 2.0'
-  spec.author  = 'Sebastián Katzer, appPlant GmbH'
-  spec.version = Fifa::VERSION
-  spec.bins    = ['fifa']
-
-  spec.rbfiles -= Dir.glob("#{spec.dir}/mrblib/mruby/**/*.rb")
-
-  spec.add_dependency 'mruby-terminal-table',  mgem: 'mruby-terminal-table'
-  spec.add_dependency 'mruby-ansi-colors',     mgem: 'mruby-ansi-colors'
-  spec.add_dependency 'mruby-tiny-io',         mgem: 'mruby-tiny-io'
-  spec.add_dependency 'mruby-print',           core: 'mruby-print'
-  spec.add_dependency 'mruby-exit',            core: 'mruby-exit'
-  spec.add_dependency 'mruby-env',             mgem: 'mruby-env'
-  spec.add_dependency 'mruby-os',              mgem: 'mruby-os'
-  spec.add_dependency 'mruby-json',            mgem: 'mruby-json'
-  spec.add_dependency 'mruby-regexp-pcre',     mgem: 'mruby-regexp-pcre'
-  spec.add_dependency 'mruby-tiny-opt-parser', mgem: 'mruby-tiny-opt-parser'
+namespace :mruby do
+  desc 'strip binary'
+  task strip: 'mruby:environment' do
+    MRuby.targets.each_pair do |name, spec|
+      Dir["#{spec.build_dir}/bin/#{MRuby::Gem.current.name}*"].each do |bin|
+        if RbConfig::CONFIG['host_os'].include? 'darwin'
+          sh "strip -u -r -arch all #{bin}"
+        elsif name.include? 'darwin'
+          sh "x86_64-apple-darwin17-strip -u -r -arch all #{bin}"
+        else
+          sh "strip --strip-unneeded #{bin}"
+        end
+      end
+    end
+  end
 end

@@ -33,4 +33,4 @@ def docker_run(cmd, ver = ENV['MRUBY_VERSION'])
   sh "MRUBY_VERSION=#{ver} docker-compose run #{cmd}"
 end
 
-Dir["#{__dir__}/tasks/**/*.rake"].each { |file| load file }
+Dir["#{__dir__}/mrblib/tasks/**/*.rake"].each { |file| load file }
