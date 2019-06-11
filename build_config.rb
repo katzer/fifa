@@ -74,7 +74,7 @@ MRuby::CrossBuild.new('x86_64-apple-darwin17') do |conf|
 
   [conf.cc, conf.linker].each do |cc|
     cc.command = 'x86_64-apple-darwin17-clang'
-    cc.flags  += %w[-mmacosx-version-min=10.11 -stdlib=libstdc++]
+    cc.flags  += %w[-mmacosx-version-min=10.13 -stdlib=libstdc++]
   end
 
   conf.cxx.command      = 'x86_64-apple-darwin17-clang++'
