@@ -69,7 +69,7 @@ module Fifa
     # @return [ Void ]
     def validate(crumbs)
       crumbs.each do |crumb|
-        Kernel.raise "invalid matcher: #{crumb}" unless crumb =~ CRUMBS_PATTERN
+        Kernel.raise "invalid matcher: #{crumb}" unless CRUMBS_PATTERN =~ crumb
       end
     end
 
@@ -103,7 +103,7 @@ module Fifa
         #
         # @return [ Fifa::Matcher::Crumb ]
         def initialize(crumb)
-          match = crumb.match(CRUMB_PATTERN)
+          match = CRUMB_PATTERN.match(crumb)
           value = match[3] ? match[4] : match[2]
           value = "^#{value}$" unless match[3] == ':'
 
@@ -120,7 +120,7 @@ module Fifa
         def match?(map)
           value = value_for_key(map)
 
-          @not ? (value !~ @exp) : (value =~ @exp)
+          @not ? (@exp !~ value) : (@exp =~ value)
         end
 
         private
