@@ -20,13 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative 'mrblib/mruby/build'
+require 'mruby_utils/build_helpers'
 
 def gem_config(conf, glibc_version: '2.19')
-  conf.cc.defines << 'MRB_WITHOUT_FLOAT'
+  conf.enable_optimizations
+
   conf.glibc_version = glibc_version
 
-  conf.enable_optimizations
+  [conf.cc, conf.cxx].each do |cc|
+    cc.defines << 'MRB_WITHOUT_FLOAT'
+  end
 
   conf.gem __dir__
 end
