@@ -61,9 +61,9 @@ module Fifa
 
     # The parsed command-line matcher.
     #
-    # @return [ Array<Fifa::Matcher> ]
+    # @return [ Array<PlanetMatcher> ]
     def matchers
-      tail.map { |m| Matcher.new(m) }
+      tail.map { |m| PlanetMatcher.new(m) }
     end
 
     # The right presenter class based on the specs.

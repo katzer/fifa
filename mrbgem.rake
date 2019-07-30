@@ -28,6 +28,7 @@ MRuby::Gem::Specification.new('fifa') do |spec|
   spec.version = Fifa::VERSION
   spec.bins    = ['fifa']
 
+  spec.add_dependency 'mruby-planet-matcher',  github: 'appplant/mruby-planet-matcher'
   spec.add_dependency 'mruby-terminal-table',  mgem: 'mruby-terminal-table'
   spec.add_dependency 'mruby-ansi-colors',     mgem: 'mruby-ansi-colors'
   spec.add_dependency 'mruby-tiny-io',         mgem: 'mruby-tiny-io'

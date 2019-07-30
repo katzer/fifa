@@ -44,7 +44,7 @@ module Fifa
 
     # Find planets by matchers.
     #
-    # @param [ Array<Fifa::Matcher> ] matchers List of matchers.
+    # @param [ Array<PlanetMatcher> ] matchers List of matchers.
     #
     # @return [ Array<Planet> ]
     def self.find_all(matchers)

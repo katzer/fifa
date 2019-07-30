@@ -27,7 +27,7 @@ module Fifa
       # Initialize the presenter for given spec.
       #
       # @param [ Hash<Symbol,_>]        spec     The parsed command-line args.
-      # @param [ Array<Fifa::Matcher> ] matchers Defines the planets to present.
+      # @param [ Array<PlanetMatcher> ] matchers Defines the planets to present.
       #
       # @return [ Void ]
       def initialize(spec, matchers)
