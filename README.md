@@ -28,7 +28,7 @@ You'll need to add your `ORBIT_FILE` first to your profile:
 
 Download the latest version from the [release page][releases] and add the executable to your `PATH`.
 
-## Basic Usage
+## Usage
 
 Get the connection by type:
 
@@ -127,6 +127,10 @@ Clone the repo:
     
     $ git clone https://github.com/appplant/fifa.git && cd fifa/
 
+Install the dependencies:
+
+    $ bundle
+
 And then execute:
 
     $ rake compile
@@ -162,7 +166,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/apppla
 
 The code is available as open source under the terms of the [Apache 2.0 License][license].
 
-Made with :yum: in Leipzig
+Made with :heart: in Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
