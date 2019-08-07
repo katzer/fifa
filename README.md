@@ -87,27 +87,27 @@ Pretty print output:
 
 As its done the good old way:
 
-    $ ff planet-1 planet-2
+    $ fifa planet-1 planet-2
 
 That basically means to find any planet with id _planet-1_ __or__ _planet-2_ and is just a shortened way for:
 
-    $ ff id=planet-1 id=planet-2
+    $ fifa id=planet-1 id=planet-2
 
 Which is a shortened way for:
 
-    $ ff @id=planet-1 @id=planet-2
+    $ fifa @id=planet-1 @id=planet-2
 
 The opposite, e.g. find all planets who have a different id other than _planet-1_ __and__ _planet-2_ can be expressed as follows:
 
-    $ ff %id=planet-1%id=planet-2
+    $ fifa %id=planet-1%id=planet-2
 
 Or by using a regular expression:
 
-    $ ff %id:planet-1|planet-2
+    $ fifa %id:planet-1|planet-2
 
 Lets find all productive server Jens has to take care about:
 
-    $ ff type=server@env=prod@tags:Jens
+    $ fifa type=server@env=prod@tags:Jens
 
 ## Internal features
 
