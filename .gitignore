@@ -1,4 +1,5 @@
-/packages/
-/mruby/
-/releases/
+mruby/
+releases/
+packages/
+build/
 Gemfile.lock

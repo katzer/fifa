@@ -26,7 +26,6 @@ compile: &defaults
   volumes:
     - .:/home/mruby/code:rw
   environment:
-    MRUBY_CONFIG: build_config.rb
     MRUBY_VERSION: ${MRUBY_VERSION}
   command: rake compile
 test:

@@ -141,12 +141,12 @@ To compile the sources locally for the host machine only:
 
 You'll be able to find the binaries in the following directories:
 
-- Linux (64-bit Musl): `mruby/build/x86_64-alpine-linux-musl/bin/fifa`
-- Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu/bin/fifa`
-- Linux (64-bit, for old distros): `mruby/build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
-- OS X (64-bit): `mruby/build/x86_64-apple-darwin17/bin/fifa`
-- Windows (64-bit): `mruby/build/x86_64-w64-mingw32/bin/fifa`
-- Host: `mruby/build/host2/bin/fifa`
+- Linux (64-bit Musl): `build/x86_64-alpine-linux-musl/bin/fifa`
+- Linux (64-bit GNU): `build/x86_64-pc-linux-gnu/bin/fifa`
+- Linux (64-bit, for old distros): `build/x86_64-pc-linux-gnu-glibc-2.12/bin/fifa`
+- OS X (64-bit): `build/x86_64-apple-darwin17/bin/fifa`
+- Windows (64-bit): `build/x86_64-w64-mingw32/bin/fifa`
+- Host: `build/host2/bin/fifa`
 
 For the complete list of build tasks:
 
