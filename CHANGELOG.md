@@ -1,5 +1,13 @@
 ## Release Notes: _fifa_
 
+### 1.5.0 (not yet released)
+
+1. Compiled binary with `MRB_WITHOUT_FLOAT`.
+
+2. Compiled binary for OSX build with MacOSX10.13 SDK (Darwin17).
+
+3. Upgraded to mruby 2.0.1
+
 ### 1.4.7 (02.01.2019)
 
 1. New command-line argument parser.
