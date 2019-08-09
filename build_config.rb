@@ -56,12 +56,6 @@ MRuby::Build.new('x86_64-pc-linux-gnu-glibc-2.9') do |conf|
   gem_config(conf, glibc_version: '2.9')
 end
 
-MRuby::Build.new('x86_64-pc-linux-gnu-openssl') do |conf|
-  toolchain :clang
-
-  gem_config(conf)
-end
-
 MRuby::CrossBuild.new('x86_64-alpine-linux-musl') do |conf|
   toolchain :gcc
 
