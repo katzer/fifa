@@ -4,7 +4,7 @@ A tool to find out the way to any "planet"
 
 ## 1.5.0
 
-Released at: UNLRELEASED
+Released at: 13.08.2019
 
 1. Compiled with `MRB_WITHOUT_FLOAT`
 
