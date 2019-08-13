@@ -1,14 +1,25 @@
-## Release Notes: _fifa_
+# Release Notes: _fifa_
 
-### 1.5.0 (not yet released)
+A tool to find out the way to any "planet"
 
-1. Compiled binary with `MRB_WITHOUT_FLOAT`.
+## 1.5.0
 
-2. Compiled binary for OSX build with MacOSX10.13 SDK (Darwin17).
+Released at: UNLRELEASED
+
+1. Compiled with `MRB_WITHOUT_FLOAT`
+
+2. Compiled binary for OSX build with MacOSX10.13 SDK (Darwin17)
 
 3. Upgraded to mruby 2.0.1
 
-### 1.4.7 (02.01.2019)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.7...1.5.0)
+
+## 1.4.7
+
+Released at: 02.01.2019
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. New command-line argument parser.
 
@@ -32,13 +43,33 @@
 
 6. Upgraded to mruby 2.0.0
 
-### 1.4.6 (16.08.2018)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.6...1.4.7)
+</details>
+
+## 1.4.6
+
+Released at: 16.08.2018
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Increase MacOSX min SDK version from 10.5 to to 10.11
 
 2. Remove 32-bit build targets.
 
-### 1.4.5 (26.06.2018)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.5...1.4.6)
+</details>
+
+## 1.4.5
+
+Released at: 02.01.2019
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Row number for table output starts with 1. instead of 0.
 
@@ -66,15 +97,45 @@
    85
    ```
 
-### 1.4.4 (17.11.2017)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.4...1.4.5)
+</details>
+
+## 1.4.4
+
+Released at: 17.11.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 No notable changes
 
-### 1.4.3 (11.07.2017)
+</p>
 
-1. Upgrade to mruby-1.3.0 from mruby-1.2.0
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.3...1.4.4)
+</details>
 
-### 1.4.2 (31.05.2017)
+## 1.4.3
+
+Released at: 11.07.2017
+
+<details><summary>Releasenotes</summary>
+<p>
+
+1. Upgraded to mruby-1.3.0
+
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.2...1.4.3)
+</details>
+
+## 1.4.2
+
+Released at: 31.05.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Bug fixes for edge cases like if type attribute is missing.
 
@@ -101,7 +162,17 @@ No notable changes
 
 8. Compile binary for OSX with MacOSX10.11 SDK (Darwin15).
 
-### 1.4.1 (15.03.2017)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.1...1.4.2)
+</details>
+
+## 1.4.1
+
+Released at: 15.03.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Colorized error output.
 
@@ -123,7 +194,17 @@ No notable changes
 
 7. Exit with failure if type is missing.
 
-### 1.4.0 (10.03.2017)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.4.0...1.4.1)
+</details>
+
+## 1.4.0
+
+Released at: 10.03.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Removed -e flag
 
@@ -155,7 +236,17 @@ No notable changes
    +-----+------------+--------+-----------+-------------+------------------------+-------+
    ```
 
-### 1.3.2 (01.03.2017)
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.3.2...1.4.0)
+</details>
+
+## 1.3.2
+
+Released at: 01.03.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Renamed the tool to fifa (<b>Fi</b>nd<b>Fa</b>st).
 
@@ -171,8 +262,17 @@ No notable changes
 
 4. Changed order of columns and ski format.
 
+</p>
 
-### 1.3.1 (14.02.2017)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.3.1...1.3.2)
+</details>
+
+## 1.3.1
+
+Released at: 14.02.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. The version flag gives more information about the compiled binary and the host system:
 
@@ -181,8 +281,17 @@ No notable changes
    v1.3.1 - Linux 32-Bit (x86_64)
    ```
 
+</p>
 
-### 1.3.0 (09.02.2017)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.3.0...1.3.1)
+</details>
+
+## 1.3.0
+
+Released at: 09.02.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Changed the default name of config file:
 
@@ -240,8 +349,17 @@ No notable changes
    +-----+---------------+---------+---------------+----------------+
    ```
 
+</p>
 
-### 1.2.0 (25.01.2017)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.2.0...1.3.0)
+</details>
+
+## 1.2.0
+
+Released at: 25.01.2017
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Support for `$ORBIT_HOME`. The _orbit_file.json_ formerly specified by `$ORBIT_KEY` has to be placed by default under $ORBIT_HOME/config/orbit_file.json.
 
@@ -252,8 +370,17 @@ No notable changes
   - Linux (64-bit GNU): `mruby/build/x86_64-pc-linux-gnu-glibc-2.14/bin/ff`
   - Linux (32-bit GNU): `mruby/build/i686-pc-linux-gnu-glibc-2.14/bin/ff`
 
+</p>
 
-### 1.1.0 (14.12.2016)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.1.0...1.2.0)
+</details>
+
+## 1.1.0
+
+Released at: 14.12.2016
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Added custom _pqdb_ format:
 
@@ -278,13 +405,31 @@ No notable changes
    OP_DB:user@server.de
    ```
 
+</p>
 
-### 1.0.1 (08.12.2016)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.0.1...1.1.0)
+</details>
+
+## 1.0.1
+
+Released at: 08.12.2016
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Fixed tiny format issue when using the pretty print flag.
 
+</p>
 
-### 1.0.0 (21.11.2016)
+[Full Changelog](https://github.com/appplant/fifa/compare/1.0.0...1.0.1)
+</details>
+
+## 1.0.0
+
+Released at: 21.11.2016
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Support for multiple planets:
 
@@ -306,8 +451,17 @@ No notable changes
       2   web-package   https://url.1.net
    ```
 
+</p>
 
-### 0.0.2 (11.11.2016)
+[Full Changelog](https://github.com/appplant/fifa/compare/0.0.2...1.0.0)
+</details>
+
+## 0.0.2
+
+Released at: 11.11.2016
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Get a specific attribute:
 
@@ -316,10 +470,17 @@ No notable changes
    1234
    ```
 
+</p>
 
-### 0.0.1 - Initial release (06.11.2016)
+[Full Changelog](https://github.com/appplant/fifa/compare/0.0.1...0.0.2)
+</details>
 
-Cross-platform CLI tool to find out the way to any "planet".
+## 0.0.1
+
+Released at: 06.11.2016
+
+<details><summary>Releasenotes</summary>
+<p>
 
 ```
 $ fifa -h
@@ -333,8 +494,6 @@ Options:
 -v, --version    Show version number
 ```
 
-## Basic Usage
-
 Get the connection by type:
 
 ```
@@ -346,8 +505,6 @@ $ user@hostname.de
 $ fifa -f=tns db-package
 $ (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host.de)(PORT=1234)))(CONNECT_DATA=(SID=hostid)))
 ```
-
-## Advanced features
 
 Get the type:
 
@@ -362,3 +519,8 @@ Ensure the right type:
 $ fifa -e=web db-package
 $ type missmatch: expected web but got db
 ```
+
+</p>
+
+[Full Changelog](https://github.com/appplant/fifa/compare/f3d163089181041b58155665df5d79bfedf2b997...0.0.1)
+</details>
