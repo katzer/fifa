@@ -1,4 +1,4 @@
-# fifa - Find Fast EVERYTHING! <br> [![GitHub release](https://img.shields.io/github/release/appPlant/fifa.svg)](https://github.com/appplant/fifa/releases) [![Build Status](https://travis-ci.com/appPlant/fifa.svg?branch=master)](https://travis-ci.com/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![codebeat badge](https://codebeat.co/badges/daa86bf9-f801-48f9-867d-8d446d7402a4)](https://codebeat.co/projects/github-com-appplant-fifa-master)
+# fifa - Find Fast EVERYTHING! <br> ![GitHub release](https://img.shields.io/github/v/release/appplant/fifa) [![Build Status](https://travis-ci.com/appPlant/fifa.svg?branch=master)](https://travis-ci.com/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/5aa3c3746eb58f455183/maintainability)](https://codeclimate.com/github/appPlant/fifa/maintainability)
 
 A tool to find out the way to any "planet".
 
