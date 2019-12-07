@@ -54,8 +54,8 @@ module Fifa
       key, val = tail[0, 2]
 
       Planet.planets
-            .group_by { |p| p[key] }
-            .keys.compact
+            .map { |p| p[key] }
+            .uniq.compact
             .map! { |v| "#{key}=#{v}#{"@#{val}" if val}" }
     end
 
