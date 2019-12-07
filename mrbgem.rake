@@ -37,6 +37,7 @@ MRuby::Gem::Specification.new('fifa') do |spec|
   spec.add_dependency 'mruby-env',             mgem: 'mruby-env'
   spec.add_dependency 'mruby-os',              mgem: 'mruby-os'
   spec.add_dependency 'mruby-json',            mgem: 'mruby-json'
+  spec.add_dependency 'mruby-array-ext',       core: 'mruby-array-ext'
   spec.add_dependency 'mruby-regexp-pcre',     mgem: 'mruby-regexp-pcre'
   spec.add_dependency 'mruby-tiny-opt-parser', mgem: 'mruby-tiny-opt-parser'
 end
