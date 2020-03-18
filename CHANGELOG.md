@@ -1,10 +1,23 @@
 # Release Notes: _fifa_
 
-A tool to find out the way to any "planet"
+A tool to find out the way to any "planet".
+
+## 1.5.1
+
+Released at: 18.03.2020
+
+2. Compiled binary for OSX build with MacOSX10.15 SDK
+
+3. Upgraded to mruby 2.1.0
+
+[Full Changelog](https://github.com/appplant/fifa/compare/1.5.0...1.5.1)
 
 ## 1.5.0
 
 Released at: 13.08.2019
+
+<details><summary>Releasenotes</summary>
+<p>
 
 1. Compiled with `MRB_WITHOUT_FLOAT`
 
@@ -12,7 +25,10 @@ Released at: 13.08.2019
 
 3. Upgraded to mruby 2.0.1
 
+</p>
+
 [Full Changelog](https://github.com/appplant/fifa/compare/1.4.7...1.5.0)
+</details>
 
 ## 1.4.7
 
