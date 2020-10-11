@@ -6,9 +6,9 @@ A tool to find out the way to any "planet".
 
 Released at: 18.03.2020
 
-2. Compiled binary for OSX build with MacOSX10.15 SDK
+1. Compiled binary for OSX build with MacOSX10.15 SDK
 
-3. Upgraded to mruby 2.1.0
+2. Upgraded to mruby 2.1.0
 
 [Full Changelog](https://github.com/appplant/fifa/compare/1.5.0...1.5.1)
 
