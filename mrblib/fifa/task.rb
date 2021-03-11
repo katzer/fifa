@@ -23,7 +23,7 @@
 module Fifa
   # Class reads the passed command-line arguments,
   # loads the date and presents the output.
-  class Task < BasicObject
+  class Task
     # Initialize the task for given spec.
     #
     # @param [ Hash<Symbol,_>] spec The parsed command-line args.

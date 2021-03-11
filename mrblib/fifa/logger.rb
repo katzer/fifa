@@ -22,7 +22,7 @@
 
 module Fifa
   # Loggs all errors seperated by planet id
-  class Logger < BasicObject
+  class Logger
     # Global logger for messages.
     #
     # @return [ Fifa::Logger ]

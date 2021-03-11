@@ -22,7 +22,7 @@
 
 module Fifa
   # Wrapper around the Terminal::Table
-  class Table < BasicObject
+  class Table
     # Initialize a new table object.
     #
     # @param [ Hash ]   spec The parsed command line arguments.

@@ -23,7 +23,7 @@
 module Fifa
   module Formatter
     # Base formatter for every planet type.
-    class Base < BasicObject
+    class Base
       # Format the params by the given format.
       # Raises an error if a required attribute is missing
       # or the format is not supported!
