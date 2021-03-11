@@ -24,6 +24,9 @@ require 'open3'
 require 'json'
 require_relative '../mrblib/fifa/version'
 
+ENV.delete 'ORBIT_HOME'
+ENV.delete 'ORBIT_FILE'
+
 def orbit_env_get(file = nil)
   if file
     { 'ORBIT_FILE' => File.expand_path("config/#{file}.json", __dir__) }
