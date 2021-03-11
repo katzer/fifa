@@ -1,4 +1,4 @@
-# fifa - Find Fast EVERYTHING! <br> ![GitHub release](https://img.shields.io/github/v/release/appplant/fifa) [![Build Status](https://travis-ci.com/appPlant/fifa.svg?branch=master)](https://travis-ci.com/appPlant/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/5aa3c3746eb58f455183/maintainability)](https://codeclimate.com/github/appPlant/fifa/maintainability)
+# fifa - Find Fast EVERYTHING! <br> ![GitHub release](https://img.shields.io/github/v/release/katzer/fifa) [![Build Status](https://travis-ci.com/katzer/fifa.svg?branch=master)](https://travis-ci.com/katzer/fifa) [![Build status](https://ci.appveyor.com/api/projects/status/767rj22k1qmdy08h/branch/master?svg=true)](https://ci.appveyor.com/project/katzer/fifa/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/5aa3c3746eb58f455183/maintainability)](https://codeclimate.com/github/katzer/fifa/maintainability)
 
 A tool to find out the way to any "planet".
 
@@ -125,7 +125,7 @@ The general format is `type|id|name|type specific connection`.
 
 Clone the repo:
     
-    $ git clone https://github.com/appplant/fifa.git && cd fifa/
+    $ git clone https://github.com/katzer/fifa.git && cd fifa/
 
 Install the dependencies:
 
@@ -154,7 +154,7 @@ For the complete list of build tasks:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/appplant/fifa.
+Bug reports and pull requests are welcome on GitHub at https://github.com/katzer/fifa.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -170,6 +170,6 @@ Made with :heart: in Leipzig
 
 © 2016 [appPlant GmbH][appplant]
 
-[releases]: https://github.com/appplant/fifa/releases
+[releases]: https://github.com/katzer/fifa/releases
 [license]: http://opensource.org/licenses/Apache-2.0
 [appplant]: www.appplant.de

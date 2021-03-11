@@ -2,7 +2,18 @@
 
 A tool to find out the way to any "planet".
 
+## 1.5.2
+
+Released at: 18.03.2020
+
+1. Upgraded to mruby 3.0.0
+
+[Full Changelog](https://github.com/katzer/fifa/compare/1.5.1...master)
+
 ## 1.5.1
+
+<details><summary>Releasenotes</summary>
+<p>
 
 Released at: 18.03.2020
 
@@ -10,7 +21,10 @@ Released at: 18.03.2020
 
 2. Upgraded to mruby 2.1.0
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.5.0...1.5.1)
+</p>
+
+[Full Changelog](https://github.com/katzer/fifa/compare/1.5.0...1.5.1)
+</details>
 
 ## 1.5.0
 
@@ -27,7 +41,7 @@ Released at: 13.08.2019
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.7...1.5.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.7...1.5.0)
 </details>
 
 ## 1.4.7
@@ -61,7 +75,7 @@ Released at: 02.01.2019
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.6...1.4.7)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.6...1.4.7)
 </details>
 
 ## 1.4.6
@@ -77,7 +91,7 @@ Released at: 16.08.2018
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.5...1.4.6)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.5...1.4.6)
 </details>
 
 ## 1.4.5
@@ -115,7 +129,7 @@ Released at: 02.01.2019
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.4...1.4.5)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.4...1.4.5)
 </details>
 
 ## 1.4.4
@@ -129,7 +143,7 @@ No notable changes
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.3...1.4.4)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.3...1.4.4)
 </details>
 
 ## 1.4.3
@@ -143,7 +157,7 @@ Released at: 11.07.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.2...1.4.3)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.2...1.4.3)
 </details>
 
 ## 1.4.2
@@ -180,7 +194,7 @@ Released at: 31.05.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.1...1.4.2)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.1...1.4.2)
 </details>
 
 ## 1.4.1
@@ -212,7 +226,7 @@ Released at: 15.03.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.4.0...1.4.1)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.4.0...1.4.1)
 </details>
 
 ## 1.4.0
@@ -254,7 +268,7 @@ Released at: 10.03.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.3.2...1.4.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.3.2...1.4.0)
 </details>
 
 ## 1.3.2
@@ -280,7 +294,7 @@ Released at: 01.03.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.3.1...1.3.2)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.3.1...1.3.2)
 </details>
 
 ## 1.3.1
@@ -299,7 +313,7 @@ Released at: 14.02.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.3.0...1.3.1)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.3.0...1.3.1)
 </details>
 
 ## 1.3.0
@@ -367,7 +381,7 @@ Released at: 09.02.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.2.0...1.3.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.2.0...1.3.0)
 </details>
 
 ## 1.2.0
@@ -388,7 +402,7 @@ Released at: 25.01.2017
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.1.0...1.2.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.1.0...1.2.0)
 </details>
 
 ## 1.1.0
@@ -423,7 +437,7 @@ Released at: 14.12.2016
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.0.1...1.1.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.0.1...1.1.0)
 </details>
 
 ## 1.0.1
@@ -437,7 +451,7 @@ Released at: 08.12.2016
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/1.0.0...1.0.1)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.0.0...1.0.1)
 </details>
 
 ## 1.0.0
@@ -469,7 +483,7 @@ Released at: 21.11.2016
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/0.0.2...1.0.0)
+[Full Changelog](https://github.com/katzer/fifa/compare/0.0.2...1.0.0)
 </details>
 
 ## 0.0.2
@@ -488,7 +502,7 @@ Released at: 11.11.2016
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/0.0.1...0.0.2)
+[Full Changelog](https://github.com/katzer/fifa/compare/0.0.1...0.0.2)
 </details>
 
 ## 0.0.1
@@ -538,5 +552,5 @@ $ type missmatch: expected web but got db
 
 </p>
 
-[Full Changelog](https://github.com/appplant/fifa/compare/f3d163089181041b58155665df5d79bfedf2b997...0.0.1)
+[Full Changelog](https://github.com/katzer/fifa/compare/f3d163089181041b58155665df5d79bfedf2b997...0.0.1)
 </details>
