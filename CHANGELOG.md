@@ -8,6 +8,10 @@ Released at:
 
 1. Upgraded to mruby 3.1.0
 
+2. Compiled binary for OSX build with MacOSX11.3 SDK
+
+3. Added binary for `arm64-apple-darwin19` target
+
 [Full Changelog](https://github.com/katzer/fifa/compare/1.5.1...master)
 
 ## 1.5.1
