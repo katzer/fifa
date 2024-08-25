@@ -60,7 +60,7 @@ end
 # @return [ Void ]
 def __main__(args)
   Fifa::Task.new($opts = parse(args[1..-1])).exec
-  exit(1) if Fifa::Logger.errors?
+  exit!(1) if Fifa::Logger.errors?
 end
 
 # Parse the command-line arguments.
