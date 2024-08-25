@@ -6,7 +6,7 @@ A tool to find out the way to any "planet".
 
 Released at:
 
-1. Upgraded to mruby 3.1.0
+1. Upgraded to mruby 3.2.0
 
 2. Compiled binary for OSX build with MacOSX11.3 SDK
 
