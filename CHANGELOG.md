@@ -12,7 +12,7 @@ Released at: 26.08.2024
 
 3. Added binary for `arm64-apple-darwin19` target
 
-[Full Changelog](https://github.com/katzer/fifa/compare/1.5.1...master)
+[Full Changelog](https://github.com/katzer/fifa/compare/1.5.1...1.5.2)
 
 ## 1.5.1
 
