@@ -4,7 +4,7 @@ A tool to find out the way to any "planet".
 
 ## 1.5.2
 
-Released at:
+Released at: 26.08.2024
 
 1. Upgraded to mruby 3.2.0
 
